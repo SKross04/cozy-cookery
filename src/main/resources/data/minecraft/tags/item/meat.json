@@ -1,0 +1,17 @@
+{
+  "values": [
+    "cozycookery:raw_beef_strips",
+    "cozycookery:raw_beef_cubes",
+    "cozycookery:ground_beef",
+    "cozycookery:raw_pork_strips",
+    "cozycookery:raw_pork_cubes",
+    "cozycookery:ground_pork",
+    "cozycookery:raw_mutton_strips",
+    "cozycookery:raw_mutton_cubes",
+    "cozycookery:ground_mutton",
+    "cozycookery:raw_chicken_drumstick",
+    "cozycookery:raw_chicken_wing",
+    "cozycookery:cooked_chicken_drumstick",
+    "cozycookery:cooked_chicken_wing"
+  ]
+}

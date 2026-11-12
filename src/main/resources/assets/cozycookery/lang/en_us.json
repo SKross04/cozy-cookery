@@ -1,12 +1,23 @@
 {
   "creativetab.cozycookery.cozy_cookery_tab": "Cozy Cookery",
-
   "item.cozycookery.flint_knife": "Flint Knife",
   "item.cozycookery.iron_knife": "Iron Knife",
   "item.cozycookery.golden_knife": "Golden Knife",
   "item.cozycookery.diamond_knife": "Diamond Knife",
   "item.cozycookery.netherite_knife": "Netherite Knife",
   "item.cozycookery.wooden_spoon": "Wooden Spoon",
-
+  "item.cozycookery.raw_beef_strips": "Raw Beef Strips",
+  "item.cozycookery.raw_beef_cubes": "Raw Beef Cubes",
+  "item.cozycookery.ground_beef": "Ground Beef",
+  "item.cozycookery.raw_pork_strips": "Raw Pork Strips",
+  "item.cozycookery.raw_pork_cubes": "Raw Pork Cubes",
+  "item.cozycookery.ground_pork": "Ground Pork",
+  "item.cozycookery.raw_mutton_strips": "Raw Mutton Strips",
+  "item.cozycookery.raw_mutton_cubes": "Raw Mutton Cubes",
+  "item.cozycookery.ground_mutton": "Ground Mutton",
+  "item.cozycookery.raw_chicken_drumstick": "Raw Chicken Drumstick",
+  "item.cozycookery.raw_chicken_wing": "Raw Chicken Wing",
+  "item.cozycookery.cooked_chicken_drumstick": "Cooked Chicken Drumstick",
+  "item.cozycookery.cooked_chicken_wing": "Cooked Chicken Wing",
   "sounds.cozycookery.spoon_bonk": "Spoon bonks"
 }

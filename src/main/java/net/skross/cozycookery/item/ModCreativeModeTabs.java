@@ -25,6 +25,20 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DIAMOND_KNIFE);
                         output.accept(ModItems.NETHERITE_KNIFE);
                         output.accept(ModItems.WOODEN_SPOON);
+
+                        output.accept(ModItems.RAW_BEEF_STRIPS);
+                        output.accept(ModItems.RAW_BEEF_CUBES);
+                        output.accept(ModItems.GROUND_BEEF);
+                        output.accept(ModItems.RAW_PORK_STRIPS);
+                        output.accept(ModItems.RAW_PORK_CUBES);
+                        output.accept(ModItems.GROUND_PORK);
+                        output.accept(ModItems.RAW_MUTTON_STRIPS);
+                        output.accept(ModItems.RAW_MUTTON_CUBES);
+                        output.accept(ModItems.GROUND_MUTTON);
+                        output.accept(ModItems.RAW_CHICKEN_DRUMSTICK);
+                        output.accept(ModItems.RAW_CHICKEN_WING);
+                        output.accept(ModItems.COOKED_CHICKEN_DRUMSTICK);
+                        output.accept(ModItems.COOKED_CHICKEN_WING);
                     }).build());
 
     public static void register(IEventBus eventBus) {

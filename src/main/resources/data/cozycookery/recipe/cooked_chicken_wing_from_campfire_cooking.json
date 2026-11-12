@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 400,
+  "experience": 0.2,
+  "ingredient": {
+    "item": "cozycookery:raw_chicken_wing"
+  },
+  "result": {
+    "count": 1,
+    "id": "cozycookery:cooked_chicken_wing"
+  }
+}
