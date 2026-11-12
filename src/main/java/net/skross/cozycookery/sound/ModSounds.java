@@ -14,6 +14,7 @@ public class ModSounds {
             DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, CozyCookery.MOD_ID);
 
     public static final Supplier<SoundEvent> SPOON_BONK = registerSoundEvent("spoon_bonk");
+    public static final Supplier<SoundEvent> CHOPPING_BOARD_CHOP = registerSoundEvent("chopping_board_chop");
 
     private static Supplier<SoundEvent> registerSoundEvent(String name) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(CozyCookery.MOD_ID, name);

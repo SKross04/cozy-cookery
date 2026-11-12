@@ -1,0 +1,15 @@
+{
+  "type": "cozycookery:chopping",
+  "ingredient": {
+    "item": "minecraft:porkchop"
+  },
+  "tool": {
+    "tag": "c:tools/knife"
+  },
+  "results": [
+    {
+      "id": "cozycookery:raw_pork_strips",
+      "count": 1
+    }
+  ]
+}

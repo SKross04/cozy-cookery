@@ -1,0 +1,15 @@
+{
+  "type": "cozycookery:chopping",
+  "ingredient": {
+    "item": "cozycookery:raw_pork_strips"
+  },
+  "tool": {
+    "tag": "c:tools/knife"
+  },
+  "results": [
+    {
+      "id": "cozycookery:raw_pork_cubes",
+      "count": 1
+    }
+  ]
+}

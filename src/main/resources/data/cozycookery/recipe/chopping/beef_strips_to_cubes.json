@@ -1,0 +1,15 @@
+{
+  "type": "cozycookery:chopping",
+  "ingredient": {
+    "item": "cozycookery:raw_beef_strips"
+  },
+  "tool": {
+    "tag": "c:tools/knife"
+  },
+  "results": [
+    {
+      "id": "cozycookery:raw_beef_cubes",
+      "count": 1
+    }
+  ]
+}

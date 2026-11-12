@@ -4,5 +4,11 @@
     "sounds": [
       "cozycookery:spoon_bonk"
     ]
+  },
+  "chopping_board_chop": {
+    "subtitle": "sounds.cozycookery.chopping_board_chop",
+    "sounds": [
+      "cozycookery:chopping_board_chop"
+    ]
   }
 }
