@@ -6,5 +6,7 @@
   "item.cozycookery.golden_knife": "Golden Knife",
   "item.cozycookery.diamond_knife": "Diamond Knife",
   "item.cozycookery.netherite_knife": "Netherite Knife",
-  "item.cozycookery.wooden_spoon": "Wooden Spoon"
+  "item.cozycookery.wooden_spoon": "Wooden Spoon",
+
+  "sounds.cozycookery.spoon_bonk": "Spoon bonks"
 }

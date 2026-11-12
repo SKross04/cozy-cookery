@@ -17,6 +17,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.skross.cozycookery.item.ModCreativeModeTabs;
 import net.skross.cozycookery.item.ModItems;
+import net.skross.cozycookery.sound.ModSounds;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(CozyCookery.MOD_ID)
@@ -40,6 +41,7 @@ public class CozyCookery {
 
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModSounds.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
