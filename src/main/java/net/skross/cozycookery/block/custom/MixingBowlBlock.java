@@ -13,7 +13,9 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -21,15 +23,17 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.skross.cozycookery.block.entity.MixingBowlBlockEntity;
+import net.skross.cozycookery.component.ModDataComponents;
 import net.skross.cozycookery.item.custom.SpoonItem;
 import net.skross.cozycookery.recipe.MixingRecipe;
 import net.skross.cozycookery.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Optional;
 
 public class MixingBowlBlock extends BaseEntityBlock {
@@ -37,8 +41,23 @@ public class MixingBowlBlock extends BaseEntityBlock {
     // A wooden bowl: 10 x 10 pixels, 6 pixels high
     private static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 6, 13);
 
+    // true = soup in the bowl (from a cooking pot): shows the soup surface in the model
+    public static final BooleanProperty SOUP = BooleanProperty.create("soup");
+
     public MixingBowlBlock(Properties properties) {
         super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(SOUP, false));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(SOUP);
+    }
+
+    // Placing a mixing bowl that carries soup -> start with the soup surface visible
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(SOUP, context.getItemInHand().has(ModDataComponents.SOUP_CONTENTS.get()));
     }
 
     @Override
@@ -78,6 +97,19 @@ public class MixingBowlBlock extends BaseEntityBlock {
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (stack.isEmpty() || !(level.getBlockEntity(pos) instanceof MixingBowlBlockEntity bowl)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+        // Soup in the bowl: only an empty bowl does something (scoop 1 serving)
+        if (bowl.hasSoup()) {
+            if (!stack.is(Items.BOWL)) {
+                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+            }
+            if (!level.isClientSide()) {
+                ItemStack serving = bowl.takeSoupServing(level, pos, state);
+                player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, serving));
+                level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 0.8f, 0.8f);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
         // Spoon -> stir. If the ingredients match a recipe, they become dough.
@@ -123,7 +155,7 @@ public class MixingBowlBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof MixingBowlBlockEntity bowl && !bowl.isEmpty()) {
+        if (level.getBlockEntity(pos) instanceof MixingBowlBlockEntity bowl && !bowl.isEmpty() && !bowl.hasSoup()) {
             if (!level.isClientSide()) {
                 ItemStack taken = bowl.takeItem();
                 if (player.getMainHandItem().isEmpty()) {

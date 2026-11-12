@@ -37,8 +37,10 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.skross.cozycookery.block.ModBlocks;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
 import net.skross.cozycookery.block.entity.ModBlockEntities;
+import net.skross.cozycookery.component.ModDataComponents;
 import net.skross.cozycookery.item.custom.SpoonItem;
 import net.skross.cozycookery.sound.ModSounds;
 import net.skross.cozycookery.util.ModTags;
@@ -182,6 +184,20 @@ public class CookingPotBlock extends BaseEntityBlock {
                 if (pot.stir(level)) {
                     stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 }
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        }
+
+        // Empty mixing bowl on a finished soup -> pour ALL servings into it, to carry the soup around
+        if (stack.is(ModBlocks.MIXING_BOWL.get().asItem()) && !stack.has(ModDataComponents.SOUP_CONTENTS.get())) {
+            if (!pot.hasServings() || !pot.isServedInBowl()) {
+                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION; // no soup: just place the mixing bowl
+            }
+            if (!level.isClientSide()) {
+                ItemStack filled = new ItemStack(ModBlocks.MIXING_BOWL.get());
+                filled.set(ModDataComponents.SOUP_CONTENTS.get(), pot.takeAllServings(level, pos, state));
+                player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, filled));
+                level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.8f, 1.3f);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }

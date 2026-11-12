@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "soup=false": {
       "model": "cozycookery:block/mixing_bowl"
+    },
+    "soup=true": {
+      "model": "cozycookery:block/mixing_bowl_soup"
     }
   }
 }

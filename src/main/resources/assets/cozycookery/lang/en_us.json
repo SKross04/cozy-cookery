@@ -159,5 +159,6 @@
   "block.cozycookery.plated_spaghetti_and_meatballs": "Plate of Spaghetti & Meatballs",
   "block.cozycookery.plated_mushroom_stew": "Plate of Mushroom Stew",
   "block.cozycookery.plated_beetroot_soup": "Plate of Beetroot Soup",
-  "block.cozycookery.plated_rabbit_stew": "Plate of Rabbit Stew"
+  "block.cozycookery.plated_rabbit_stew": "Plate of Rabbit Stew",
+  "tooltip.cozycookery.soup_contents": "%s\u00d7 %s"
 }

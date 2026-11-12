@@ -24,13 +24,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
 import net.skross.cozycookery.block.custom.PotLiquid;
+import net.skross.cozycookery.component.SoupContents;
 import net.skross.cozycookery.item.ModItems;
 import net.skross.cozycookery.recipe.CookingRecipe;
 import net.skross.cozycookery.recipe.CookingRecipeInput;
 import net.skross.cozycookery.recipe.ModRecipes;
 import net.skross.cozycookery.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -215,6 +215,7 @@ public class CookingPotBlockEntity extends BlockEntity {
         serving = new ItemStack(ModItems.BURNT_STEW.get());
         servings = SERVINGS_WHEN_BURNT;
         servedInBowl = true;
+        soupColor = 0x2A2018; // dark, for when it's carried in a mixing bowl
         clearIngredients();
         resetCooking();
         level.setBlock(pos, state.setValue(CookingPotBlock.LIQUID, PotLiquid.BURNT), Block.UPDATE_ALL);
@@ -240,6 +241,16 @@ public class CookingPotBlockEntity extends BlockEntity {
     // ---------- Serving ----------
     public boolean hasServings() {
         return servings > 0 && !serving.isEmpty();
+    }
+
+    // Pours ALL servings into a mixing bowl (see CookingPotBlock). The pot becomes empty.
+    public SoupContents takeAllServings(Level level, BlockPos pos, BlockState state) {
+        SoupContents contents = new SoupContents(serving.getItem(), servings, soupColor);
+        servings = 0;
+        serving = ItemStack.EMPTY;
+        level.setBlock(pos, state.setValue(CookingPotBlock.LIQUID, PotLiquid.EMPTY), Block.UPDATE_ALL);
+        syncToClient();
+        return contents;
     }
 
     public boolean isServedInBowl() {

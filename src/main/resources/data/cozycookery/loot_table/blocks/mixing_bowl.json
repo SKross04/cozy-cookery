@@ -11,7 +11,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "cozycookery:mixing_bowl"
+          "name": "cozycookery:mixing_bowl",
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "source": "block_entity",
+              "include": [
+                "cozycookery:soup_contents"
+              ]
+            }
+          ]
         }
       ],
       "rolls": 1.0

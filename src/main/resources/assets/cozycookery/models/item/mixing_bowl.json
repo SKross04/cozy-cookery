@@ -1,3 +1,11 @@
 {
-  "parent": "cozycookery:block/mixing_bowl"
+  "parent": "cozycookery:block/mixing_bowl",
+  "overrides": [
+    {
+      "predicate": {
+        "cozycookery:filled": 1
+      },
+      "model": "cozycookery:block/mixing_bowl_soup"
+    }
+  ]
 }

@@ -1,18 +1,21 @@
 package net.skross.cozycookery;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.skross.cozycookery.block.ModBlocks;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
+import net.skross.cozycookery.block.entity.MixingBowlBlockEntity;
 import net.skross.cozycookery.block.entity.ModBlockEntities;
 import net.skross.cozycookery.block.entity.renderer.ChoppingBoardBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.CookingPotBlockEntityRenderer;
@@ -21,6 +24,8 @@ import net.skross.cozycookery.block.entity.renderer.MixingBowlBlockEntityRendere
 import net.skross.cozycookery.block.entity.renderer.MortarBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.OvenBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.StoveBlockEntityRenderer;
+import net.skross.cozycookery.component.ModDataComponents;
+import net.skross.cozycookery.component.SoupContents;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = CozyCookery.MOD_ID, dist = Dist.CLIENT)
@@ -36,6 +41,10 @@ public class CozyCookeryClient {
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
+        // "cozycookery:filled" = 1 when a mixing bowl item carries soup -> its item model shows the soup
+        event.enqueueWork(() -> ItemProperties.register(ModBlocks.MIXING_BOWL.get().asItem(),
+                ResourceLocation.fromNamespaceAndPath(CozyCookery.MOD_ID, "filled"),
+                (stack, level, entity, seed) -> stack.has(ModDataComponents.SOUP_CONTENTS.get()) ? 1.0f : 0.0f));
         // Some client setup code
         CozyCookery.LOGGER.info("HELLO FROM CLIENT SETUP");
         CozyCookery.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
@@ -62,5 +71,24 @@ public class CozyCookeryClient {
             }
             return CookingPotBlockEntity.WATER_COLOR;
         }, ModBlocks.COOKING_POT.get());
+
+        // Soup surface in a placed mixing bowl
+        event.register((state, level, pos, tintIndex) -> {
+            if (level != null && pos != null && level.getBlockEntity(pos) instanceof MixingBowlBlockEntity bowl && bowl.hasSoup()) {
+                return bowl.getSoupColor();
+            }
+            return 0xFFFFFF;
+        }, ModBlocks.MIXING_BOWL.get());
+    }
+
+    // Soup surface on a mixing bowl ITEM (in your hand / inventory). Item colours need an alpha value (0xFF...)
+    @SubscribeEvent
+    static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+        event.register((stack, tintIndex) -> {
+            SoupContents contents = stack.get(ModDataComponents.SOUP_CONTENTS.get());
+            return contents != null ? 0xFF000000 | contents.color() : 0xFFFFFFFF;
+        }, ModBlocks.MIXING_BOWL.get().asItem());
+    }
+
     }
 }
