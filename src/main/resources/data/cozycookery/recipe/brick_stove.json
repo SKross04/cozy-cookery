@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stove",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:bricks"
+    }
+  },
+  "pattern": [
+    "III",
+    "B B",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:brick_stove"
+  }
+}

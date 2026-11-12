@@ -1,0 +1,6 @@
+{
+  "parent": "cozycookery:block/stove_template_lit",
+  "textures": {
+    "bricks": "minecraft:block/bricks"
+  }
+}

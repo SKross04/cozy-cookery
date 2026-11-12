@@ -12,6 +12,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.skross.cozycookery.block.entity.ModBlockEntities;
 import net.skross.cozycookery.block.entity.renderer.ChoppingBoardBlockEntityRenderer;
+import net.skross.cozycookery.block.entity.renderer.StoveBlockEntityRenderer;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = CozyCookery.MOD_ID, dist = Dist.CLIENT)
@@ -36,5 +37,6 @@ public class CozyCookeryClient {
     @SubscribeEvent
     static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.CHOPPING_BOARD_BE.get(), ChoppingBoardBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.STOVE_BE.get(), StoveBlockEntityRenderer::new);
     }
 }

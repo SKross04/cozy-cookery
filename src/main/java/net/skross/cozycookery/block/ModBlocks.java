@@ -12,6 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
+import net.skross.cozycookery.block.custom.StoveBlock;
 import net.skross.cozycookery.item.ModItems;
 
 import java.util.LinkedHashMap;
@@ -57,6 +58,33 @@ public class ModBlocks {
                     .strength(2.0f, 6.0f)
                     .sound(SoundType.LANTERN)
                     .noOcclusion()));
+
+    // ---------- Stoves: one per brick type, all using the same StoveBlock class ----------
+    public static final List<String> STOVE_TYPES = List.of(
+            "brick", "stone_brick", "deepslate_brick", "mud_brick", "tuff_brick");
+
+    // Key = brick type ("stone_brick"), value = the registered block ("stone_brick_stove")
+    public static final Map<String, DeferredBlock<Block>> STOVES = registerStoves();
+
+    private static Map<String, DeferredBlock<Block>> registerStoves() {
+        Map<String, DeferredBlock<Block>> stoves = new LinkedHashMap<>();
+        for (String type : STOVE_TYPES) {
+            SoundType sound = switch (type) {
+                case "deepslate_brick" -> SoundType.DEEPSLATE_BRICKS;
+                case "mud_brick" -> SoundType.MUD_BRICKS;
+                case "tuff_brick" -> SoundType.TUFF_BRICKS;
+                default -> SoundType.STONE;
+            };
+            stoves.put(type, registerBlock(type + "_stove", () -> new StoveBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.STONE)
+                    .strength(2.0f, 6.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(sound)
+                    .lightLevel(state -> state.getValue(StoveBlock.LIT) ? 13 : 0)
+                    .noOcclusion())));
+        }
+        return stoves;
+    }
 
     // Registers the block AND a BlockItem with the same name, so you can hold and place it.
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {

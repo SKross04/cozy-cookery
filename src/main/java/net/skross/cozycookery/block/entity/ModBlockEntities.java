@@ -23,6 +23,12 @@ public class ModBlockEntities {
                     ModBlocks.CHOPPING_BOARDS.values().stream().map(DeferredBlock::get).toArray(Block[]::new)
             ).build(null));
 
+    public static final Supplier<BlockEntityType<StoveBlockEntity>> STOVE_BE =
+            BLOCK_ENTITIES.register("stove_be", () -> BlockEntityType.Builder.of(
+                    StoveBlockEntity::new,
+                    ModBlocks.STOVES.values().stream().map(DeferredBlock::get).toArray(Block[]::new)
+            ).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

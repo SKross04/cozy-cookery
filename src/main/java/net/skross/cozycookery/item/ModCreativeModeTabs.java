@@ -22,6 +22,7 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
                         ModBlocks.CHOPPING_BOARDS.values().forEach(output::accept);
                         output.accept(ModBlocks.COOKING_POT);
+                        ModBlocks.STOVES.values().forEach(output::accept);
 
                         output.accept(ModItems.FLINT_KNIFE);
                         output.accept(ModItems.IRON_KNIFE);
