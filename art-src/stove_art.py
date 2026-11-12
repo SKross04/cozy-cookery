@@ -3,7 +3,7 @@ from PIL import Image
 out=sys.argv[1]
 IRON=[(34,32,38),(52,50,58),(72,70,80),(98,96,108),(128,126,138)]
 COPPER=[(110,56,32),(164,88,50),(204,124,72),(234,164,108)]
-SOOT=[(26,22,24),(40,34,36),(56,48,50)]
+SOOT=[(40,34,36),(66,58,58),(88,78,76)]
 rnd=random.Random(9)
 def save(img,name): img.save(f"{out}/{name}.png")
 # cast iron top plate with a copper burner ring
