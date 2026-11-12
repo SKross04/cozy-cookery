@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
+import net.skross.cozycookery.block.ModBlocks;
 
 import java.util.function.Supplier;
 
@@ -19,6 +20,8 @@ public class ModCreativeModeTabs {
                     .icon(() -> new ItemStack(ModItems.IRON_KNIFE.get()))
                     .title(Component.translatable("creativetab.cozycookery.cozy_cookery_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
+                        output.accept(ModBlocks.CHOPPING_BOARD);
+
                         output.accept(ModItems.FLINT_KNIFE);
                         output.accept(ModItems.IRON_KNIFE);
                         output.accept(ModItems.GOLDEN_KNIFE);
