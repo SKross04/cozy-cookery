@@ -215,10 +215,12 @@ public class OvenBlock extends BaseEntityBlock {
             return;
         }
         Direction front = state.getValue(FACING);
-        // The chimney sits at x/z 10-13 in the model (facing north) -> turn that position with the oven
-        double[] chimney = turn(11.5 / 16.0, 11.5 / 16.0, front);
-        level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX() + chimney[0], pos.getY() + 1.3,
-                pos.getZ() + chimney[1], 0.0, 0.04, 0.0);
+        // Smoke drifts up from the back of the oven roof (the model stays inside the block, no chimney)
+        if (random.nextInt(2) == 0) {
+            double[] vent = turn(0.3 + random.nextDouble() * 0.4, 0.6 + random.nextDouble() * 0.25, front);
+            level.addParticle(ParticleTypes.SMOKE, pos.getX() + vent[0], pos.getY() + 1.02,
+                    pos.getZ() + vent[1], 0.0, 0.03, 0.0);
+        }
 
         double x = pos.getX() + 0.5 + front.getStepX() * 0.52;
         double z = pos.getZ() + 0.5 + front.getStepZ() * 0.52;

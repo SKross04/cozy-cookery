@@ -14,7 +14,7 @@
       "from": [
         0,
         0,
-        0
+        0.5
       ],
       "to": [
         16,
@@ -23,8 +23,7 @@
       ],
       "faces": {
         "north": {
-          "texture": "#bricks",
-          "cullface": "north"
+          "texture": "#bricks"
         },
         "south": {
           "texture": "#bricks",
@@ -52,7 +51,7 @@
       "from": [
         0,
         2,
-        0
+        0.5
       ],
       "to": [
         4,
@@ -61,8 +60,7 @@
       ],
       "faces": {
         "north": {
-          "texture": "#bricks",
-          "cullface": "north"
+          "texture": "#bricks"
         },
         "south": {
           "texture": "#bricks",
@@ -82,7 +80,7 @@
       "from": [
         12,
         2,
-        0
+        0.5
       ],
       "to": [
         16,
@@ -91,8 +89,7 @@
       ],
       "faces": {
         "north": {
-          "texture": "#bricks",
-          "cullface": "north"
+          "texture": "#bricks"
         },
         "south": {
           "texture": "#bricks",
@@ -134,7 +131,7 @@
       "from": [
         0,
         8,
-        0
+        0.5
       ],
       "to": [
         16,
@@ -143,8 +140,7 @@
       ],
       "faces": {
         "north": {
-          "texture": "#bricks",
-          "cullface": "north"
+          "texture": "#bricks"
         },
         "south": {
           "texture": "#bricks",
@@ -202,12 +198,12 @@
       "from": [
         3,
         8,
-        -0.5
+        0
       ],
       "to": [
         13,
         9,
-        0
+        0.5
       ],
       "faces": {
         "north": {
@@ -262,12 +258,12 @@
       "from": [
         3,
         1,
-        -0.5
+        0
       ],
       "to": [
         13,
         2,
-        0
+        0.5
       ],
       "faces": {
         "north": {
@@ -322,12 +318,12 @@
       "from": [
         3,
         2,
-        -0.5
+        0
       ],
       "to": [
         4,
         8,
-        0
+        0.5
       ],
       "faces": {
         "north": {
@@ -382,12 +378,12 @@
       "from": [
         12,
         2,
-        -0.5
+        0
       ],
       "to": [
         13,
         8,
-        0
+        0.5
       ],
       "faces": {
         "north": {
@@ -442,7 +438,7 @@
       "from": [
         4,
         2,
-        0.5
+        1
       ],
       "to": [
         12,

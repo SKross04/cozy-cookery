@@ -1,6 +1,5 @@
 package net.skross.cozycookery;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -11,8 +10,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.skross.cozycookery.block.ModBlocks;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
 import net.skross.cozycookery.block.entity.MixingBowlBlockEntity;
@@ -33,10 +30,6 @@ import net.skross.cozycookery.component.SoupContents;
 @EventBusSubscriber(modid = CozyCookery.MOD_ID, value = Dist.CLIENT)
 public class CozyCookeryClient {
     public CozyCookeryClient(ModContainer container) {
-        // Allows NeoForge to create a config screen for this mod's configs.
-        // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
-        // Do not forget to add translations for your config options to the en_us.json file.
-        container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 
     @SubscribeEvent
@@ -45,9 +38,6 @@ public class CozyCookeryClient {
         event.enqueueWork(() -> ItemProperties.register(ModBlocks.MIXING_BOWL.get().asItem(),
                 ResourceLocation.fromNamespaceAndPath(CozyCookery.MOD_ID, "filled"),
                 (stack, level, entity, seed) -> stack.has(ModDataComponents.SOUP_CONTENTS.get()) ? 1.0f : 0.0f));
-        // Some client setup code
-        CozyCookery.LOGGER.info("HELLO FROM CLIENT SETUP");
-        CozyCookery.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
     }
 
     // Tells Minecraft which renderer draws the item lying on the chopping board

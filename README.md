@@ -1,0 +1,50 @@
+# Cozy Cookery
+
+**Immersive, GUI-free cooking for Minecraft 1.21.1 (NeoForge).**
+
+Cozy Cookery has no cooking menus. You place real tools in the world and work with them by hand. You chop on a board, stir a pot over a stove, flip food in a pan, grind in a mortar and bake in a brick oven. Meals are served on plates and eaten bite by bite.
+
+> **Beta (0.0.1):** recipes, balance and art may still change between versions. Back up your worlds.
+
+## Requirements
+- Minecraft **1.21.1**
+- NeoForge **21.1.265** or newer
+
+## Content
+- **Tools:**
+  - Knives: flint, iron, gold, diamond, netherite.
+  - Wooden spoon. Bonk another player on the head with it to hear a sound.
+  - Wooden spatula.
+- **Workstations:**
+  - Chopping boards: all 11 wood types.
+  - Cooking pot, frying pan, mortar and pestle, mixing bowl.
+  - Stoves and brick ovens: brick, stone brick, deepslate brick, mud brick and tuff brick.
+- **Crops:**
+  - Tomatoes, which grow on a trellis.
+  - Cabbage, onion and garlic. Garlic is planted from a clove.
+  - All four can also be found growing wild across the world.
+- **Food:**
+  - Prepared ingredients: meat cuts and ground meat, sliced and diced vegetables, flour and doughs.
+  - Soups and stews.
+  - Fried dishes.
+  - Baked goods.
+  - Plated meals, including Spaghetti Bolognese, Full Breakfast, Steak & Chips and Pancake Stack.
+
+## How to cook
+Every station works with right-clicks:
+
+| Station | How it works |
+|---|---|
+| **Chopping board** | Place food on the board, then right-click it with a knife. Each chop plays a sound. You can place any item on a board for decoration. |
+| **Stove** | Add coal, charcoal or sticks (sticks burn out faster), then light it with flint and steel. A lit stove or a campfire heats whatever is placed on top. |
+| **Cooking pot** | Place it on a heat source and fill it with a water bucket. Add up to 8 ingredients, then stir with the wooden spoon. When the soup is done, scoop it out with bowls or with a mixing bowl. If you forget it, the soup burns. |
+| **Frying pan** | Place it on a heat source and add food. Flip the food with the spatula. If you leave it too long, it chars into scraps. |
+| **Mortar and pestle** | Put in wheat and right-click to grind it into flour. |
+| **Mixing bowl** | Add ingredients such as flour, eggs, sugar or a water bottle, then mix them with the spoon to make dough or batter. |
+| **Brick oven** | Light it like the stove, then put in dough or batter to bake. |
+| **Plates** | Fire a raw plate in a furnace to make a plate. Craft a plate together with a dish to get a placeable meal, then right-click the meal to eat it one bite at a time. |
+
+Most vanilla food crafting and smelting recipes (bread, cake, cookies, cooked meats and others) are turned off. Those foods are made with the stations above instead. Campfire cooking still works.
+
+## License
+MIT
