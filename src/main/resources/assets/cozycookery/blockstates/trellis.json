@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "cozycookery:block/trellis_lower"
+    },
+    "half=upper": {
+      "model": "cozycookery:block/trellis_upper"
+    }
+  }
+}

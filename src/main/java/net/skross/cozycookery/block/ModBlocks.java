@@ -20,6 +20,8 @@ import net.skross.cozycookery.block.custom.ModCropBlock;
 import net.skross.cozycookery.block.custom.MortarBlock;
 import net.skross.cozycookery.block.custom.OvenBlock;
 import net.skross.cozycookery.block.custom.StoveBlock;
+import net.skross.cozycookery.block.custom.TomatoTrellisBlock;
+import net.skross.cozycookery.block.custom.TrellisBlock;
 import net.skross.cozycookery.block.custom.WildCropBlock;
 import net.skross.cozycookery.item.ModItems;
 
@@ -89,9 +91,23 @@ public class ModBlocks {
                     .ignitedByLava()
                     .noOcclusion()));
 
-    // ---------- Crops (no BlockItem: you plant them with their seed item) ----------
-    public static final DeferredBlock<Block> TOMATO_CROP = BLOCKS.register("tomato_crop",
-            () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), ModItems.TOMATO_SEEDS));
+    // ---------- Trellis + tomatoes (2 blocks tall) ----------
+    public static final DeferredBlock<Block> TRELLIS = registerBlock("trellis",
+            () -> new TrellisBlock(trellisProperties()));
+    // No BlockItem: you get it by using tomato seeds on a trellis
+    public static final DeferredBlock<Block> TOMATO_TRELLIS = BLOCKS.register("tomato_trellis",
+            () -> new TomatoTrellisBlock(trellisProperties().sound(SoundType.CROP)));
+
+    private static BlockBehaviour.Properties trellisProperties() {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.WOOD)
+                .noCollission()
+                .strength(0.2f)
+                .sound(SoundType.SCAFFOLDING)
+                .noOcclusion()
+                .ignitedByLava()
+                .pushReaction(PushReaction.DESTROY);
+    }
 
     // ---------- Wild crops: spawn in the world, drop the vegetable + seeds ----------
     public static final DeferredBlock<Block> WILD_TOMATO = registerBlock("wild_tomato",

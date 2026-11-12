@@ -89,6 +89,7 @@
   "sounds.cozycookery.oven_ding": "Oven dings",
   "item.cozycookery.tomato": "Tomato",
   "item.cozycookery.tomato_seeds": "Tomato Seeds",
-  "block.cozycookery.tomato_crop": "Tomatoes",
-  "block.cozycookery.wild_tomato": "Wild Tomato"
+  "block.cozycookery.wild_tomato": "Wild Tomato",
+  "block.cozycookery.trellis": "Trellis",
+  "block.cozycookery.tomato_trellis": "Tomato Plant"
 }
