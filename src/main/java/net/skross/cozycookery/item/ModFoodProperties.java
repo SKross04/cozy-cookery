@@ -81,4 +81,8 @@ public class ModFoodProperties {
     // Apple pie: like vanilla pumpkin pie (8 hunger), a tiny bit more saturating
     public static final FoodProperties APPLE_PIE = new FoodProperties.Builder()
             .nutrition(8).saturationModifier(0.35f).build();
+
+    // ---------- Crops ----------
+    public static final FoodProperties TOMATO = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.4f).build();
 }

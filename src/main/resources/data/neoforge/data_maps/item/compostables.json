@@ -1,0 +1,13 @@
+{
+  "values": {
+    "cozycookery:tomato": {
+      "chance": 0.65
+    },
+    "cozycookery:tomato_seeds": {
+      "chance": 0.3
+    },
+    "cozycookery:wild_tomato": {
+      "chance": 0.65
+    }
+  }
+}

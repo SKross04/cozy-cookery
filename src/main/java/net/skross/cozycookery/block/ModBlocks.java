@@ -3,9 +3,11 @@ package net.skross.cozycookery.block;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -14,9 +16,11 @@ import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
 import net.skross.cozycookery.block.custom.FryingPanBlock;
 import net.skross.cozycookery.block.custom.MixingBowlBlock;
+import net.skross.cozycookery.block.custom.ModCropBlock;
 import net.skross.cozycookery.block.custom.MortarBlock;
 import net.skross.cozycookery.block.custom.OvenBlock;
 import net.skross.cozycookery.block.custom.StoveBlock;
+import net.skross.cozycookery.block.custom.WildCropBlock;
 import net.skross.cozycookery.item.ModItems;
 
 import java.util.LinkedHashMap;
@@ -84,6 +88,25 @@ public class ModBlocks {
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
                     .noOcclusion()));
+
+    // ---------- Crops (no BlockItem: you plant them with their seed item) ----------
+    public static final DeferredBlock<Block> TOMATO_CROP = BLOCKS.register("tomato_crop",
+            () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), ModItems.TOMATO_SEEDS));
+
+    // ---------- Wild crops: spawn in the world, drop the vegetable + seeds ----------
+    public static final DeferredBlock<Block> WILD_TOMATO = registerBlock("wild_tomato",
+            () -> new WildCropBlock(wildPlantProperties()));
+
+    private static BlockBehaviour.Properties wildPlantProperties() {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.PLANT)
+                .noCollission()
+                .instabreak()
+                .sound(SoundType.SWEET_BERRY_BUSH)
+                .offsetType(BlockBehaviour.OffsetType.XZ)
+                .ignitedByLava()
+                .pushReaction(PushReaction.DESTROY);
+    }
 
     // ---------- Stoves: one per brick type, all using the same StoveBlock class ----------
     public static final List<String> STOVE_TYPES = List.of(

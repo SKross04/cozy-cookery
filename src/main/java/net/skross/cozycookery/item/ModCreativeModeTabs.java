@@ -50,6 +50,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COOKED_CHICKEN_DRUMSTICK);
                         output.accept(ModItems.COOKED_CHICKEN_WING);
 
+                        output.accept(ModItems.TOMATO);
+                        output.accept(ModItems.TOMATO_SEEDS);
+                        output.accept(ModBlocks.WILD_TOMATO);
+
                         output.accept(ModItems.CARROT_SLICES);
                         output.accept(ModItems.CARROT_CUBES);
                         output.accept(ModItems.POTATO_SLICES);

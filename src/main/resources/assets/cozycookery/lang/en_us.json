@@ -86,5 +86,9 @@
   "block.cozycookery.mud_brick_oven": "Mud Brick Oven",
   "block.cozycookery.tuff_brick_oven": "Tuff Brick Oven",
   "item.cozycookery.apple_pie": "Apple Pie",
-  "sounds.cozycookery.oven_ding": "Oven dings"
+  "sounds.cozycookery.oven_ding": "Oven dings",
+  "item.cozycookery.tomato": "Tomato",
+  "item.cozycookery.tomato_seeds": "Tomato Seeds",
+  "block.cozycookery.tomato_crop": "Tomatoes",
+  "block.cozycookery.wild_tomato": "Wild Tomato"
 }

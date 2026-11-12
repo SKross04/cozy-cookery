@@ -2,6 +2,7 @@ package net.skross.cozycookery.item;
 
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
@@ -9,6 +10,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
+import net.skross.cozycookery.block.ModBlocks;
 import net.skross.cozycookery.item.custom.KnifeItem;
 import net.skross.cozycookery.item.custom.SpatulaItem;
 import net.skross.cozycookery.item.custom.SpoonItem;
@@ -63,6 +65,12 @@ public class ModItems {
     public static final DeferredItem<Item> RAW_CHICKEN_WING = food("raw_chicken_wing", ModFoodProperties.RAW_CHICKEN_PIECE);
     public static final DeferredItem<Item> COOKED_CHICKEN_DRUMSTICK = food("cooked_chicken_drumstick", ModFoodProperties.COOKED_CHICKEN_DRUMSTICK);
     public static final DeferredItem<Item> COOKED_CHICKEN_WING = food("cooked_chicken_wing", ModFoodProperties.COOKED_CHICKEN_WING);
+
+    // ---------- Crops ----------
+    public static final DeferredItem<Item> TOMATO = food("tomato", ModFoodProperties.TOMATO);
+    // ItemNameBlockItem: an item that places a block (the crop) but keeps its own name ("Tomato Seeds")
+    public static final DeferredItem<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.TOMATO_CROP.get(), new Item.Properties()));
 
     // ---------- Chopped vegetables & fruit (from the chopping board) ----------
     public static final DeferredItem<Item> CARROT_SLICES = food("carrot_slices", ModFoodProperties.CARROT_CUT);
