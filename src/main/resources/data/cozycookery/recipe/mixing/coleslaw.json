@@ -1,0 +1,24 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:shredded_cabbage"
+    },
+    {
+      "item": "cozycookery:carrot_slices"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:coleslaw",
+    "count": 2
+  }
+}

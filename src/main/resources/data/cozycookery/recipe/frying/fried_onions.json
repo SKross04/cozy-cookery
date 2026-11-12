@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:onion_rings"
+  },
+  "cooking_time": 200,
+  "result": {
+    "id": "cozycookery:fried_onions",
+    "count": 1
+  }
+}

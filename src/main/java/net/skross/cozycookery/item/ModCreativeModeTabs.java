@@ -63,6 +63,18 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.GARLIC_CLOVE);
                         output.accept(ModBlocks.WILD_GARLIC);
 
+                        output.accept(ModItems.TOMATO_SLICES);
+                        output.accept(ModItems.DICED_TOMATO);
+                        output.accept(ModItems.ONION_RINGS);
+                        output.accept(ModItems.DICED_ONION);
+                        output.accept(ModItems.MINCED_GARLIC);
+                        output.accept(ModItems.CABBAGE_LEAVES);
+                        output.accept(ModItems.SHREDDED_CABBAGE);
+                        output.accept(ModItems.BREAD_SLICE);
+                        output.accept(ModItems.TOAST);
+                        output.accept(ModItems.FRIED_ONIONS);
+                        output.accept(ModItems.RAW_GARLIC_BREAD);
+                        output.accept(ModItems.GARLIC_BREAD);
                         output.accept(ModItems.CARROT_SLICES);
                         output.accept(ModItems.CARROT_CUBES);
                         output.accept(ModItems.POTATO_SLICES);
@@ -98,6 +110,11 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CHICKEN_SOUP);
                         output.accept(ModItems.VEGETABLE_SOUP);
                         output.accept(ModItems.PUMPKIN_SOUP);
+                        output.accept(ModItems.TOMATO_SOUP);
+                        output.accept(ModItems.ONION_SOUP);
+                        output.accept(ModItems.CABBAGE_SOUP);
+                        output.accept(ModItems.GARDEN_SALAD);
+                        output.accept(ModItems.COLESLAW);
                         output.accept(ModItems.BURNT_STEW);
                     }).build());
 

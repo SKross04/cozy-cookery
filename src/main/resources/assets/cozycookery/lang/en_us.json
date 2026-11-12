@@ -102,5 +102,22 @@
   "block.cozycookery.wild_cabbage": "Wild Cabbage",
   "block.cozycookery.wild_onion": "Wild Onion",
   "block.cozycookery.wild_garlic": "Wild Garlic",
-  "item.cozycookery.garlic_clove": "Garlic Clove"
+  "item.cozycookery.garlic_clove": "Garlic Clove",
+  "item.cozycookery.tomato_slices": "Tomato Slices",
+  "item.cozycookery.diced_tomato": "Diced Tomato",
+  "item.cozycookery.onion_rings": "Onion Rings",
+  "item.cozycookery.diced_onion": "Diced Onion",
+  "item.cozycookery.minced_garlic": "Minced Garlic",
+  "item.cozycookery.cabbage_leaves": "Cabbage Leaves",
+  "item.cozycookery.shredded_cabbage": "Shredded Cabbage",
+  "item.cozycookery.bread_slice": "Bread Slice",
+  "item.cozycookery.toast": "Toast",
+  "item.cozycookery.fried_onions": "Fried Onions",
+  "item.cozycookery.raw_garlic_bread": "Raw Garlic Bread",
+  "item.cozycookery.garlic_bread": "Garlic Bread",
+  "item.cozycookery.tomato_soup": "Tomato Soup",
+  "item.cozycookery.onion_soup": "Onion Soup",
+  "item.cozycookery.cabbage_soup": "Cabbage Soup",
+  "item.cozycookery.garden_salad": "Garden Salad",
+  "item.cozycookery.coleslaw": "Coleslaw"
 }

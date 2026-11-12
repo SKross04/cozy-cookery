@@ -1,0 +1,15 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:bread_slice"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:raw_garlic_bread",
+    "count": 1
+  }
+}

@@ -100,8 +100,8 @@ public class MixingBowlBlock extends BaseEntityBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        // Tools, buckets and bowls are no ingredients (milk buckets and water bottles are!)
-        if (bowl.isMixed() || stack.isDamageableItem() || stack.is(Items.BUCKET) || stack.is(Items.BOWL)) {
+        // Tools and empty buckets are no ingredients (milk buckets, water bottles and empty bowls for salads are!)
+        if (bowl.isMixed() || stack.isDamageableItem() || stack.is(Items.BUCKET)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 

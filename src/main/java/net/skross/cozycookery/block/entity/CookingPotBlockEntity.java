@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class CookingPotBlockEntity extends BlockEntity {
-    public static final int INGREDIENT_SLOTS = 6;
+    public static final int INGREDIENT_SLOTS = 8;
     public static final int SERVINGS_WHEN_BURNT = 2;
     public static final int WATER_COLOR = 0x3F76E4; // the colour of plain water in the pot
 

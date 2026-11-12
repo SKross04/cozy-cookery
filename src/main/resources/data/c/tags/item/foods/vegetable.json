@@ -9,6 +9,12 @@
     "cozycookery:tomato",
     "cozycookery:cabbage",
     "cozycookery:onion",
-    "cozycookery:garlic"
+    "cozycookery:garlic",
+    "cozycookery:tomato_slices",
+    "cozycookery:diced_tomato",
+    "cozycookery:onion_rings",
+    "cozycookery:diced_onion",
+    "cozycookery:cabbage_leaves",
+    "cozycookery:shredded_cabbage"
   ]
 }

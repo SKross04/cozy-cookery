@@ -1,0 +1,29 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_onion"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
+    }
+  ],
+  "cooking_time": 500,
+  "color": "#C8402E",
+  "result": {
+    "id": "cozycookery:tomato_soup",
+    "count": 2
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:shredded_cabbage"
+    },
+    {
+      "item": "cozycookery:carrot_slices"
+    },
+    {
+      "item": "cozycookery:diced_onion"
+    },
+    {
+      "item": "cozycookery:potato_cubes"
+    }
+  ],
+  "cooking_time": 500,
+  "color": "#9CB45A",
+  "result": {
+    "id": "cozycookery:cabbage_soup",
+    "count": 2
+  }
+}

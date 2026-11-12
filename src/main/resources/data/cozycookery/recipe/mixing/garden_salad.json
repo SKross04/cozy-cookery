@@ -1,0 +1,27 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:cabbage_leaves"
+    },
+    {
+      "item": "cozycookery:tomato_slices"
+    },
+    {
+      "item": "cozycookery:onion_rings"
+    },
+    {
+      "item": "cozycookery:carrot_slices"
+    },
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:garden_salad",
+    "count": 2
+  }
+}

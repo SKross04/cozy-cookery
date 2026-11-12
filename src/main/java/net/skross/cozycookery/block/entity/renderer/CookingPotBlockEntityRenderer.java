@@ -36,7 +36,7 @@ public class CookingPotBlockEntityRenderer implements BlockEntityRenderer<Cookin
                 continue;
             }
             // Ingredients float in a slow circle around the middle of the pot and bob up and down
-            float angle = i * 60f + time * 0.6f;
+            float angle = i * 45f + time * 0.6f;
             float radius = 2.4f / 16f;
             float x = 0.5f + Mth.cos(angle * Mth.DEG_TO_RAD) * radius;
             float z = 0.5f + Mth.sin(angle * Mth.DEG_TO_RAD) * radius;

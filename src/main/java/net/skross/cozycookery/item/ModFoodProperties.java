@@ -91,4 +91,31 @@ public class ModFoodProperties {
             .nutrition(2).saturationModifier(0.3f).build();
     public static final FoodProperties GARLIC = new FoodProperties.Builder()
             .nutrition(1).saturationModifier(0.3f).build();
+
+    // ---------- New crops in the kitchen ----------
+    public static final FoodProperties CABBAGE_LEAF = new FoodProperties.Builder()     // 4 leaves from 1 cabbage
+            .nutrition(1).saturationModifier(0.5f).build();
+    public static final FoodProperties BREAD_SLICE = new FoodProperties.Builder()      // 4 slices from 1 bread
+            .nutrition(1).saturationModifier(0.6f).build();
+    public static final FoodProperties TOAST = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.6f).build();
+    public static final FoodProperties FRIED_ONIONS = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.5f).build();
+    public static final FoodProperties GARLIC_BREAD = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.6f).build();
+    // Tomato soup: 4 tomatoes + onion + garlic (12 + 2 + 0 = 14) -> 2 x 7
+    public static final FoodProperties TOMATO_SOUP = new FoodProperties.Builder()
+            .nutrition(7).saturationModifier(0.6f).build();
+    // Onion soup: 3 onion rings + garlic + bread slice (6 + 0 + 1 = 7) -> 2 x 5
+    public static final FoodProperties ONION_SOUP = new FoodProperties.Builder()
+            .nutrition(5).saturationModifier(0.6f).build();
+    // Cabbage soup: cabbage + carrot + onion + potato (1 + 3 + 2 + 5 = 11) -> 2 x 6
+    public static final FoodProperties CABBAGE_SOUP = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.6f).build();
+    // Garden salad: cabbage leaf + tomato + onion + carrot (1 + 3 + 2 + 3 = 9) -> 2 x 5
+    public static final FoodProperties GARDEN_SALAD = new FoodProperties.Builder()
+            .nutrition(5).saturationModifier(0.6f).build();
+    // Coleslaw: cabbage + carrot + egg (1 + 3 + 3 = 7) -> 2 x 4
+    public static final FoodProperties COLESLAW = new FoodProperties.Builder()
+            .nutrition(4).saturationModifier(0.6f).build();
 }

@@ -8,6 +8,11 @@
     "minecraft:rabbit_stew",
     "minecraft:suspicious_stew",
     "cozycookery:vegetable_soup",
-    "cozycookery:pumpkin_soup"
+    "cozycookery:pumpkin_soup",
+    "cozycookery:tomato_soup",
+    "cozycookery:onion_soup",
+    "cozycookery:cabbage_soup",
+    "cozycookery:garden_salad",
+    "cozycookery:coleslaw"
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:onion_rings"
+    },
+    {
+      "item": "cozycookery:onion_rings"
+    },
+    {
+      "item": "cozycookery:onion_rings"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
+    },
+    {
+      "item": "cozycookery:bread_slice"
+    }
+  ],
+  "cooking_time": 500,
+  "color": "#B8833E",
+  "result": {
+    "id": "cozycookery:onion_soup",
+    "count": 2
+  }
+}

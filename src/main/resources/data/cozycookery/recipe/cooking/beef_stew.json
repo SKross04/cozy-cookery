@@ -9,6 +9,12 @@
     },
     {
       "item": "cozycookery:carrot_cubes"
+    },
+    {
+      "item": "cozycookery:diced_onion"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
     }
   ],
   "cooking_time": 600,

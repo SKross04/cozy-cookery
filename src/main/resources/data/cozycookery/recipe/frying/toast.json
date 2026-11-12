@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:bread_slice"
+  },
+  "cooking_time": 160,
+  "result": {
+    "id": "cozycookery:toast",
+    "count": 1
+  }
+}

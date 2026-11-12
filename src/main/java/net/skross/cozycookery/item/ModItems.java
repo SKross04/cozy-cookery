@@ -94,6 +94,20 @@ public class ModItems {
     // Mushrooms aren't edible raw in vanilla, so sliced mushrooms aren't either
     public static final DeferredItem<Item> SLICED_MUSHROOMS = ITEMS.registerSimpleItem("sliced_mushrooms");
 
+    // ---------- Prepped new crops (chopping board) ----------
+    public static final DeferredItem<Item> TOMATO_SLICES = food("tomato_slices", ModFoodProperties.TOMATO);
+    public static final DeferredItem<Item> DICED_TOMATO = food("diced_tomato", ModFoodProperties.TOMATO);
+    public static final DeferredItem<Item> ONION_RINGS = food("onion_rings", ModFoodProperties.ONION);
+    public static final DeferredItem<Item> DICED_ONION = food("diced_onion", ModFoodProperties.ONION);
+    public static final DeferredItem<Item> MINCED_GARLIC = ITEMS.registerSimpleItem("minced_garlic");
+    public static final DeferredItem<Item> CABBAGE_LEAVES = food("cabbage_leaves", ModFoodProperties.CABBAGE_LEAF);
+    public static final DeferredItem<Item> SHREDDED_CABBAGE = food("shredded_cabbage", ModFoodProperties.CABBAGE_LEAF);
+    public static final DeferredItem<Item> BREAD_SLICE = food("bread_slice", ModFoodProperties.BREAD_SLICE);
+    public static final DeferredItem<Item> TOAST = food("toast", ModFoodProperties.TOAST);
+    public static final DeferredItem<Item> FRIED_ONIONS = food("fried_onions", ModFoodProperties.FRIED_ONIONS);
+    public static final DeferredItem<Item> RAW_GARLIC_BREAD = ITEMS.registerSimpleItem("raw_garlic_bread");
+    public static final DeferredItem<Item> GARLIC_BREAD = food("garlic_bread", ModFoodProperties.GARLIC_BREAD);
+
     // ---------- Fried in the frying pan ----------
     public static final DeferredItem<Item> SEARED_BEEF_STRIPS = food("seared_beef_strips", ModFoodProperties.SEARED_BEEF);
     public static final DeferredItem<Item> SEARED_BEEF_CUBES = food("seared_beef_cubes", ModFoodProperties.SEARED_BEEF);
@@ -115,6 +129,11 @@ public class ModItems {
     public static final DeferredItem<Item> CHICKEN_SOUP = bowlFood("chicken_soup", ModFoodProperties.CHICKEN_SOUP);
     public static final DeferredItem<Item> VEGETABLE_SOUP = bowlFood("vegetable_soup", ModFoodProperties.VEGETABLE_SOUP);
     public static final DeferredItem<Item> PUMPKIN_SOUP = bowlFood("pumpkin_soup", ModFoodProperties.PUMPKIN_SOUP);
+    public static final DeferredItem<Item> TOMATO_SOUP = bowlFood("tomato_soup", ModFoodProperties.TOMATO_SOUP);
+    public static final DeferredItem<Item> ONION_SOUP = bowlFood("onion_soup", ModFoodProperties.ONION_SOUP);
+    public static final DeferredItem<Item> CABBAGE_SOUP = bowlFood("cabbage_soup", ModFoodProperties.CABBAGE_SOUP);
+    public static final DeferredItem<Item> GARDEN_SALAD = bowlFood("garden_salad", ModFoodProperties.GARDEN_SALAD);
+    public static final DeferredItem<Item> COLESLAW = bowlFood("coleslaw", ModFoodProperties.COLESLAW);
     public static final DeferredItem<Item> BURNT_STEW = bowlFood("burnt_stew", ModFoodProperties.BURNT_STEW);
 
     // The empty bowl is given back by ModEvents.onFinishEating (tag cozycookery:bowl_foods)
