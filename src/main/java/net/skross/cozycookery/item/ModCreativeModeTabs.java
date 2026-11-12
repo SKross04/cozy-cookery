@@ -20,7 +20,7 @@ public class ModCreativeModeTabs {
                     .icon(() -> new ItemStack(ModItems.IRON_KNIFE.get()))
                     .title(Component.translatable("creativetab.cozycookery.cozy_cookery_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModBlocks.CHOPPING_BOARD);
+                        ModBlocks.CHOPPING_BOARDS.values().forEach(output::accept);
                         output.accept(ModBlocks.COOKING_POT);
 
                         output.accept(ModItems.FLINT_KNIFE);

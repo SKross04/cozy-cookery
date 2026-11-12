@@ -1,0 +1,6 @@
+{
+  "parent": "cozycookery:block/chopping_board_template",
+  "textures": {
+    "board": "cozycookery:block/oak_chopping_board"
+  }
+}

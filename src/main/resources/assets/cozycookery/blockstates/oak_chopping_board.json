@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "cozycookery:block/oak_chopping_board"
+    },
+    "facing=east": {
+      "model": "cozycookery:block/oak_chopping_board",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "cozycookery:block/oak_chopping_board",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "cozycookery:block/oak_chopping_board",
+      "y": 270
+    }
+  }
+}

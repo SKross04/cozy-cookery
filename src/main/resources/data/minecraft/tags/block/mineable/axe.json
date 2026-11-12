@@ -1,5 +1,15 @@
 {
   "values": [
-    "cozycookery:chopping_board"
+    "cozycookery:oak_chopping_board",
+    "cozycookery:spruce_chopping_board",
+    "cozycookery:birch_chopping_board",
+    "cozycookery:jungle_chopping_board",
+    "cozycookery:acacia_chopping_board",
+    "cozycookery:dark_oak_chopping_board",
+    "cozycookery:mangrove_chopping_board",
+    "cozycookery:cherry_chopping_board",
+    "cozycookery:bamboo_chopping_board",
+    "cozycookery:crimson_chopping_board",
+    "cozycookery:warped_chopping_board"
   ]
 }

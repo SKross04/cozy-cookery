@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "cozycookery:item/chopping_board"
+    "layer0": "cozycookery:item/dark_oak_chopping_board"
   }
 }

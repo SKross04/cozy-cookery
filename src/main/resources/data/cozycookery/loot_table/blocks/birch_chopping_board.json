@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "cozycookery:chopping_board"
+          "name": "cozycookery:birch_chopping_board"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "cozycookery:blocks/chopping_board"
+  "random_sequence": "cozycookery:blocks/birch_chopping_board"
 }

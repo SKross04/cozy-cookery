@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "cozycookery:block/crimson_chopping_board"
+    },
+    "facing=east": {
+      "model": "cozycookery:block/crimson_chopping_board",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "cozycookery:block/crimson_chopping_board",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "cozycookery:block/crimson_chopping_board",
+      "y": 270
+    }
+  }
+}

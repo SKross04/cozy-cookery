@@ -14,18 +14,42 @@ import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
 import net.skross.cozycookery.item.ModItems;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CozyCookery.MOD_ID);
 
-    public static final DeferredBlock<Block> CHOPPING_BOARD = registerBlock("chopping_board",
-            () -> new ChoppingBoardBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.WOOD)
-                    .strength(0.5f)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .noOcclusion()));
+    // ---------- Chopping boards: one per wood type, all using the same ChoppingBoardBlock class ----------
+    public static final List<String> WOOD_TYPES = List.of(
+            "oak", "spruce", "birch", "jungle", "acacia", "dark_oak",
+            "mangrove", "cherry", "bamboo", "crimson", "warped");
+
+    // Key = wood type ("oak"), value = the registered block ("oak_chopping_board")
+    public static final Map<String, DeferredBlock<Block>> CHOPPING_BOARDS = registerChoppingBoards();
+
+    private static Map<String, DeferredBlock<Block>> registerChoppingBoards() {
+        Map<String, DeferredBlock<Block>> boards = new LinkedHashMap<>();
+        for (String wood : WOOD_TYPES) {
+            boolean netherWood = wood.equals("crimson") || wood.equals("warped"); // nether wood doesn't burn
+            boards.put(wood, registerBlock(wood + "_chopping_board", () -> {
+                BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.WOOD)
+                        .strength(0.5f)
+                        .sound(wood.equals("bamboo") ? SoundType.BAMBOO_WOOD
+                                : wood.equals("cherry") ? SoundType.CHERRY_WOOD
+                                : netherWood ? SoundType.NETHER_WOOD : SoundType.WOOD)
+                        .noOcclusion();
+                if (!netherWood) {
+                    properties.ignitedByLava();
+                }
+                return new ChoppingBoardBlock(properties);
+            }));
+        }
+        return boards;
+    }
 
     public static final DeferredBlock<Block> COOKING_POT = registerBlock("cooking_pot",
             () -> new CookingPotBlock(BlockBehaviour.Properties.of()

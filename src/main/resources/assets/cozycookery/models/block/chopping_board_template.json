@@ -1,8 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "board": "cozycookery:block/chopping_board",
-    "particle": "cozycookery:block/chopping_board"
+    "particle": "#board"
   },
   "elements": [
     {

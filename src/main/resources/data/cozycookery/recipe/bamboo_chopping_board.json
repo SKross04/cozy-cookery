@@ -1,12 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
+  "group": "chopping_board",
   "key": {
     "#": {
       "item": "minecraft:stick"
     },
     "X": {
-      "tag": "minecraft:planks"
+      "item": "minecraft:bamboo_planks"
     }
   },
   "pattern": [
@@ -14,6 +15,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "cozycookery:chopping_board"
+    "id": "cozycookery:bamboo_chopping_board"
   }
 }
