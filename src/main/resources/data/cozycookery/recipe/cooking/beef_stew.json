@@ -5,10 +5,10 @@
       "item": "cozycookery:raw_beef_cubes"
     },
     {
-      "item": "minecraft:potato"
+      "item": "cozycookery:potato_cubes"
     },
     {
-      "item": "minecraft:carrot"
+      "item": "cozycookery:carrot_cubes"
     }
   ],
   "cooking_time": 600,

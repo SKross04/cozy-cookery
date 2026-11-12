@@ -1,0 +1,15 @@
+{
+  "type": "cozycookery:chopping",
+  "ingredient": {
+    "item": "cozycookery:potato_slices"
+  },
+  "tool": {
+    "tag": "c:tools/knife"
+  },
+  "results": [
+    {
+      "id": "cozycookery:potato_cubes",
+      "count": 1
+    }
+  ]
+}

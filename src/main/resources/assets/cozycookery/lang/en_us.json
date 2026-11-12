@@ -42,5 +42,15 @@
   "item.cozycookery.chicken_soup": "Chicken Soup",
   "item.cozycookery.burnt_stew": "Burnt Stew",
   "sounds.cozycookery.cooking_pot_stir": "Spoon stirs",
-  "sounds.cozycookery.cooking_pot_blub": "Pot needs stirring"
+  "sounds.cozycookery.cooking_pot_blub": "Pot needs stirring",
+  "item.cozycookery.carrot_slices": "Carrot Slices",
+  "item.cozycookery.carrot_cubes": "Carrot Cubes",
+  "item.cozycookery.potato_slices": "Potato Slices",
+  "item.cozycookery.potato_cubes": "Potato Cubes",
+  "item.cozycookery.beetroot_cubes": "Beetroot Cubes",
+  "item.cozycookery.sliced_mushrooms": "Sliced Mushrooms",
+  "item.cozycookery.apple_slices": "Apple Slices",
+  "item.cozycookery.pumpkin_slice": "Pumpkin Slice",
+  "item.cozycookery.vegetable_soup": "Vegetable Soup",
+  "item.cozycookery.pumpkin_soup": "Pumpkin Soup"
 }

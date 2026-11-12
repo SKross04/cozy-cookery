@@ -49,9 +49,22 @@ public class ModItems {
     public static final DeferredItem<Item> COOKED_CHICKEN_DRUMSTICK = food("cooked_chicken_drumstick", ModFoodProperties.COOKED_CHICKEN_DRUMSTICK);
     public static final DeferredItem<Item> COOKED_CHICKEN_WING = food("cooked_chicken_wing", ModFoodProperties.COOKED_CHICKEN_WING);
 
+    // ---------- Chopped vegetables & fruit (from the chopping board) ----------
+    public static final DeferredItem<Item> CARROT_SLICES = food("carrot_slices", ModFoodProperties.CARROT_CUT);
+    public static final DeferredItem<Item> CARROT_CUBES = food("carrot_cubes", ModFoodProperties.CARROT_CUT);
+    public static final DeferredItem<Item> POTATO_SLICES = food("potato_slices", ModFoodProperties.POTATO_CUT);
+    public static final DeferredItem<Item> POTATO_CUBES = food("potato_cubes", ModFoodProperties.POTATO_CUT);
+    public static final DeferredItem<Item> BEETROOT_CUBES = food("beetroot_cubes", ModFoodProperties.BEETROOT_CUT);
+    public static final DeferredItem<Item> APPLE_SLICES = food("apple_slices", ModFoodProperties.APPLE_SLICES);
+    public static final DeferredItem<Item> PUMPKIN_SLICE = food("pumpkin_slice", ModFoodProperties.PUMPKIN_SLICE);
+    // Mushrooms aren't edible raw in vanilla, so sliced mushrooms aren't either
+    public static final DeferredItem<Item> SLICED_MUSHROOMS = ITEMS.registerSimpleItem("sliced_mushrooms");
+
     // ---------- Pot dishes: served in bowls, stack to 4 ----------
     public static final DeferredItem<Item> BEEF_STEW = bowlFood("beef_stew", ModFoodProperties.BEEF_STEW);
     public static final DeferredItem<Item> CHICKEN_SOUP = bowlFood("chicken_soup", ModFoodProperties.CHICKEN_SOUP);
+    public static final DeferredItem<Item> VEGETABLE_SOUP = bowlFood("vegetable_soup", ModFoodProperties.VEGETABLE_SOUP);
+    public static final DeferredItem<Item> PUMPKIN_SOUP = bowlFood("pumpkin_soup", ModFoodProperties.PUMPKIN_SOUP);
     public static final DeferredItem<Item> BURNT_STEW = bowlFood("burnt_stew", ModFoodProperties.BURNT_STEW);
 
     // The empty bowl is given back by ModEvents.onFinishEating (tag cozycookery:bowl_foods)

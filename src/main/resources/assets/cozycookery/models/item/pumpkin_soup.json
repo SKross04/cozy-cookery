@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/bowl",
+    "layer1": "cozycookery:item/pumpkin_soup"
+  }
+}

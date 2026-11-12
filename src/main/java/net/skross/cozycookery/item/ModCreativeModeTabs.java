@@ -45,8 +45,19 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COOKED_CHICKEN_DRUMSTICK);
                         output.accept(ModItems.COOKED_CHICKEN_WING);
 
+                        output.accept(ModItems.CARROT_SLICES);
+                        output.accept(ModItems.CARROT_CUBES);
+                        output.accept(ModItems.POTATO_SLICES);
+                        output.accept(ModItems.POTATO_CUBES);
+                        output.accept(ModItems.BEETROOT_CUBES);
+                        output.accept(ModItems.SLICED_MUSHROOMS);
+                        output.accept(ModItems.APPLE_SLICES);
+                        output.accept(ModItems.PUMPKIN_SLICE);
+
                         output.accept(ModItems.BEEF_STEW);
                         output.accept(ModItems.CHICKEN_SOUP);
+                        output.accept(ModItems.VEGETABLE_SOUP);
+                        output.accept(ModItems.PUMPKIN_SOUP);
                         output.accept(ModItems.BURNT_STEW);
                     }).build());
 

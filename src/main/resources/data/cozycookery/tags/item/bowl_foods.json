@@ -6,6 +6,8 @@
     "minecraft:mushroom_stew",
     "minecraft:beetroot_soup",
     "minecraft:rabbit_stew",
-    "minecraft:suspicious_stew"
+    "minecraft:suspicious_stew",
+    "cozycookery:vegetable_soup",
+    "cozycookery:pumpkin_soup"
   ]
 }

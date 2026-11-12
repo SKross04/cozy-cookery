@@ -14,10 +14,10 @@
       "item": "cozycookery:raw_chicken_wing"
     },
     {
-      "item": "minecraft:carrot"
+      "item": "cozycookery:carrot_slices"
     },
     {
-      "item": "minecraft:potato"
+      "item": "cozycookery:potato_cubes"
     }
   ],
   "cooking_time": 600,

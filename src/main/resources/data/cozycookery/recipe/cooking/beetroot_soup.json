@@ -2,22 +2,22 @@
   "type": "cozycookery:cooking",
   "ingredients": [
     {
-      "item": "minecraft:beetroot"
+      "item": "cozycookery:beetroot_cubes"
     },
     {
-      "item": "minecraft:beetroot"
+      "item": "cozycookery:beetroot_cubes"
     },
     {
-      "item": "minecraft:beetroot"
+      "item": "cozycookery:beetroot_cubes"
     },
     {
-      "item": "minecraft:beetroot"
+      "item": "cozycookery:beetroot_cubes"
     },
     {
-      "item": "minecraft:beetroot"
+      "item": "cozycookery:beetroot_cubes"
     },
     {
-      "item": "minecraft:beetroot"
+      "item": "cozycookery:beetroot_cubes"
     }
   ],
   "cooking_time": 400,

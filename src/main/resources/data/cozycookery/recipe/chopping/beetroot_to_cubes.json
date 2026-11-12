@@ -1,0 +1,15 @@
+{
+  "type": "cozycookery:chopping",
+  "ingredient": {
+    "item": "minecraft:beetroot"
+  },
+  "tool": {
+    "tag": "c:tools/knife"
+  },
+  "results": [
+    {
+      "id": "cozycookery:beetroot_cubes",
+      "count": 1
+    }
+  ]
+}

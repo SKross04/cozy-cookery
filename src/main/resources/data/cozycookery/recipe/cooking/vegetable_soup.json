@@ -1,0 +1,23 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:carrot_slices"
+    },
+    {
+      "item": "cozycookery:potato_cubes"
+    },
+    {
+      "item": "cozycookery:beetroot_cubes"
+    },
+    {
+      "item": "cozycookery:sliced_mushrooms"
+    }
+  ],
+  "cooking_time": 500,
+  "color": "#8A9A4A",
+  "result": {
+    "id": "cozycookery:vegetable_soup",
+    "count": 2
+  }
+}

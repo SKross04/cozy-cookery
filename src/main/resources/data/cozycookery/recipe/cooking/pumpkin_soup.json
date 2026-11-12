@@ -1,0 +1,29 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:pumpkin_slice"
+    },
+    {
+      "item": "cozycookery:pumpkin_slice"
+    },
+    {
+      "item": "cozycookery:pumpkin_slice"
+    },
+    {
+      "item": "cozycookery:pumpkin_slice"
+    },
+    {
+      "item": "cozycookery:carrot_slices"
+    },
+    {
+      "item": "cozycookery:potato_cubes"
+    }
+  ],
+  "cooking_time": 500,
+  "color": "#E08A2C",
+  "result": {
+    "id": "cozycookery:pumpkin_soup",
+    "count": 2
+  }
+}

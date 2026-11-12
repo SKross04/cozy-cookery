@@ -40,4 +40,23 @@ public class ModFoodProperties {
     public static final FoodProperties BURNT_STEW = new FoodProperties.Builder()
             .nutrition(2).saturationModifier(0.1f)
             .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5f).build();
+
+    // ---------- Chopped vegetables & fruit (same value as what you chopped) ----------
+    public static final FoodProperties CARROT_CUT = new FoodProperties.Builder()      // like a carrot
+            .nutrition(3).saturationModifier(0.6f).build();
+    public static final FoodProperties POTATO_CUT = new FoodProperties.Builder()      // like a raw potato
+            .nutrition(1).saturationModifier(0.3f).build();
+    public static final FoodProperties BEETROOT_CUT = new FoodProperties.Builder()    // like a beetroot
+            .nutrition(1).saturationModifier(0.6f).build();
+    public static final FoodProperties APPLE_SLICES = new FoodProperties.Builder()    // like an apple
+            .nutrition(4).saturationModifier(0.3f).build();
+    public static final FoodProperties PUMPKIN_SLICE = new FoodProperties.Builder()   // 4 slices from 1 pumpkin
+            .nutrition(1).saturationModifier(0.3f).build();
+
+    // Vegetable soup: carrot + potato + beetroot + mushrooms (cooked 3 + 5 + 1 + 0 = 9) -> 2 x 5
+    public static final FoodProperties VEGETABLE_SOUP = new FoodProperties.Builder()
+            .nutrition(5).saturationModifier(0.6f).build();
+    // Pumpkin soup: 4 pumpkin slices + carrot + potato (4 + 3 + 5 = 12) -> 2 x 6
+    public static final FoodProperties PUMPKIN_SOUP = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.6f).build();
 }

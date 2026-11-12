@@ -2,16 +2,16 @@
   "type": "cozycookery:cooking",
   "ingredients": [
     {
-      "item": "minecraft:brown_mushroom"
+      "item": "cozycookery:sliced_mushrooms"
     },
     {
-      "item": "minecraft:brown_mushroom"
+      "item": "cozycookery:sliced_mushrooms"
     },
     {
-      "item": "minecraft:red_mushroom"
+      "item": "cozycookery:sliced_mushrooms"
     },
     {
-      "item": "minecraft:red_mushroom"
+      "item": "cozycookery:sliced_mushrooms"
     }
   ],
   "cooking_time": 400,

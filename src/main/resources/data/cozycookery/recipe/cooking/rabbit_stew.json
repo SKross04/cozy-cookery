@@ -8,19 +8,14 @@
       "item": "minecraft:rabbit"
     },
     {
-      "item": "minecraft:carrot"
+      "item": "cozycookery:carrot_cubes"
     },
     {
-      "item": "minecraft:potato"
+      "item": "cozycookery:potato_cubes"
     },
-    [
-      {
-        "item": "minecraft:brown_mushroom"
-      },
-      {
-        "item": "minecraft:red_mushroom"
-      }
-    ]
+    {
+      "item": "cozycookery:sliced_mushrooms"
+    }
   ],
   "cooking_time": 600,
   "color": "#B66A34",
