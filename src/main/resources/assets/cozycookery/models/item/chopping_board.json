@@ -1,3 +1,6 @@
 {
-  "parent": "cozycookery:block/chopping_board"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cozycookery:item/chopping_board"
+  }
 }
