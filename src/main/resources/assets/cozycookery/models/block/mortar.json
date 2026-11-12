@@ -351,6 +351,162 @@
           "texture": "#stone"
         }
       }
+    },
+    {
+      "name": "pestle_head",
+      "from": [
+        7,
+        1,
+        6.5
+      ],
+      "to": [
+        10,
+        4,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            12,
+            10,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            7,
+            12,
+            10,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            12,
+            9.5,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            12,
+            9.5,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            7,
+            6.5,
+            10,
+            9.5
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            7,
+            6.5,
+            10,
+            9.5
+          ],
+          "texture": "#stone"
+        }
+      },
+      "rotation": {
+        "angle": 22.5,
+        "axis": "z",
+        "origin": [
+          8.5,
+          1,
+          8
+        ]
+      }
+    },
+    {
+      "name": "pestle_handle",
+      "from": [
+        7.75,
+        4,
+        7.25
+      ],
+      "to": [
+        9.25,
+        11,
+        8.75
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7.75,
+            5,
+            9.25,
+            12
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            7.75,
+            5,
+            9.25,
+            12
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            7.25,
+            5,
+            8.75,
+            12
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            7.25,
+            5,
+            8.75,
+            12
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            7.75,
+            7.25,
+            9.25,
+            8.75
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            7.75,
+            7.25,
+            9.25,
+            8.75
+          ],
+          "texture": "#stone"
+        }
+      },
+      "rotation": {
+        "angle": 22.5,
+        "axis": "z",
+        "origin": [
+          8.5,
+          1,
+          8
+        ]
+      }
     }
   ]
 }

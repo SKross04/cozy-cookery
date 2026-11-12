@@ -33,7 +33,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.NETHERITE_KNIFE);
                         output.accept(ModItems.WOODEN_SPOON);
                         output.accept(ModItems.WOODEN_SPATULA);
-                        output.accept(ModItems.PESTLE);
 
                         output.accept(ModItems.RAW_BEEF_STRIPS);
                         output.accept(ModItems.RAW_BEEF_CUBES);

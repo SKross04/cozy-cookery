@@ -71,8 +71,7 @@
   "item.cozycookery.charred_scraps": "Charred Scraps",
   "sounds.cozycookery.frying_pan_sizzle": "Pan sizzles",
   "sounds.cozycookery.frying_pan_flip": "Spatula flips",
-  "block.cozycookery.mortar": "Mortar",
-  "item.cozycookery.pestle": "Pestle",
+  "block.cozycookery.mortar": "Mortar and Pestle",
   "item.cozycookery.flour": "Flour",
-  "sounds.cozycookery.mortar_grind": "Pestle grinds"
+  "sounds.cozycookery.mortar_grind": "Mortar grinds"
 }

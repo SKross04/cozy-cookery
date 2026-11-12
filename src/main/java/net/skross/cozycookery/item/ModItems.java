@@ -10,7 +10,6 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.item.custom.KnifeItem;
-import net.skross.cozycookery.item.custom.PestleItem;
 import net.skross.cozycookery.item.custom.SpatulaItem;
 import net.skross.cozycookery.item.custom.SpoonItem;
 
@@ -36,10 +35,6 @@ public class ModItems {
     // Wooden spatula: flips food in the frying pan. 128 uses.
     public static final DeferredItem<Item> WOODEN_SPATULA = ITEMS.register("wooden_spatula",
             () -> new SpatulaItem(new Item.Properties().durability(128)));
-
-    // Pestle: grinds what lies in the mortar. Stone, so it lasts longer: 256 uses.
-    public static final DeferredItem<Item> PESTLE = ITEMS.register("pestle",
-            () -> new PestleItem(new Item.Properties().durability(256)));
 
     // ---------- Baking ingredients ----------
     public static final DeferredItem<Item> FLOUR = ITEMS.registerSimpleItem("flour");

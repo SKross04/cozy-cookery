@@ -4,9 +4,13 @@
   "key": {
     "S": {
       "item": "minecraft:smooth_stone"
+    },
+    "#": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
+    "  #",
     "S S",
     " S "
   ],
