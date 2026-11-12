@@ -29,6 +29,9 @@
     },
     "cozycookery:wild_garlic": {
       "chance": 0.65
+    },
+    "cozycookery:garlic_clove": {
+      "chance": 0.3
     }
   }
 }

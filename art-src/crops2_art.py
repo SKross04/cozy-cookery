@@ -109,3 +109,24 @@ def wild(name, kind):
             for y in range(cy+2,12): px[cx,y]=STEM+(255,)
     save(img,f"block/{name}")
 wild("wild_cabbage","cabbage"); wild("wild_onion","onion"); wild("wild_garlic","garlic")
+
+# ---- garlic clove ----
+def garlic_clove():
+    col={}; fill={}
+    G=[(150,134,120),(220,210,196),(240,234,224),(252,250,244)]
+    for y in range(16):
+        for x in range(16):
+            # a teardrop: wide at the bottom, pointed at the top, slightly curved
+            t=(y-3)/10.0
+            if 0<=t<=1:
+                half=3.6*math.sin(t*math.pi*0.85)+0.3
+                cx=7.5+1.2*(1-t)
+                if abs(x-cx)<=half:
+                    fill[(x,y)]=1
+                    c=G[2]
+                    if x<cx-1: c=G[3]
+                    if x>cx+1.5: c=G[1]
+                    if y>=12 and x>cx: c=(196,160,196)
+                    col[(x,y)]=c
+    img=new(); put(img,col); outline(img,fill,lambda p:G[0]); img.save(f"{out}/item/garlic_clove.png")
+garlic_clove()

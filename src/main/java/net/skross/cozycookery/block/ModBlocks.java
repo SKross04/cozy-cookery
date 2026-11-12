@@ -104,7 +104,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ONION_CROP = BLOCKS.register("onion_crop",
             () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CARROTS), ModItems.ONION));
     public static final DeferredBlock<Block> GARLIC_CROP = BLOCKS.register("garlic_crop",
-            () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CARROTS), ModItems.GARLIC));
+            () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CARROTS), ModItems.GARLIC_CLOVE));
 
     public static final DeferredBlock<Block> WILD_CABBAGE = registerBlock("wild_cabbage",
             () -> new WildCropBlock(wildPlantProperties()));

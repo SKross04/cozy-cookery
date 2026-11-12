@@ -101,5 +101,6 @@
   "block.cozycookery.garlic_crop": "Garlic",
   "block.cozycookery.wild_cabbage": "Wild Cabbage",
   "block.cozycookery.wild_onion": "Wild Onion",
-  "block.cozycookery.wild_garlic": "Wild Garlic"
+  "block.cozycookery.wild_garlic": "Wild Garlic",
+  "item.cozycookery.garlic_clove": "Garlic Clove"
 }

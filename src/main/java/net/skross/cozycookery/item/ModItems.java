@@ -75,11 +75,13 @@ public class ModItems {
     public static final DeferredItem<Item> CABBAGE = food("cabbage", ModFoodProperties.CABBAGE);
     public static final DeferredItem<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds",
             () -> new ItemNameBlockItem(ModBlocks.CABBAGE_CROP.get(), new Item.Properties()));
-    // Onion and garlic are planted themselves, like vanilla carrots and potatoes
+    // The onion is planted itself, like vanilla carrots and potatoes
     public static final DeferredItem<Item> ONION = ITEMS.register("onion",
             () -> new ItemNameBlockItem(ModBlocks.ONION_CROP.get(), new Item.Properties().food(ModFoodProperties.ONION)));
-    public static final DeferredItem<Item> GARLIC = ITEMS.register("garlic",
-            () -> new ItemNameBlockItem(ModBlocks.GARLIC_CROP.get(), new Item.Properties().food(ModFoodProperties.GARLIC)));
+    // Garlic: the bulb is food, you plant a single clove (1 bulb -> 4 cloves in the crafting table)
+    public static final DeferredItem<Item> GARLIC = food("garlic", ModFoodProperties.GARLIC);
+    public static final DeferredItem<Item> GARLIC_CLOVE = ITEMS.register("garlic_clove",
+            () -> new ItemNameBlockItem(ModBlocks.GARLIC_CROP.get(), new Item.Properties()));
 
     // ---------- Chopped vegetables & fruit (from the chopping board) ----------
     public static final DeferredItem<Item> CARROT_SLICES = food("carrot_slices", ModFoodProperties.CARROT_CUT);

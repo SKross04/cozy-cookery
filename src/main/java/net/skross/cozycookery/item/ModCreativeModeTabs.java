@@ -60,6 +60,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.ONION);
                         output.accept(ModBlocks.WILD_ONION);
                         output.accept(ModItems.GARLIC);
+                        output.accept(ModItems.GARLIC_CLOVE);
                         output.accept(ModBlocks.WILD_GARLIC);
 
                         output.accept(ModItems.CARROT_SLICES);
