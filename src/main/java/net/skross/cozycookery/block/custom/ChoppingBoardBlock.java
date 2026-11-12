@@ -44,10 +44,10 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
     public static final MapCodec<ChoppingBoardBlock> CODEC = simpleCodec(ChoppingBoardBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    // The board is 14 x 10 pixels and 1 pixel high.
+    // The board (with handle) is 15 x 10 pixels and 2 pixels high.
     // Block.box uses pixels: (minX, minY, minZ, maxX, maxY, maxZ) from 0 to 16.
-    private static final VoxelShape SHAPE_NORTH_SOUTH = Block.box(1, 0, 3, 15, 1, 13);
-    private static final VoxelShape SHAPE_EAST_WEST = Block.box(3, 0, 1, 13, 1, 15);
+    private static final VoxelShape SHAPE_NORTH_SOUTH = Block.box(0, 0, 3, 16, 2, 13);
+    private static final VoxelShape SHAPE_EAST_WEST = Block.box(3, 0, 0, 13, 2, 16);
 
     public ChoppingBoardBlock(Properties properties) {
         super(properties);

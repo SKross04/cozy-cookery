@@ -15,7 +15,9 @@ import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
 import net.skross.cozycookery.block.entity.ChoppingBoardBlockEntity;
 
 public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<ChoppingBoardBlockEntity> {
-    private static final float BOARD_TOP = 1f / 16f; // the board is 1 pixel high
+    private static final float BOARD_TOP = 2f / 16f; // the board is 2 pixels high
+    // The cutting surface is 1 pixel left of the block centre (the handle sticks out on the right)
+    private static final float SURFACE_OFFSET = -1f / 16f;
 
     public ChoppingBoardBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -41,10 +43,12 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
             // Blocks (stone, a cake...) stand upright on the board at half size
             poseStack.translate(0.5f, BOARD_TOP + 0.125f, 0.5f);
             poseStack.mulPose(Axis.YP.rotationDegrees(-boardRotation));
+            poseStack.translate(SURFACE_OFFSET, 0f, 0f);
         } else {
             // Flat items (meat, knives...) lie flat on the board
             poseStack.translate(0.5f, BOARD_TOP + 0.02f, 0.5f);
             poseStack.mulPose(Axis.YP.rotationDegrees(-boardRotation));
+            poseStack.translate(SURFACE_OFFSET, 0f, 0f);
             poseStack.mulPose(Axis.XP.rotationDegrees(90f));
             // Most item textures are drawn diagonally (knives, strips, drumsticks).
             // Turning them 45 degrees makes them lie along the long side of the board.
