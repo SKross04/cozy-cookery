@@ -29,6 +29,10 @@ public class ModBlockEntities {
                     ModBlocks.STOVES.values().stream().map(DeferredBlock::get).toArray(Block[]::new)
             ).build(null));
 
+    public static final Supplier<BlockEntityType<CookingPotBlockEntity>> COOKING_POT_BE =
+            BLOCK_ENTITIES.register("cooking_pot_be", () -> BlockEntityType.Builder.of(
+                    CookingPotBlockEntity::new, ModBlocks.COOKING_POT.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

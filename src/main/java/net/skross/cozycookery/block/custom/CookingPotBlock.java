@@ -8,18 +8,23 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -29,9 +34,12 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
+import net.skross.cozycookery.item.custom.SpoonItem;
 import net.skross.cozycookery.util.ModTags;
+import org.jetbrains.annotations.Nullable;
 
-public class CookingPotBlock extends Block {
+public class CookingPotBlock extends BaseEntityBlock {
     public static final MapCodec<CookingPotBlock> CODEC = simpleCodec(CookingPotBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<PotLiquid> LIQUID = EnumProperty.create("liquid", PotLiquid.class);
@@ -47,8 +55,31 @@ public class CookingPotBlock extends Block {
     }
 
     @Override
-    protected MapCodec<? extends Block> codec() {
+    protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
+    }
+
+    // ---------- Block entity ----------
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CookingPotBlockEntity(pos, state);
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    // When the pot is broken, drop the ingredients that were in it
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (state.getBlock() != newState.getBlock()) {
+            if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot) {
+                pot.drops();
+            }
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Override
@@ -91,10 +122,16 @@ public class CookingPotBlock extends Block {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (stack.isEmpty() || !(level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
         PotLiquid liquid = state.getValue(LIQUID);
 
         // Water bucket into an empty pot -> fill with water
-        if (stack.is(Items.WATER_BUCKET) && liquid == PotLiquid.EMPTY) {
+        if (stack.is(Items.WATER_BUCKET)) {
+            if (liquid != PotLiquid.EMPTY) {
+                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+            }
             if (!level.isClientSide()) {
                 player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
                 level.setBlock(pos, state.setValue(LIQUID, PotLiquid.WATER), Block.UPDATE_ALL);
@@ -104,8 +141,11 @@ public class CookingPotBlock extends Block {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        // Empty bucket on a pot with water -> take the water back
-        if (stack.is(Items.BUCKET) && liquid == PotLiquid.WATER) {
+        // Empty bucket on a pot with ONLY water (no ingredients) -> take the water back
+        if (stack.is(Items.BUCKET)) {
+            if (liquid != PotLiquid.WATER || pot.hasIngredients()) {
+                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+            }
             if (!level.isClientSide()) {
                 player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.WATER_BUCKET)));
                 level.setBlock(pos, state.setValue(LIQUID, PotLiquid.EMPTY), Block.UPDATE_ALL);
@@ -115,7 +155,46 @@ public class CookingPotBlock extends Block {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
+        // Any other item into a pot with water -> add it as an ingredient (max 6)
+        if (liquid == PotLiquid.WATER && isIngredient(stack)) {
+            if (!level.isClientSide()) {
+                if (pot.addIngredient(stack)) {
+                    stack.consume(1, player);
+                    level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS,
+                            0.3f, 1.3f + level.getRandom().nextFloat() * 0.3f);
+                }
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        }
+
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    // Tools and containers are never ingredients (they get their own uses: spoon, bowl, knife...)
+    private static boolean isIngredient(ItemStack stack) {
+        return !(stack.getItem() instanceof TieredItem)
+                && !(stack.getItem() instanceof SpoonItem)
+                && !stack.is(Items.BOWL)
+                && !stack.isDamageableItem();
+    }
+
+    // Empty hand -> take the last added ingredient back out
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
+                                               Player player, BlockHitResult hitResult) {
+        if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot && pot.hasIngredients()) {
+            if (!level.isClientSide()) {
+                ItemStack taken = pot.removeLastIngredient();
+                if (player.getMainHandItem().isEmpty()) {
+                    player.setItemInHand(InteractionHand.MAIN_HAND, taken);
+                } else {
+                    player.getInventory().placeItemBackInInventory(taken);
+                }
+                level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4f, 1.2f);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide());
+        }
+        return InteractionResult.PASS;
     }
 
     // ---------- Client effects: bubbles, steam and bubbling sounds ----------
