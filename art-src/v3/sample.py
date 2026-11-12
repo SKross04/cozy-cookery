@@ -9,14 +9,16 @@ os.makedirs(OUT, exist_ok=True)
 
 def tomato():
     p = Pic()
-    p.ball(8, 9.2, 5.7, 5.0, 'tomato', ang=-0.15)
+    p.ball(8, 9.8, 5.8, 5.2, 'tomato', ang=-0.1)
     p.rows([
-        "..a.a..",
-        "aabbbaa",
-        ".a.b.a.",
-    ], {'a': ('leaf', 0.45), 'b': ('leaf', 0.8)}, ox=5, oy=4)
-    p.rows(["b", "b"], {'b': ('leaf', 0.6)}, ox=8, oy=2)
-    return p.render()
+        "....d....",
+        "...dm....",
+        "dm.dm.mmd",
+        ".dmlmdml.",
+        "mdlmdmldm",
+        ".m.d.d.m.",
+    ], {'d': ('leaf', 0.0), 'm': ('leaf', 0.5), 'l': ('leaf', 0.75)}, ox=4, oy=1)
+    return p.render(inner=False)
 
 
 def cabbage():

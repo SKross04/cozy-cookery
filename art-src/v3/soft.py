@@ -76,6 +76,48 @@ M = {
 }
 
 
+
+class Flat(Mat):
+    """Exact cartoon palette: tones dark -> light used as hard bands (no blending), like hand-pixelled art."""
+
+    def __init__(self, tones, outline, cut=(0.42, 0.72, 0.9)):
+        self.stops = [hx(c) for c in tones]
+        self.outline = hx(outline)
+        self.cut = cut
+
+    def at(self, t):
+        n = len(self.stops)
+        cuts = list(self.cut[:n - 1])
+        i = sum(1 for c in cuts if t > c)
+        return self.stops[min(i, n - 1)]
+
+
+# vivid, hue-shifted palettes: shadows lean crimson/plum, lights lean orange/coral (like Wannes's tomato)
+M.update({
+    'tomato':  Flat(['#941533', '#c03416', '#cf4d3a', '#ff8073'], '#631739'),
+    'leaf':    Flat(['#005000', '#047204', '#2b9226', '#4cb03a'], '#003a00'),
+    'cabbage': Flat(['#2e7a1e', '#4ea02e', '#76c03e', '#a8e060'], '#14400e'),
+    'cabbage_dark': Flat(['#1e5a16', '#2e7a1e', '#3e8e24'], '#10340c'),
+    'onion':   Flat(['#a0481a', '#cc6e24', '#e8963a', '#ffc46a'], '#5a1e10'),
+    'onionskin': Flat(['#6a2e10', '#a0521c', '#cc7a2a'], '#4a1a0c'),
+    'garlic':  Flat(['#c8949e', '#e8c4c8', '#f6e2e0', '#ffffff'], '#6a2a44'),
+    'garlicpink': Flat(['#a8467a', '#c8649a'], '#6a2a44'),
+    'iron':    Flat(['#5e6276', '#9298ac', '#c8cedc', '#ffffff'], '#26263a'),
+    'handle':  Flat(['#6e300e', '#9a4a16', '#c46a24', '#e08c3a'], '#3a160a'),
+    'bowl':    Flat(['#6a3414', '#94501e', '#b86e2a', '#d8903c'], '#3a1a0a'),
+    'stew':    Flat(['#6a1e0c', '#962e12', '#b44418'], '#3a120a'),
+    'carrot':  Flat(['#d05a0a', '#f07a14', '#ffa83a'], '#6a2006'),
+    'beef':    Flat(['#5e1e10', '#86321a', '#a84a26'], '#3a100a'),
+    'potato':  Flat(['#e0b04a', '#f4d06a', '#fff0a8'], '#7a4a12'),
+    'plate':   Flat(['#a8b0c8', '#dce2f0', '#f4f6fc', '#ffffff'], '#3e425e'),
+    'rim':     Flat(['#d84a2a', '#f06a3a'], '#3e425e'),
+    'pasta':   Flat(['#d8960e', '#f4c22a', '#ffe060', '#fff4a8'], '#7a420a'),
+    'sauce':   Flat(['#941533', '#c03416', '#e0502e', '#ff8073'], '#5a1030'),
+    'cooked':  Flat(['#a0400c', '#d06a18', '#f0922e', '#ffc06a'], '#4a1808'),
+    'bone':    Flat(['#c8b8a4', '#f0e8dc', '#ffffff'], '#5a4a44'),
+})
+
+
 class Pic:
     def __init__(self):
         self.px = {}        # (x,y) -> (rgb, outline_rgb, piece)
@@ -111,6 +153,8 @@ class Pic:
                     best = (ds, x, y)
         if shine and best:
             self._put(best[1], best[2], mix(m.at(1.0), (255, 255, 255), 0.6), m)
+            if getattr(self, 'big_shine', True) and (best[1] + 1, best[2]) in self.px:
+                self._put(best[1] + 1, best[2], m.at(1.0), m)
         return self
 
     def pixels(self, pts, mat, t):
