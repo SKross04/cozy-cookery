@@ -8,7 +8,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.skross.cozycookery.block.entity.ModBlockEntities;
+import net.skross.cozycookery.block.entity.renderer.ChoppingBoardBlockEntityRenderer;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = CozyCookery.MOD_ID, dist = Dist.CLIENT)
@@ -27,5 +30,11 @@ public class CozyCookeryClient {
         // Some client setup code
         CozyCookery.LOGGER.info("HELLO FROM CLIENT SETUP");
         CozyCookery.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    }
+
+    // Tells Minecraft which renderer draws the item lying on the chopping board
+    @SubscribeEvent
+    static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntities.CHOPPING_BOARD_BE.get(), ChoppingBoardBlockEntityRenderer::new);
     }
 }

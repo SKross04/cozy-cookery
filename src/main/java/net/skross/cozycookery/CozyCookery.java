@@ -16,6 +16,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.skross.cozycookery.block.ModBlocks;
+import net.skross.cozycookery.block.entity.ModBlockEntities;
 import net.skross.cozycookery.item.ModCreativeModeTabs;
 import net.skross.cozycookery.item.ModItems;
 import net.skross.cozycookery.sound.ModSounds;
@@ -43,6 +44,7 @@ public class CozyCookery {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModSounds.register(modEventBus);
 
         // Register the item to a creative tab
