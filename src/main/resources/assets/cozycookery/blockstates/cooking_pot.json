@@ -44,6 +44,21 @@
     "facing=west,liquid=soup": {
       "model": "cozycookery:block/cooking_pot_soup",
       "y": 270
+    },
+    "facing=north,liquid=burnt": {
+      "model": "cozycookery:block/cooking_pot_burnt"
+    },
+    "facing=east,liquid=burnt": {
+      "model": "cozycookery:block/cooking_pot_burnt",
+      "y": 90
+    },
+    "facing=south,liquid=burnt": {
+      "model": "cozycookery:block/cooking_pot_burnt",
+      "y": 180
+    },
+    "facing=west,liquid=burnt": {
+      "model": "cozycookery:block/cooking_pot_burnt",
+      "y": 270
     }
   }
 }

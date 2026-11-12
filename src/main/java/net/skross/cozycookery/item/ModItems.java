@@ -49,6 +49,16 @@ public class ModItems {
     public static final DeferredItem<Item> COOKED_CHICKEN_DRUMSTICK = food("cooked_chicken_drumstick", ModFoodProperties.COOKED_CHICKEN_DRUMSTICK);
     public static final DeferredItem<Item> COOKED_CHICKEN_WING = food("cooked_chicken_wing", ModFoodProperties.COOKED_CHICKEN_WING);
 
+    // ---------- Pot dishes: served in bowls, stack to 4 ----------
+    public static final DeferredItem<Item> BEEF_STEW = bowlFood("beef_stew", ModFoodProperties.BEEF_STEW);
+    public static final DeferredItem<Item> CHICKEN_SOUP = bowlFood("chicken_soup", ModFoodProperties.CHICKEN_SOUP);
+    public static final DeferredItem<Item> BURNT_STEW = bowlFood("burnt_stew", ModFoodProperties.BURNT_STEW);
+
+    // The empty bowl is given back by ModEvents.onFinishEating (tag cozycookery:bowl_foods)
+    private static DeferredItem<Item> bowlFood(String name, FoodProperties foodProperties) {
+        return ITEMS.register(name, () -> new Item(new Item.Properties().stacksTo(4).food(foodProperties)));
+    }
+
     private static DeferredItem<Item> food(String name, FoodProperties foodProperties) {
         return ITEMS.register(name, () -> new Item(new Item.Properties().food(foodProperties)));
     }

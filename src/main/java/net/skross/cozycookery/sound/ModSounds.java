@@ -15,6 +15,8 @@ public class ModSounds {
 
     public static final Supplier<SoundEvent> SPOON_BONK = registerSoundEvent("spoon_bonk");
     public static final Supplier<SoundEvent> CHOPPING_BOARD_CHOP = registerSoundEvent("chopping_board_chop");
+    public static final Supplier<SoundEvent> COOKING_POT_STIR = registerSoundEvent("cooking_pot_stir");
+    public static final Supplier<SoundEvent> COOKING_POT_BLUB = registerSoundEvent("cooking_pot_blub");
 
     private static Supplier<SoundEvent> registerSoundEvent(String name) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(CozyCookery.MOD_ID, name);

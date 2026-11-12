@@ -1,0 +1,30 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:rabbit"
+    },
+    {
+      "item": "minecraft:rabbit"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    [
+      {
+        "item": "minecraft:brown_mushroom"
+      },
+      {
+        "item": "minecraft:red_mushroom"
+      }
+    ]
+  ],
+  "cooking_time": 600,
+  "result": {
+    "id": "minecraft:rabbit_stew",
+    "count": 2
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:raw_chicken_drumstick"
+    },
+    {
+      "item": "cozycookery:raw_chicken_drumstick"
+    },
+    {
+      "item": "cozycookery:raw_chicken_wing"
+    },
+    {
+      "item": "cozycookery:raw_chicken_wing"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:potato"
+    }
+  ],
+  "cooking_time": 600,
+  "result": {
+    "id": "cozycookery:chicken_soup",
+    "count": 2
+  }
+}

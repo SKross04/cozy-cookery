@@ -6,7 +6,8 @@ import net.minecraft.util.StringRepresentable;
 public enum PotLiquid implements StringRepresentable {
     EMPTY("empty"),
     WATER("water"),
-    SOUP("soup");
+    SOUP("soup"),
+    BURNT("burnt");
 
     private final String name;
 

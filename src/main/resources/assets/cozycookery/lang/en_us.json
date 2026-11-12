@@ -37,5 +37,10 @@
   "item.cozycookery.cooked_chicken_drumstick": "Cooked Chicken Drumstick",
   "item.cozycookery.cooked_chicken_wing": "Cooked Chicken Wing",
   "sounds.cozycookery.spoon_bonk": "Spoon bonks",
-  "sounds.cozycookery.chopping_board_chop": "Knife chops"
+  "sounds.cozycookery.chopping_board_chop": "Knife chops",
+  "item.cozycookery.beef_stew": "Beef Stew",
+  "item.cozycookery.chicken_soup": "Chicken Soup",
+  "item.cozycookery.burnt_stew": "Burnt Stew",
+  "sounds.cozycookery.cooking_pot_stir": "Spoon stirs",
+  "sounds.cozycookery.cooking_pot_blub": "Pot needs stirring"
 }

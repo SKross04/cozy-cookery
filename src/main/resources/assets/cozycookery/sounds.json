@@ -10,5 +10,17 @@
     "sounds": [
       "cozycookery:chopping_board_chop"
     ]
+  },
+  "cooking_pot_stir": {
+    "subtitle": "sounds.cozycookery.cooking_pot_stir",
+    "sounds": [
+      "cozycookery:cooking_pot_stir"
+    ]
+  },
+  "cooking_pot_blub": {
+    "subtitle": "sounds.cozycookery.cooking_pot_blub",
+    "sounds": [
+      "cozycookery:cooking_pot_blub"
+    ]
   }
 }

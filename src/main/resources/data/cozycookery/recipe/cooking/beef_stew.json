@@ -1,0 +1,19 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:raw_beef_cubes"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:carrot"
+    }
+  ],
+  "cooking_time": 600,
+  "result": {
+    "id": "cozycookery:beef_stew",
+    "count": 2
+  }
+}

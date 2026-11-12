@@ -44,6 +44,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.RAW_CHICKEN_WING);
                         output.accept(ModItems.COOKED_CHICKEN_DRUMSTICK);
                         output.accept(ModItems.COOKED_CHICKEN_WING);
+
+                        output.accept(ModItems.BEEF_STEW);
+                        output.accept(ModItems.CHICKEN_SOUP);
+                        output.accept(ModItems.BURNT_STEW);
                     }).build());
 
     public static void register(IEventBus eventBus) {

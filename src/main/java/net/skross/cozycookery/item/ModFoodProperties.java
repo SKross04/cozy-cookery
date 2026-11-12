@@ -28,4 +28,16 @@ public class ModFoodProperties {
             .nutrition(2).saturationModifier(0.6f).build();
     public static final FoodProperties COOKED_CHICKEN_WING = new FoodProperties.Builder()
             .nutrition(1).saturationModifier(0.6f).build();
+
+    // ---------- Pot dishes (2 bowls per pot; together worth about the cooked ingredients + a small bonus) ----------
+    // Beef stew: beef cubes + potato + carrot (cooked worth 8 + 5 + 3 = 16) -> 2 x 8
+    public static final FoodProperties BEEF_STEW = new FoodProperties.Builder()
+            .nutrition(8).saturationModifier(0.75f).build();
+    // Chicken soup: 2 drumsticks + 2 wings + carrot + potato (6 + 3 + 5 = 14) -> 2 x 7
+    public static final FoodProperties CHICKEN_SOUP = new FoodProperties.Builder()
+            .nutrition(7).saturationModifier(0.7f).build();
+    // Burnt stew: you forgot to stir... barely edible, 50% chance of Nausea
+    public static final FoodProperties BURNT_STEW = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.1f)
+            .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5f).build();
 }

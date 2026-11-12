@@ -1,0 +1,22 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    }
+  ],
+  "cooking_time": 400,
+  "result": {
+    "id": "minecraft:mushroom_stew",
+    "count": 2
+  }
+}

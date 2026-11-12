@@ -10,6 +10,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -25,6 +26,8 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -35,7 +38,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
+import net.skross.cozycookery.block.entity.ModBlockEntities;
 import net.skross.cozycookery.item.custom.SpoonItem;
+import net.skross.cozycookery.sound.ModSounds;
 import net.skross.cozycookery.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,6 +74,17 @@ public class CookingPotBlock extends BaseEntityBlock {
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    // Tells Minecraft to call CookingPotBlockEntity.tick() every tick, on the server only
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (level.isClientSide()) {
+            return null;
+        }
+        return createTickerHelper(type, ModBlockEntities.COOKING_POT_BE.get(),
+                (tickLevel, tickPos, tickState, pot) -> pot.tick(tickLevel, tickPos, tickState));
     }
 
     // When the pot is broken, drop the ingredients that were in it
@@ -155,6 +171,34 @@ public class CookingPotBlock extends BaseEntityBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
+        // Spoon -> stir (only counts when the pot asks for it, then it costs 1 durability)
+        if (stack.getItem() instanceof SpoonItem) {
+            if (liquid != PotLiquid.WATER || !pot.hasIngredients()) {
+                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+            }
+            if (!level.isClientSide()) {
+                level.playSound(null, pos, ModSounds.COOKING_POT_STIR.get(), SoundSource.BLOCKS,
+                        1.0f, 0.9f + level.getRandom().nextFloat() * 0.2f);
+                if (pot.stir(level)) {
+                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                }
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        }
+
+        // Bowl on a finished dish -> 1 serving
+        if (stack.is(Items.BOWL)) {
+            if (!pot.hasServings()) {
+                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+            }
+            if (!level.isClientSide()) {
+                ItemStack serving = pot.takeServing(level, pos, state);
+                player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, serving));
+                level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 0.8f, 0.8f);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        }
+
         // Any other item into a pot with water -> add it as an ingredient (max 6)
         if (liquid == PotLiquid.WATER && isIngredient(stack)) {
             if (!level.isClientSide()) {
@@ -204,6 +248,18 @@ public class CookingPotBlock extends BaseEntityBlock {
             return;
         }
         double surfaceY = pos.getY() + 7.2 / 16.0;
+
+        // The pot asks for a stir: big bubbles, splashes and a burst of steam
+        if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot && pot.needsStir()) {
+            for (int i = 0; i < 4; i++) {
+                double x = pos.getX() + 0.25 + random.nextDouble() * 0.5;
+                double z = pos.getZ() + 0.25 + random.nextDouble() * 0.5;
+                level.addParticle(ParticleTypes.SPLASH, x, surfaceY + 0.05, z, 0.0, 0.1, 0.0);
+                level.addParticle(ParticleTypes.BUBBLE_POP, x, surfaceY, z, 0.0, 0.06, 0.0);
+            }
+            level.addParticle(ParticleTypes.CLOUD, pos.getX() + 0.5, surfaceY + 0.4, pos.getZ() + 0.5,
+                    (random.nextDouble() - 0.5) * 0.02, 0.06, (random.nextDouble() - 0.5) * 0.02);
+        }
 
         for (int i = 0; i < 2; i++) {
             double x = pos.getX() + 0.25 + random.nextDouble() * 0.5;
