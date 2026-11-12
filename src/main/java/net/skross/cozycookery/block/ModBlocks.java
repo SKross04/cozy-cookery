@@ -13,6 +13,7 @@ import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
 import net.skross.cozycookery.block.custom.FryingPanBlock;
+import net.skross.cozycookery.block.custom.MortarBlock;
 import net.skross.cozycookery.block.custom.StoveBlock;
 import net.skross.cozycookery.item.ModItems;
 
@@ -65,6 +66,13 @@ public class ModBlocks {
                     .mapColor(MapColor.METAL)
                     .strength(1.5f, 6.0f)
                     .sound(SoundType.LANTERN)
+                    .noOcclusion()));
+
+    public static final DeferredBlock<Block> MORTAR = registerBlock("mortar",
+            () -> new MortarBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.STONE)
+                    .strength(1.5f, 6.0f)
+                    .sound(SoundType.STONE)
                     .noOcclusion()));
 
     // ---------- Stoves: one per brick type, all using the same StoveBlock class ----------

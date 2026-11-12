@@ -1,0 +1,356 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "stone": "cozycookery:block/mortar",
+    "inside": "cozycookery:block/mortar_inside",
+    "particle": "cozycookery:block/mortar"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        4,
+        0,
+        4
+      ],
+      "to": [
+        12,
+        1,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            15,
+            12,
+            16
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            4,
+            15,
+            12,
+            16
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            4,
+            15,
+            12,
+            16
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            4,
+            15,
+            12,
+            16
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#inside"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#stone",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "name": "wall_north",
+      "from": [
+        4,
+        1,
+        4
+      ],
+      "to": [
+        12,
+        5,
+        5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            11,
+            12,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            4,
+            11,
+            12,
+            15
+          ],
+          "texture": "#inside"
+        },
+        "east": {
+          "uv": [
+            4,
+            11,
+            5,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            4,
+            11,
+            5,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            5
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            5
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "name": "wall_south",
+      "from": [
+        4,
+        1,
+        11
+      ],
+      "to": [
+        12,
+        5,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            11,
+            12,
+            15
+          ],
+          "texture": "#inside"
+        },
+        "south": {
+          "uv": [
+            4,
+            11,
+            12,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            11,
+            11,
+            12,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            11,
+            11,
+            12,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            4,
+            11,
+            12,
+            12
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            4,
+            11,
+            12,
+            12
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "name": "wall_west",
+      "from": [
+        4,
+        1,
+        5
+      ],
+      "to": [
+        5,
+        5,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            11,
+            5,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            4,
+            11,
+            5,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            5,
+            11,
+            11,
+            15
+          ],
+          "texture": "#inside"
+        },
+        "west": {
+          "uv": [
+            5,
+            11,
+            11,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "up": {
+          "uv": [
+            4,
+            5,
+            5,
+            11
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            4,
+            5,
+            5,
+            11
+          ],
+          "texture": "#stone"
+        }
+      }
+    },
+    {
+      "name": "wall_east",
+      "from": [
+        11,
+        1,
+        5
+      ],
+      "to": [
+        12,
+        5,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            11,
+            11,
+            12,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "south": {
+          "uv": [
+            11,
+            11,
+            12,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "east": {
+          "uv": [
+            5,
+            11,
+            11,
+            15
+          ],
+          "texture": "#stone"
+        },
+        "west": {
+          "uv": [
+            5,
+            11,
+            11,
+            15
+          ],
+          "texture": "#inside"
+        },
+        "up": {
+          "uv": [
+            11,
+            5,
+            12,
+            11
+          ],
+          "texture": "#stone"
+        },
+        "down": {
+          "uv": [
+            11,
+            5,
+            12,
+            11
+          ],
+          "texture": "#stone"
+        }
+      }
+    }
+  ]
+}

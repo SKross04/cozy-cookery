@@ -1,0 +1,10 @@
+{
+  "type": "cozycookery:grinding",
+  "ingredient": {
+    "item": "minecraft:wheat"
+  },
+  "result": {
+    "id": "cozycookery:flour",
+    "count": 1
+  }
+}

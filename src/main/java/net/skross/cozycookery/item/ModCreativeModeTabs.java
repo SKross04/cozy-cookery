@@ -23,6 +23,7 @@ public class ModCreativeModeTabs {
                         ModBlocks.CHOPPING_BOARDS.values().forEach(output::accept);
                         output.accept(ModBlocks.COOKING_POT);
                         output.accept(ModBlocks.FRYING_PAN);
+                        output.accept(ModBlocks.MORTAR);
                         ModBlocks.STOVES.values().forEach(output::accept);
 
                         output.accept(ModItems.FLINT_KNIFE);
@@ -32,6 +33,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.NETHERITE_KNIFE);
                         output.accept(ModItems.WOODEN_SPOON);
                         output.accept(ModItems.WOODEN_SPATULA);
+                        output.accept(ModItems.PESTLE);
 
                         output.accept(ModItems.RAW_BEEF_STRIPS);
                         output.accept(ModItems.RAW_BEEF_CUBES);
@@ -56,6 +58,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.APPLE_SLICES);
                         output.accept(ModItems.PUMPKIN_SLICE);
 
+                        output.accept(ModItems.FLOUR);
                         output.accept(ModItems.SEARED_BEEF_STRIPS);
                         output.accept(ModItems.SEARED_BEEF_CUBES);
                         output.accept(ModItems.BROWNED_GROUND_BEEF);

@@ -70,5 +70,9 @@
   "item.cozycookery.fried_egg": "Fried Egg",
   "item.cozycookery.charred_scraps": "Charred Scraps",
   "sounds.cozycookery.frying_pan_sizzle": "Pan sizzles",
-  "sounds.cozycookery.frying_pan_flip": "Spatula flips"
+  "sounds.cozycookery.frying_pan_flip": "Spatula flips",
+  "block.cozycookery.mortar": "Mortar",
+  "item.cozycookery.pestle": "Pestle",
+  "item.cozycookery.flour": "Flour",
+  "sounds.cozycookery.mortar_grind": "Pestle grinds"
 }

@@ -34,5 +34,11 @@
     "sounds": [
       "cozycookery:frying_pan_flip"
     ]
+  },
+  "mortar_grind": {
+    "subtitle": "sounds.cozycookery.mortar_grind",
+    "sounds": [
+      "cozycookery:mortar_grind"
+    ]
   }
 }
