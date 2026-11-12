@@ -18,7 +18,7 @@ First public beta.
   - Meat cuts, prepared vegetables, flour and doughs.
   - 8 soups and stews.
   - Fried foods and baked goods.
-  - 24 placeable plated meals, eaten bite by bite.
+  - Placeable plated meals, eaten bite by bite.
 - Vanilla changes:
   - Vanilla food crafting and smelting recipes are replaced by the new stations.
   - Vanilla stews stack to 4.
