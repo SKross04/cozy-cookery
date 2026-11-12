@@ -18,15 +18,33 @@ def mix(a, b, t):
     return tuple(int(round(a[i] + (b[i] - a[i]) * t)) for i in range(3))
 
 
+import colorsys
+
+SAT = 1.45      # colour punch
+CONTRAST = 1.25 # spread between shadow and light
+BANDS = 4       # cartoon shading: this many flat tones per material
+
+
+def punch(c, k):
+    h, s, v = colorsys.rgb_to_hsv(*(x / 255 for x in c))
+    s = min(1.0, s * SAT)
+    v = min(1.0, max(0.0, 0.5 + (v - 0.5) * CONTRAST + (k - 0.5) * 0.08))
+    return tuple(int(round(x * 255)) for x in colorsys.hsv_to_rgb(h, s, v))
+
+
 class Mat:
     """Gradient material: stops dark -> light, plus outline colour."""
 
     def __init__(self, stops, outline):
-        self.stops = [hx(c) for c in stops]
-        self.outline = hx(outline)
+        raw = [hx(c) for c in stops]
+        self.stops = [punch(c, i / max(1, len(raw) - 1)) for i, c in enumerate(raw)]
+        o = colorsys.rgb_to_hsv(*(x / 255 for x in hx(outline)))
+        self.outline = tuple(int(round(x * 255)) for x in colorsys.hsv_to_rgb(o[0], min(1, o[1] * 1.2), o[2] * 0.8))
 
     def at(self, t):
         t = max(0.0, min(1.0, t))
+        if BANDS:
+            t = min(1.0, round(t * (BANDS - 1)) / (BANDS - 1))
         n = len(self.stops) - 1
         i = min(n - 1, int(t * n))
         return mix(self.stops[i], self.stops[i + 1], t * n - i)
@@ -38,10 +56,10 @@ M = {
     'onionskin': Mat(['#653626', '#956341', '#b27241', '#c89f81', '#d9b18a'], '#622d28'),
     'garlic':  Mat(['#b58980', '#ca9d8e', '#d3a99f', '#e0beb2', '#e7cdc4', '#edd6cd'], '#5a2e34'),
     'garlicpink': Mat(['#be6453', '#c46a52', '#ce785e', '#d3857f', '#e4947f'], '#5a2e34'),
-    'tomato':  Mat(['#a8302a', '#c8403a', '#de5a46', '#ec7a5e', '#f6a088', '#fcc8b4'], '#5e1e22'),
+    'tomato':  Mat(['#a8282a', '#c63a30', '#dc4e36', '#e8643e', '#f07c4a'], '#5e1e22'),
     'leaf':    Mat(['#3e6e2c', '#4f8a36', '#66a444', '#86bc5c', '#a8d27c'], '#25401e'),
-    'cabbage': Mat(['#5e9a48', '#76b058', '#90c46c', '#a8d484', '#c4e2a2', '#e0f0c8'], '#2c4a24'),
-    'cabbage_dark': Mat(['#3e7634', '#4f8a40', '#64a050', '#7ab462'], '#24401e'),
+    'cabbage': Mat(['#5a8e44', '#6ea252', '#84b462', '#9cc478', '#b4d492'], '#2c4a24'),
+    'cabbage_dark': Mat(['#3c6a32', '#4a7c3c', '#5a8e48', '#6aa054'], '#24401e'),
     'iron':    Mat(['#7a7e8c', '#9a9eaa', '#b8bcc6', '#d4d8de', '#eef0f2'], '#3e3c48'),
     'handle':  Mat(['#7a4a2c', '#935c36', '#a87044', '#bc8654'], '#3e2218'),
     'bowl':    Mat(['#7e5030', '#94623a', '#a87446', '#bc8854', '#cc9c66'], '#4a2a1a'),
@@ -92,7 +110,7 @@ class Pic:
                 if best is None or ds < best[0]:
                     best = (ds, x, y)
         if shine and best:
-            self._put(best[1], best[2], mix(m.at(1.0), (255, 255, 255), 0.45), m)
+            self._put(best[1], best[2], mix(m.at(1.0), (255, 255, 255), 0.6), m)
         return self
 
     def pixels(self, pts, mat, t):
