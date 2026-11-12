@@ -157,6 +157,33 @@ class Pic:
                 self._put(best[1] + 1, best[2], m.at(1.0), m)
         return self
 
+
+    def toon(self, cx, cy, rx, ry, mat, ang=0.0, shadow=0.30, glint=True, clip=None):
+        """Cartoon ball: flat base, clean shadow crescent bottom-right, white-ish glint arc top-left."""
+        m = M[mat]
+        dark, base, light = m.stops[0], m.stops[1], m.stops[-1]
+        self.piece += 1
+        ca, sa = math.cos(ang), math.sin(ang)
+        for y in range(16):
+            for x in range(16):
+                ux, uy = x + 0.5 - cx, y + 0.5 - cy
+                dx, dy = (ux * ca + uy * sa) / rx, (-ux * sa + uy * ca) / ry
+                d = dx * dx + dy * dy
+                if d > 1 or (clip and not clip(x, y)):
+                    continue
+                # shadow: a circle offset towards the top-left cuts out the lit part
+                sx, sy = dx + 0.28, dy + 0.30
+                c = base if sx * sx + sy * sy < 1.0 - shadow * 0.3 else dark
+                if glint:
+                    gx, gy = ux / max(rx, ry) + 0.42, uy / max(rx, ry) + 0.42
+                    gd = gx * gx + gy * gy
+                    if gd < 0.05:
+                        c = mix(light, (255, 255, 255), 0.75)
+                    elif gd < 0.13 and gx * 1 + gy * 1 < 0.05:
+                        c = light
+                self._put(x, y, c, m)
+        return self
+
     def pixels(self, pts, mat, t):
         m = M[mat]
         self.piece += 1
