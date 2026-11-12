@@ -70,11 +70,12 @@ public class MixingBowlBlockEntity extends BlockEntity {
         return false;
     }
 
-    // Takes the dough, or else the last ingredient that was put in
+    // Takes the dough (the whole batch, e.g. 8 cookie doughs), or else the last ingredient that was put in
     public ItemStack takeItem() {
         for (int i = SLOTS - 1; i >= 0; i--) {
             if (!items.getStackInSlot(i).isEmpty()) {
-                ItemStack taken = items.extractItem(i, 1, false);
+                int amount = mixed ? items.getStackInSlot(i).getCount() : 1;
+                ItemStack taken = items.extractItem(i, amount, false);
                 if (isEmpty()) mixed = false;
                 return taken;
             }
