@@ -32,16 +32,23 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
         Direction facing = blockEntity.getBlockState().getValue(ChoppingBoardBlock.FACING);
         boolean is3dItem = itemRenderer.getModel(stack, blockEntity.getLevel(), null, 0).isGui3d();
 
+        // Same rotation as the board model in the blockstate JSON (north 0, east 90, south 180, west 270).
+        // Blockstate rotations go clockwise, PoseStack rotations go counter-clockwise -> minus sign.
+        float boardRotation = (facing.toYRot() + 180f) % 360f;
+
         poseStack.pushPose();
         if (is3dItem) {
             // Blocks (stone, a cake...) stand upright on the board at half size
             poseStack.translate(0.5f, BOARD_TOP + 0.125f, 0.5f);
-            poseStack.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
+            poseStack.mulPose(Axis.YP.rotationDegrees(-boardRotation));
         } else {
             // Flat items (meat, knives...) lie flat on the board
             poseStack.translate(0.5f, BOARD_TOP + 0.02f, 0.5f);
-            poseStack.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
+            poseStack.mulPose(Axis.YP.rotationDegrees(-boardRotation));
             poseStack.mulPose(Axis.XP.rotationDegrees(90f));
+            // Most item textures are drawn diagonally (knives, strips, drumsticks).
+            // Turning them 45 degrees makes them lie along the long side of the board.
+            poseStack.mulPose(Axis.ZP.rotationDegrees(-45f));
         }
         poseStack.scale(0.5f, 0.5f, 0.5f);
 
