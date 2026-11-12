@@ -58,15 +58,40 @@ def broth_shade(x, y):
     return 1 if (x + y) % 3 else (2 if edge < 0 else 0)
 
 
-def dish(broth, pieces=(), specks=(), swirl=None, full=None):
+PLATE = [
+    "................",
+    ".....OOOOOO.....",
+    "...OOBCCCCBOO...",
+    "..OBC######JCBO.",
+    ".OBC########JCO.",
+    "OBC##########JBO",
+    "OC###########JJO",
+    "OC###########JJO",
+    "OC###########JJO",
+    "OBC#########JJBO",
+    ".OBJ########JBO.",
+    ".OIBJJ####JJBIO.",
+    "..OIBJJJJJJBIO..",
+    "...OOIIBBIIOO...",
+    ".....OOOOOO.....",
+    "................",
+]
+CHINA = {'O': '#4a5060', 'B': '#b8c0cc', 'C': '#ffffff', 'J': '#e2e6ea', 'I': '#8a9aac'}
+VESSELS = {'bowl': (BOWL, WOOD), 'plate': (PLATE, CHINA)}
+
+
+def dish(broth, pieces=(), specks=(), swirl=None, full=None, vessel='bowl'):
+    global INSIDE
+    tmpl, colours = VESSELS[vessel]
+    INSIDE = [(x, y) for y, row in enumerate(tmpl) for x, ch in enumerate(row) if ch == '#']
     """broth: (dark, mid, light). pieces: list of (slot, (light, dark)). specks: list of colours.
     swirl: colour of a cream swirl. full: colour pattern function overriding broth (salads, pasta)."""
     img = Image.new('RGBA', (16, 16), (0, 0, 0, 0))
     p = img.load()
-    for y, row in enumerate(BOWL):
+    for y, row in enumerate(tmpl):
         for x, ch in enumerate(row):
-            if ch in WOOD:
-                p[x, y] = hx(WOOD[ch])
+            if ch in colours:
+                p[x, y] = hx(colours[ch])
     for (x, y) in INSIDE:
         p[x, y] = hx(full(x, y) if full else broth[broth_shade(x, y)])
     if swirl:
@@ -153,6 +178,10 @@ DISHES = {
     'spaghetti_bolognese': dict(broth=('#4a120a',) * 3, full=pasta(('#6a1a10', '#c8301e')), specks=[HERB]),
     'spaghetti_and_meatballs': dict(broth=('#a8141a',) * 3, full=pasta(('#a8141a', '#e83a2a')),
                                     pieces=[(2, ('#9a4428', '#5e2414')), (4, ('#9a4428', '#5e2414')), (3, ('#9a4428', '#5e2414'))]),
+    # batters / mixes (no herbs)
+    'cake_batter': dict(broth=('#e0c070', '#f4dc98', '#fff0c8'), swirl='#fff8e8'),
+    'pancake_batter': dict(broth=('#e8d4a0', '#f6e8c4', '#fffbe8'), swirl='#ffffff'),
+    'omelette_mix': dict(broth=('#e8a818', '#fad040', '#ffe888'), specks=['#4c9a22', '#4c9a22', '#ffffff']),
     # vanilla stews, redrawn to match
     'minecraft:mushroom_stew': dict(broth=('#b08060', '#d0a07c', '#e8c4a0'),
                                     pieces=[(0, MUSHROOM), (2, ('#e04a3a', '#a82a22')), (4, MUSHROOM), (3, MUSHROOM)]),

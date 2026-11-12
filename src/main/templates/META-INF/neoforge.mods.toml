@@ -8,6 +8,7 @@ modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
 displayURL="https://github.com/SKross04/cozy-cookery"
+logoFile="logo.png"
 authors="Wannes (SKross04)"
 description='''
 Immersive, GUI-free cooking. Chop on boards, cook soups and stews in a pot over a stove,
