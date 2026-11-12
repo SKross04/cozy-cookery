@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    }
+  },
+  "pattern": [
+    "L L",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:mixing_bowl"
+  }
+}

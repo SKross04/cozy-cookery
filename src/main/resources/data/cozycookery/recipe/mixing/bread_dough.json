@@ -1,0 +1,27 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "type": "neoforge:components",
+      "items": "minecraft:potion",
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:water"
+        }
+      }
+    }
+  ],
+  "result": {
+    "id": "cozycookery:bread_dough",
+    "count": 1
+  }
+}

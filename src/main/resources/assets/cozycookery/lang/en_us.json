@@ -73,5 +73,11 @@
   "sounds.cozycookery.frying_pan_flip": "Spatula flips",
   "block.cozycookery.mortar": "Mortar and Pestle",
   "item.cozycookery.flour": "Flour",
-  "sounds.cozycookery.mortar_grind": "Mortar grinds"
+  "sounds.cozycookery.mortar_grind": "Mortar grinds",
+  "block.cozycookery.mixing_bowl": "Mixing Bowl",
+  "item.cozycookery.bread_dough": "Bread Dough",
+  "item.cozycookery.cookie_dough": "Cookie Dough",
+  "item.cozycookery.cake_batter": "Cake Batter",
+  "item.cozycookery.raw_pumpkin_pie": "Raw Pumpkin Pie",
+  "item.cozycookery.raw_apple_pie": "Raw Apple Pie"
 }

@@ -55,6 +55,16 @@ public class ModRecipes {
                 }
             });
 
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MixingRecipe>> MIXING_SERIALIZER =
+            SERIALIZERS.register("mixing", MixingRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<MixingRecipe>> MIXING_TYPE =
+            TYPES.register("mixing", () -> new RecipeType<MixingRecipe>() {
+                @Override
+                public String toString() {
+                    return "mixing";
+                }
+            });
+
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);
         TYPES.register(eventBus);

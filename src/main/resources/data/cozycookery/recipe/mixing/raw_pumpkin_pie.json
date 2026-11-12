@@ -1,0 +1,30 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "cozycookery:pumpkin_slice"
+    },
+    {
+      "item": "cozycookery:pumpkin_slice"
+    },
+    {
+      "item": "cozycookery:pumpkin_slice"
+    },
+    {
+      "item": "cozycookery:pumpkin_slice"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:raw_pumpkin_pie",
+    "count": 1
+  }
+}

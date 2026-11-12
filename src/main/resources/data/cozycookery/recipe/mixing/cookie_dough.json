@@ -1,0 +1,24 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:cookie_dough",
+    "count": 1
+  }
+}

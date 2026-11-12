@@ -41,6 +41,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("mortar_be", () -> BlockEntityType.Builder.of(
                     MortarBlockEntity::new, ModBlocks.MORTAR.get()).build(null));
 
+    public static final Supplier<BlockEntityType<MixingBowlBlockEntity>> MIXING_BOWL_BE =
+            BLOCK_ENTITIES.register("mixing_bowl_be", () -> BlockEntityType.Builder.of(
+                    MixingBowlBlockEntity::new, ModBlocks.MIXING_BOWL.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

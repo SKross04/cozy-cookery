@@ -1,0 +1,24 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "cozycookery:apple_slices"
+    },
+    {
+      "item": "cozycookery:apple_slices"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:raw_apple_pie",
+    "count": 1
+  }
+}

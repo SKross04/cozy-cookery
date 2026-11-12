@@ -24,6 +24,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.COOKING_POT);
                         output.accept(ModBlocks.FRYING_PAN);
                         output.accept(ModBlocks.MORTAR);
+                        output.accept(ModBlocks.MIXING_BOWL);
                         ModBlocks.STOVES.values().forEach(output::accept);
 
                         output.accept(ModItems.FLINT_KNIFE);
@@ -58,6 +59,11 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.PUMPKIN_SLICE);
 
                         output.accept(ModItems.FLOUR);
+                        output.accept(ModItems.BREAD_DOUGH);
+                        output.accept(ModItems.COOKIE_DOUGH);
+                        output.accept(ModItems.CAKE_BATTER);
+                        output.accept(ModItems.RAW_PUMPKIN_PIE);
+                        output.accept(ModItems.RAW_APPLE_PIE);
                         output.accept(ModItems.SEARED_BEEF_STRIPS);
                         output.accept(ModItems.SEARED_BEEF_CUBES);
                         output.accept(ModItems.BROWNED_GROUND_BEEF);

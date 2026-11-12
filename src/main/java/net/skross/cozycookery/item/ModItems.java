@@ -38,6 +38,12 @@ public class ModItems {
 
     // ---------- Baking ingredients ----------
     public static final DeferredItem<Item> FLOUR = ITEMS.registerSimpleItem("flour");
+    // Raw doughs and batters from the mixing bowl (not edible, they go in the oven)
+    public static final DeferredItem<Item> BREAD_DOUGH = ITEMS.registerSimpleItem("bread_dough");
+    public static final DeferredItem<Item> COOKIE_DOUGH = ITEMS.registerSimpleItem("cookie_dough");
+    public static final DeferredItem<Item> CAKE_BATTER = ITEMS.registerSimpleItem("cake_batter");
+    public static final DeferredItem<Item> RAW_PUMPKIN_PIE = ITEMS.registerSimpleItem("raw_pumpkin_pie");
+    public static final DeferredItem<Item> RAW_APPLE_PIE = ITEMS.registerSimpleItem("raw_apple_pie");
 
     // ---------- Meat cuts (from the chopping board) ----------
     public static final DeferredItem<Item> RAW_BEEF_STRIPS = food("raw_beef_strips", ModFoodProperties.RAW_BEEF_CUT);
