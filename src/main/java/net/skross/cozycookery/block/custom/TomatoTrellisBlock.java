@@ -114,15 +114,12 @@ public class TomatoTrellisBlock extends DoublePlantBlock implements Bonemealable
     }
 
     // ---------- Bone meal in your hand ----------
-    // Handled here ourselves: growing -> grow, ripe -> do nothing (pick with an empty hand or another item)
+    // Handled here ourselves: growing -> grow, ripe -> pick the tomatoes (the bone meal is not used up)
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!stack.is(Items.BONE_MEAL)) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        }
-        if (state.getValue(AGE) >= MAX_AGE) {
-            return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        if (!stack.is(Items.BONE_MEAL) || state.getValue(AGE) >= MAX_AGE) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION; // -> useWithoutItem: picking
         }
         if (!level.isClientSide()) {
             performBonemeal((ServerLevel) level, level.getRandom(), pos, state);
