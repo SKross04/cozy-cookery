@@ -1,5 +1,8 @@
 {
   "values": [
-    "#c:crops/tomato"
+    "#c:crops/tomato",
+    "#c:crops/cabbage",
+    "#c:crops/onion",
+    "#c:crops/garlic"
   ]
 }

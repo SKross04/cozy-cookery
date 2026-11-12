@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_plains",
+  "features": "cozycookery:wild_onion",
+  "step": "vegetal_decoration"
+}

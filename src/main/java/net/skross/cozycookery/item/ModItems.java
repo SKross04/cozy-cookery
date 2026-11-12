@@ -2,6 +2,7 @@ package net.skross.cozycookery.item;
 
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
@@ -9,6 +10,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
+import net.skross.cozycookery.block.ModBlocks;
 import net.skross.cozycookery.item.custom.KnifeItem;
 import net.skross.cozycookery.item.custom.SpatulaItem;
 import net.skross.cozycookery.item.custom.SpoonItem;
@@ -68,6 +70,16 @@ public class ModItems {
     public static final DeferredItem<Item> TOMATO = food("tomato", ModFoodProperties.TOMATO);
     // Tomato seeds are planted on a trellis (see TrellisBlock), not straight on farmland
     public static final DeferredItem<Item> TOMATO_SEEDS = ITEMS.registerSimpleItem("tomato_seeds");
+
+    // ItemNameBlockItem: an item that places a block (the crop) but keeps its own name
+    public static final DeferredItem<Item> CABBAGE = food("cabbage", ModFoodProperties.CABBAGE);
+    public static final DeferredItem<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.CABBAGE_CROP.get(), new Item.Properties()));
+    // Onion and garlic are planted themselves, like vanilla carrots and potatoes
+    public static final DeferredItem<Item> ONION = ITEMS.register("onion",
+            () -> new ItemNameBlockItem(ModBlocks.ONION_CROP.get(), new Item.Properties().food(ModFoodProperties.ONION)));
+    public static final DeferredItem<Item> GARLIC = ITEMS.register("garlic",
+            () -> new ItemNameBlockItem(ModBlocks.GARLIC_CROP.get(), new Item.Properties().food(ModFoodProperties.GARLIC)));
 
     // ---------- Chopped vegetables & fruit (from the chopping board) ----------
     public static final DeferredItem<Item> CARROT_SLICES = food("carrot_slices", ModFoodProperties.CARROT_CUT);

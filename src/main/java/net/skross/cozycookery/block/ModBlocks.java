@@ -98,6 +98,21 @@ public class ModBlocks {
     public static final DeferredBlock<Block> TOMATO_TRELLIS = BLOCKS.register("tomato_trellis",
             () -> new TomatoTrellisBlock(trellisProperties().sound(SoundType.CROP)));
 
+    // ---------- Crops on farmland (no BlockItem: you plant them with the seed / the vegetable) ----------
+    public static final DeferredBlock<Block> CABBAGE_CROP = BLOCKS.register("cabbage_crop",
+            () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT), ModItems.CABBAGE_SEEDS));
+    public static final DeferredBlock<Block> ONION_CROP = BLOCKS.register("onion_crop",
+            () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CARROTS), ModItems.ONION));
+    public static final DeferredBlock<Block> GARLIC_CROP = BLOCKS.register("garlic_crop",
+            () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CARROTS), ModItems.GARLIC));
+
+    public static final DeferredBlock<Block> WILD_CABBAGE = registerBlock("wild_cabbage",
+            () -> new WildCropBlock(wildPlantProperties()));
+    public static final DeferredBlock<Block> WILD_ONION = registerBlock("wild_onion",
+            () -> new WildCropBlock(wildPlantProperties()));
+    public static final DeferredBlock<Block> WILD_GARLIC = registerBlock("wild_garlic",
+            () -> new WildCropBlock(wildPlantProperties()));
+
     private static BlockBehaviour.Properties trellisProperties() {
         return BlockBehaviour.Properties.of()
                 .mapColor(MapColor.WOOD)

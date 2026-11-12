@@ -1,6 +1,9 @@
 {
   "values": [
     "cozycookery:trellis",
-    "cozycookery:tomato_trellis"
+    "cozycookery:tomato_trellis",
+    "cozycookery:cabbage_crop",
+    "cozycookery:onion_crop",
+    "cozycookery:garlic_crop"
   ]
 }

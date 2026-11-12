@@ -54,6 +54,13 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.TOMATO_SEEDS);
                         output.accept(ModBlocks.WILD_TOMATO);
                         output.accept(ModBlocks.TRELLIS);
+                        output.accept(ModItems.CABBAGE);
+                        output.accept(ModItems.CABBAGE_SEEDS);
+                        output.accept(ModBlocks.WILD_CABBAGE);
+                        output.accept(ModItems.ONION);
+                        output.accept(ModBlocks.WILD_ONION);
+                        output.accept(ModItems.GARLIC);
+                        output.accept(ModBlocks.WILD_GARLIC);
 
                         output.accept(ModItems.CARROT_SLICES);
                         output.accept(ModItems.CARROT_CUBES);

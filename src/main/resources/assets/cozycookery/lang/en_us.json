@@ -91,5 +91,15 @@
   "item.cozycookery.tomato_seeds": "Tomato Seeds",
   "block.cozycookery.wild_tomato": "Wild Tomato",
   "block.cozycookery.trellis": "Trellis",
-  "block.cozycookery.tomato_trellis": "Tomato Plant"
+  "block.cozycookery.tomato_trellis": "Tomato Plant",
+  "item.cozycookery.cabbage": "Cabbage",
+  "item.cozycookery.cabbage_seeds": "Cabbage Seeds",
+  "item.cozycookery.onion": "Onion",
+  "item.cozycookery.garlic": "Garlic",
+  "block.cozycookery.cabbage_crop": "Cabbages",
+  "block.cozycookery.onion_crop": "Onions",
+  "block.cozycookery.garlic_crop": "Garlic",
+  "block.cozycookery.wild_cabbage": "Wild Cabbage",
+  "block.cozycookery.wild_onion": "Wild Onion",
+  "block.cozycookery.wild_garlic": "Wild Garlic"
 }

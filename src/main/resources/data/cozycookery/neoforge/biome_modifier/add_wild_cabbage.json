@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_forest",
+  "features": "cozycookery:wild_cabbage",
+  "step": "vegetal_decoration"
+}
