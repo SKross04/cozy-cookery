@@ -1,0 +1,29 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:cooked_noodles"
+    },
+    {
+      "item": "cozycookery:browned_ground_beef"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_onion"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
+    }
+  ],
+  "cooking_time": 500,
+  "color": "#A0402A",
+  "result": {
+    "id": "cozycookery:spaghetti_bolognese",
+    "count": 2
+  }
+}

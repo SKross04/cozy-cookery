@@ -1,0 +1,29 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:cooked_noodles"
+    },
+    {
+      "item": "cozycookery:meatballs"
+    },
+    {
+      "item": "cozycookery:meatballs"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
+    }
+  ],
+  "cooking_time": 500,
+  "color": "#B8452E",
+  "result": {
+    "id": "cozycookery:spaghetti_and_meatballs",
+    "count": 2
+  }
+}

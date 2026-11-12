@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "cozycookery:item/browned_ground_mutton"
+    "layer0": "cozycookery:item/raw_noodles"
   }
 }

@@ -1,0 +1,26 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:raw_mutton_cubes"
+    },
+    {
+      "item": "cozycookery:potato_cubes"
+    },
+    {
+      "item": "cozycookery:carrot_cubes"
+    },
+    {
+      "item": "cozycookery:diced_onion"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
+    }
+  ],
+  "cooking_time": 600,
+  "color": "#8A5A3A",
+  "result": {
+    "id": "cozycookery:mutton_stew",
+    "count": 2
+  }
+}

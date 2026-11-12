@@ -1,0 +1,26 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:cooked_noodles"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    },
+    {
+      "item": "cozycookery:diced_onion"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
+    }
+  ],
+  "cooking_time": 400,
+  "color": "#D24B32",
+  "result": {
+    "id": "cozycookery:spaghetti_pomodoro",
+    "count": 2
+  }
+}

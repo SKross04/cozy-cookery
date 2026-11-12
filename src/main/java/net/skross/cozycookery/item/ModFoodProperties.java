@@ -118,4 +118,29 @@ public class ModFoodProperties {
     // Coleslaw: cabbage + carrot + egg (1 + 3 + 3 = 7) -> 2 x 4
     public static final FoodProperties COLESLAW = new FoodProperties.Builder()
             .nutrition(4).saturationModifier(0.6f).build();
+
+    // ---------- Flour dishes & more ----------
+    public static final FoodProperties COOKED_NOODLES = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.4f).build();
+    public static final FoodProperties PANCAKE = new FoodProperties.Builder()        // 4 from flour + egg + milk + sugar
+            .nutrition(3).saturationModifier(0.6f).build();
+    public static final FoodProperties MEATBALLS = new FoodProperties.Builder()      // 4 from ground pork + bread + egg + garlic
+            .nutrition(2).saturationModifier(0.6f).build();
+    public static final FoodProperties OMELETTE = new FoodProperties.Builder()       // 2 eggs + onion + tomato
+            .nutrition(7).saturationModifier(0.6f).build();
+    // Spaghetti pomodoro: noodles + 2 tomatoes + onion (3 + 6 + 2 = 11) -> 2 x 6
+    public static final FoodProperties SPAGHETTI_POMODORO = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.6f).build();
+    // Spaghetti bolognese: noodles + beef + 2 tomatoes + onion (3 + 8 + 6 + 2 = 19) -> 2 x 9
+    public static final FoodProperties SPAGHETTI_BOLOGNESE = new FoodProperties.Builder()
+            .nutrition(9).saturationModifier(0.8f).build();
+    // Spaghetti & meatballs: noodles + 2 meatballs + 2 tomatoes (3 + 4 + 6 = 13) -> 2 x 7
+    public static final FoodProperties SPAGHETTI_AND_MEATBALLS = new FoodProperties.Builder()
+            .nutrition(7).saturationModifier(0.7f).build();
+    // Mutton stew: mutton + potato + carrot + onion (6 + 5 + 3 + 2 = 16) -> 2 x 8
+    public static final FoodProperties MUTTON_STEW = new FoodProperties.Builder()
+            .nutrition(8).saturationModifier(0.7f).build();
+    // Fruit salad: melon + apple + sweet berries + glow berries (2 + 4 + 2 + 2 = 10) -> 2 x 6
+    public static final FoodProperties FRUIT_SALAD = new FoodProperties.Builder()
+            .nutrition(6).saturationModifier(0.6f).build();
 }

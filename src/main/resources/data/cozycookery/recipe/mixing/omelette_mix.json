@@ -1,0 +1,21 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "cozycookery:diced_onion"
+    },
+    {
+      "item": "cozycookery:diced_tomato"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:omelette_mix",
+    "count": 1
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:pancake_batter"
+  },
+  "cooking_time": 160,
+  "result": {
+    "id": "cozycookery:pancake",
+    "count": 1
+  }
+}

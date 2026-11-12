@@ -72,6 +72,7 @@ public class CookingPotBlockEntity extends BlockEntity {
     private ItemStack serving = ItemStack.EMPTY; // 1 serving of the dish
     private int servings = 0;                     // how many bowls are left
     private int soupColor = WATER_COLOR;          // colour of the finished soup
+    private boolean servedInBowl = true;          // false: take it out with an empty hand (cooked noodles)
 
     public CookingPotBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.COOKING_POT_BE.get(), pos, blockState);
@@ -202,6 +203,7 @@ public class CookingPotBlockEntity extends BlockEntity {
         serving = recipe.result().copyWithCount(1);
         servings = recipe.result().getCount();
         soupColor = recipe.color();
+        servedInBowl = recipe.needsBowl();
         clearIngredients();
         resetCooking();
         level.setBlock(pos, state.setValue(CookingPotBlock.LIQUID, PotLiquid.SOUP), Block.UPDATE_ALL);
@@ -212,6 +214,7 @@ public class CookingPotBlockEntity extends BlockEntity {
     private void burn(ServerLevel level, BlockPos pos, BlockState state) {
         serving = new ItemStack(ModItems.BURNT_STEW.get());
         servings = SERVINGS_WHEN_BURNT;
+        servedInBowl = true;
         clearIngredients();
         resetCooking();
         level.setBlock(pos, state.setValue(CookingPotBlock.LIQUID, PotLiquid.BURNT), Block.UPDATE_ALL);
@@ -237,6 +240,10 @@ public class CookingPotBlockEntity extends BlockEntity {
     // ---------- Serving ----------
     public boolean hasServings() {
         return servings > 0 && !serving.isEmpty();
+    }
+
+    public boolean isServedInBowl() {
+        return servedInBowl;
     }
 
     // Takes 1 serving out. When the last one is taken, the pot becomes empty again.
@@ -303,6 +310,7 @@ public class CookingPotBlockEntity extends BlockEntity {
         tag.putInt("cooking_time", cookingTime);
         tag.putInt("target_color", targetColor);
         tag.putInt("soup_color", soupColor);
+        tag.putBoolean("served_in_bowl", servedInBowl);
         tag.putInt("servings", servings);
         if (!serving.isEmpty()) {
             tag.put("serving", serving.save(registries));
@@ -321,6 +329,7 @@ public class CookingPotBlockEntity extends BlockEntity {
         cookingTime = tag.getInt("cooking_time");
         targetColor = tag.contains("target_color") ? tag.getInt("target_color") : WATER_COLOR;
         soupColor = tag.contains("soup_color") ? tag.getInt("soup_color") : WATER_COLOR;
+        servedInBowl = !tag.contains("served_in_bowl") || tag.getBoolean("served_in_bowl");
         servings = tag.getInt("servings");
         serving = tag.contains("serving")
                 ? ItemStack.parse(registries, tag.getCompound("serving")).orElse(ItemStack.EMPTY)

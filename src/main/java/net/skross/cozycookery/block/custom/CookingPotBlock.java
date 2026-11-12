@@ -188,7 +188,7 @@ public class CookingPotBlock extends BaseEntityBlock {
 
         // Bowl on a finished dish -> 1 serving
         if (stack.is(Items.BOWL)) {
-            if (!pot.hasServings()) {
+            if (!pot.hasServings() || !pot.isServedInBowl()) {
                 return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
             }
             if (!level.isClientSide()) {
@@ -222,10 +222,22 @@ public class CookingPotBlock extends BaseEntityBlock {
                 && !stack.isDamageableItem();
     }
 
-    // Empty hand -> take the last added ingredient back out
+    // Empty hand -> take a finished dish that needs no bowl (cooked noodles), or else the last ingredient back out
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hitResult) {
+        if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot && pot.hasServings() && !pot.isServedInBowl()) {
+            if (!level.isClientSide()) {
+                ItemStack serving = pot.takeServing(level, pos, state);
+                if (player.getMainHandItem().isEmpty()) {
+                    player.setItemInHand(InteractionHand.MAIN_HAND, serving);
+                } else {
+                    player.getInventory().placeItemBackInInventory(serving);
+                }
+                level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 0.3f, 1.5f);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide());
+        }
         if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot && pot.hasIngredients()) {
             if (!level.isClientSide()) {
                 ItemStack taken = pot.removeLastIngredient();

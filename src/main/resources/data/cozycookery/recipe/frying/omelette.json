@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:omelette_mix"
+  },
+  "cooking_time": 200,
+  "result": {
+    "id": "cozycookery:omelette",
+    "count": 1
+  }
+}

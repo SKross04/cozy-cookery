@@ -25,9 +25,10 @@ import java.util.List;
  * ingredients:  what has to be in the pot (shapeless: the order doesn't matter), max 6
  * cooking_time: how long it simmers, in ticks (20 ticks = 1 second)
  * color:        the colour of the soup in the pot, like "#7E3A22" (optional)
- * result:       the dish + how many servings (count). Each serving is scooped out with a bowl.
+ * container:    "bowl" (default): serve with an empty bowl, "none": take it out with an empty hand (e.g. cooked noodles)
+ * result:       the dish + how many servings (count)
  */
-public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, int color, ItemStack result)
+public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, int color, String container, ItemStack result)
         implements Recipe<CookingRecipeInput> {
 
     @Override
@@ -37,6 +38,10 @@ public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, int c
         }
         // RecipeMatcher finds out if every item matches a different ingredient, in any order
         return RecipeMatcher.findMatches(input.items(), ingredients) != null;
+    }
+
+    public boolean needsBowl() {
+        return !container.equals("none");
     }
 
     @Override
@@ -92,6 +97,7 @@ public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, int c
                 Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").forGetter(CookingRecipe::ingredients),
                 Codec.INT.optionalFieldOf("cooking_time", 600).forGetter(CookingRecipe::cookingTime),
                 HEX_COLOR.optionalFieldOf("color", 0xB66A34).forGetter(CookingRecipe::color),
+                Codec.STRING.optionalFieldOf("container", "bowl").forGetter(CookingRecipe::container),
                 ItemStack.CODEC.fieldOf("result").forGetter(CookingRecipe::result)
         ).apply(inst, CookingRecipe::new));
 
@@ -100,6 +106,7 @@ public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, int c
                         Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), CookingRecipe::ingredients,
                         ByteBufCodecs.VAR_INT, CookingRecipe::cookingTime,
                         ByteBufCodecs.INT, CookingRecipe::color,
+                        ByteBufCodecs.STRING_UTF8, CookingRecipe::container,
                         ItemStack.STREAM_CODEC, CookingRecipe::result,
                         CookingRecipe::new);
 

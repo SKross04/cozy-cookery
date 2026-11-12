@@ -84,6 +84,16 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.APPLE_SLICES);
                         output.accept(ModItems.PUMPKIN_SLICE);
 
+                        output.accept(ModItems.PASTA_DOUGH);
+                        output.accept(ModItems.RAW_NOODLES);
+                        output.accept(ModItems.COOKED_NOODLES);
+                        output.accept(ModItems.PANCAKE_BATTER);
+                        output.accept(ModItems.PANCAKE);
+                        output.accept(ModItems.RAW_MEATBALLS);
+                        output.accept(ModItems.MEATBALLS);
+                        output.accept(ModItems.OMELETTE_MIX);
+                        output.accept(ModItems.OMELETTE);
+
                         output.accept(ModItems.RAW_PLATE);
                         output.accept(ModItems.PLATE);
                         output.accept(ModBlocks.FULL_BREAKFAST);
@@ -103,7 +113,6 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.BROWNED_GROUND_PORK);
                         output.accept(ModItems.SEARED_MUTTON_STRIPS);
                         output.accept(ModItems.SEARED_MUTTON_CUBES);
-                        output.accept(ModItems.BROWNED_GROUND_MUTTON);
                         output.accept(ModItems.POTATO_CHIPS);
                         output.accept(ModItems.FRIED_POTATO_CUBES);
                         output.accept(ModItems.FRIED_MUSHROOMS);
@@ -119,6 +128,11 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CABBAGE_SOUP);
                         output.accept(ModItems.GARDEN_SALAD);
                         output.accept(ModItems.COLESLAW);
+                        output.accept(ModItems.MUTTON_STEW);
+                        output.accept(ModItems.SPAGHETTI_POMODORO);
+                        output.accept(ModItems.SPAGHETTI_BOLOGNESE);
+                        output.accept(ModItems.SPAGHETTI_AND_MEATBALLS);
+                        output.accept(ModItems.FRUIT_SALAD);
                         output.accept(ModItems.BURNT_STEW);
                     }).build());
 

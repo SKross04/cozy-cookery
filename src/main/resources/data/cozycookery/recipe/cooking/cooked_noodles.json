@@ -1,0 +1,15 @@
+{
+  "type": "cozycookery:cooking",
+  "ingredients": [
+    {
+      "item": "cozycookery:raw_noodles"
+    }
+  ],
+  "cooking_time": 300,
+  "color": "#EADBA8",
+  "container": "none",
+  "result": {
+    "id": "cozycookery:cooked_noodles",
+    "count": 2
+  }
+}

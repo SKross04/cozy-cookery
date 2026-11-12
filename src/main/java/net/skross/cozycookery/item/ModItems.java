@@ -38,6 +38,17 @@ public class ModItems {
     public static final DeferredItem<Item> WOODEN_SPATULA = ITEMS.register("wooden_spatula",
             () -> new SpatulaItem(new Item.Properties().durability(128)));
 
+    // ---------- Pasta, pancakes, meatballs, omelette ----------
+    public static final DeferredItem<Item> PASTA_DOUGH = ITEMS.registerSimpleItem("pasta_dough");
+    public static final DeferredItem<Item> RAW_NOODLES = ITEMS.registerSimpleItem("raw_noodles");
+    public static final DeferredItem<Item> COOKED_NOODLES = food("cooked_noodles", ModFoodProperties.COOKED_NOODLES);
+    public static final DeferredItem<Item> PANCAKE_BATTER = ITEMS.registerSimpleItem("pancake_batter");
+    public static final DeferredItem<Item> PANCAKE = food("pancake", ModFoodProperties.PANCAKE);
+    public static final DeferredItem<Item> RAW_MEATBALLS = ITEMS.registerSimpleItem("raw_meatballs");
+    public static final DeferredItem<Item> MEATBALLS = food("meatballs", ModFoodProperties.MEATBALLS);
+    public static final DeferredItem<Item> OMELETTE_MIX = ITEMS.registerSimpleItem("omelette_mix");
+    public static final DeferredItem<Item> OMELETTE = food("omelette", ModFoodProperties.OMELETTE);
+
     // ---------- Plates: 3 clay balls -> raw plate -> furnace -> plate ----------
     public static final DeferredItem<Item> RAW_PLATE = ITEMS.registerSimpleItem("raw_plate");
     public static final DeferredItem<Item> PLATE = ITEMS.registerSimpleItem("plate");
@@ -121,7 +132,6 @@ public class ModItems {
     public static final DeferredItem<Item> BROWNED_GROUND_PORK = food("browned_ground_pork", ModFoodProperties.FRIED_PORK);
     public static final DeferredItem<Item> SEARED_MUTTON_STRIPS = food("seared_mutton_strips", ModFoodProperties.SEARED_MUTTON);
     public static final DeferredItem<Item> SEARED_MUTTON_CUBES = food("seared_mutton_cubes", ModFoodProperties.SEARED_MUTTON);
-    public static final DeferredItem<Item> BROWNED_GROUND_MUTTON = food("browned_ground_mutton", ModFoodProperties.SEARED_MUTTON);
     public static final DeferredItem<Item> POTATO_CHIPS = food("potato_chips", ModFoodProperties.FRIED_POTATO);
     public static final DeferredItem<Item> FRIED_POTATO_CUBES = food("fried_potato_cubes", ModFoodProperties.FRIED_POTATO);
     public static final DeferredItem<Item> FRIED_MUSHROOMS = food("fried_mushrooms", ModFoodProperties.FRIED_MUSHROOMS);
@@ -138,6 +148,11 @@ public class ModItems {
     public static final DeferredItem<Item> CABBAGE_SOUP = bowlFood("cabbage_soup", ModFoodProperties.CABBAGE_SOUP);
     public static final DeferredItem<Item> GARDEN_SALAD = bowlFood("garden_salad", ModFoodProperties.GARDEN_SALAD);
     public static final DeferredItem<Item> COLESLAW = bowlFood("coleslaw", ModFoodProperties.COLESLAW);
+    public static final DeferredItem<Item> MUTTON_STEW = bowlFood("mutton_stew", ModFoodProperties.MUTTON_STEW);
+    public static final DeferredItem<Item> SPAGHETTI_POMODORO = bowlFood("spaghetti_pomodoro", ModFoodProperties.SPAGHETTI_POMODORO);
+    public static final DeferredItem<Item> SPAGHETTI_BOLOGNESE = bowlFood("spaghetti_bolognese", ModFoodProperties.SPAGHETTI_BOLOGNESE);
+    public static final DeferredItem<Item> SPAGHETTI_AND_MEATBALLS = bowlFood("spaghetti_and_meatballs", ModFoodProperties.SPAGHETTI_AND_MEATBALLS);
+    public static final DeferredItem<Item> FRUIT_SALAD = bowlFood("fruit_salad", ModFoodProperties.FRUIT_SALAD);
     public static final DeferredItem<Item> BURNT_STEW = bowlFood("burnt_stew", ModFoodProperties.BURNT_STEW);
 
     // The empty bowl is given back by ModEvents.onFinishEating (tag cozycookery:bowl_foods)

@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:raw_meatballs"
+  },
+  "cooking_time": 200,
+  "result": {
+    "id": "cozycookery:meatballs",
+    "count": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:ground_pork"
+    },
+    {
+      "item": "cozycookery:bread_slice"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "cozycookery:minced_garlic"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:raw_meatballs",
+    "count": 4
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:pasta_dough",
+    "count": 1
+  }
+}

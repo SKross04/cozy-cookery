@@ -63,7 +63,6 @@
   "item.cozycookery.browned_ground_pork": "Browned Ground Pork",
   "item.cozycookery.seared_mutton_strips": "Seared Mutton Strips",
   "item.cozycookery.seared_mutton_cubes": "Seared Mutton Cubes",
-  "item.cozycookery.browned_ground_mutton": "Browned Ground Mutton",
   "item.cozycookery.potato_chips": "Potato Chips",
   "item.cozycookery.fried_potato_cubes": "Fried Potato Cubes",
   "item.cozycookery.fried_mushrooms": "Fried Mushrooms",
@@ -122,5 +121,19 @@
   "item.cozycookery.coleslaw": "Coleslaw",
   "item.cozycookery.raw_plate": "Raw Plate",
   "item.cozycookery.plate": "Plate",
-  "block.cozycookery.full_breakfast": "Full Breakfast"
+  "block.cozycookery.full_breakfast": "Full Breakfast",
+  "item.cozycookery.pasta_dough": "Pasta Dough",
+  "item.cozycookery.raw_noodles": "Raw Noodles",
+  "item.cozycookery.cooked_noodles": "Cooked Noodles",
+  "item.cozycookery.pancake_batter": "Pancake Batter",
+  "item.cozycookery.pancake": "Pancake",
+  "item.cozycookery.raw_meatballs": "Raw Meatballs",
+  "item.cozycookery.meatballs": "Meatballs",
+  "item.cozycookery.omelette_mix": "Omelette Mix",
+  "item.cozycookery.omelette": "Omelette",
+  "item.cozycookery.mutton_stew": "Mutton Stew",
+  "item.cozycookery.spaghetti_pomodoro": "Spaghetti Pomodoro",
+  "item.cozycookery.spaghetti_bolognese": "Spaghetti Bolognese",
+  "item.cozycookery.spaghetti_and_meatballs": "Spaghetti & Meatballs",
+  "item.cozycookery.fruit_salad": "Fruit Salad"
 }

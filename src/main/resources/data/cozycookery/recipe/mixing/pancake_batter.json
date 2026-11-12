@@ -1,0 +1,21 @@
+{
+  "type": "cozycookery:mixing",
+  "ingredients": [
+    {
+      "item": "cozycookery:flour"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "id": "cozycookery:pancake_batter",
+    "count": 4
+  }
+}
