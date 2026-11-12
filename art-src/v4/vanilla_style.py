@@ -175,3 +175,67 @@ if __name__ == '__main__':
     out = sys.argv[1]
     for n, im in SPRITES.items():
         im.save(f'{out}/{n}.png')
+
+
+# ---- v4b: vanilla technique + Let's Do feel (round, heaped dishes; leafy produce) ----
+onion_sprout = draw([
+    "...........a....",
+    "..........ab....",
+    ".........bc.....",
+    "........bc......",
+    "......AAcAA.....",
+    "....AADGEDDAA...",
+    "...ADGHIGEGEDA..",
+    "..ADGIFIHGEGEDO.",
+    "..AEHIIHGEGEEDO.",
+    ".ADEHHGHEGEGEDDO",
+    ".ADEGHGEGEEGEDDO",
+    "..ADEGEEGEEEDDO.",
+    "..ODDEEEEEEDDOO.",
+    "...OODDEEDDOO...",
+    ".....ORrRrO.....",
+    "......r..r......",
+], {**GREENS, 'O': '#4a1e06', 'A': '#6e3008', 'D': '#9a4a12', 'E': '#c06a1e', 'G': '#d8842a',
+    'H': '#eca040', 'I': '#f8c060', 'F': '#ffe0a0', 'r': '#c8a878', 'R': '#8a6a48'})
+
+stew_bowl = draw([
+    "................",
+    ".....OOOOOO.....",
+    "...OOrLLLLrOO...",
+    "..OrLrRRRRrLrO..",
+    ".OLrRsKkTsmMRLO.",
+    "OLrRsKKkTmMMsRrO",
+    "OLRsTkksPPmMsTrO",
+    "OrRgsTTPPpsTGgrO",
+    "OrRsMmTpsKkTTsrO",
+    ".OrRMMsTsKkSRrO.",
+    ".OLrRSsTTsSSRrO.",
+    "..OLrRRSSRRRrO..",
+    "..OlLrrRRRrrRO..",
+    "...OOlLLLrrOO...",
+    ".....OOOOOO.....",
+    "................",
+], {'O': '#3a2412', 'R': '#5e3e20', 'r': '#8a5e30', 'L': '#b07c40', 'l': '#cf9a58',
+    'S': '#6a2410', 's': '#8e3418', 'T': '#b04a20', 'K': '#ff8e09', 'k': '#d36a0d',
+    'M': '#6e2c1c', 'm': '#8e4026', 'P': '#f0d070', 'p': '#c8a040', 'G': '#4c9a22', 'g': '#8ccc3a'})
+
+bolognese_plate = draw([
+    "................",
+    ".....OOOOOO.....",
+    "...OOBCCCCBOO...",
+    "..OBCYwYyYYJCBO.",
+    ".OBCYyYRRhyYJCO.",
+    "OBCYwYRhRRrYyJBO",
+    "OCYyYRRMRgGRYyJO",
+    "OCwYyrRRGgRrYwJO",
+    "OCYyYrRRRRrYyYJO",
+    "OBCyYYrrrrYYyJBO",
+    ".OBJyYwYyYwyJBO.",
+    ".OIBJJyYyyJJBIO.",
+    "..OIBJJJJJJBIO..",
+    "...OOIIBBIIOO...",
+    ".....OOOOOO.....",
+    "................",
+], {'O': '#4a5060', 'B': '#b8c0cc', 'C': '#ffffff', 'J': '#e2e6ea', 'I': '#8a9aac',
+    'Y': '#ffd84a', 'y': '#e8a820', 'w': '#fff4a8', 'R': '#c8201a', 'r': '#8e1012', 'h': '#ff5a3a',
+    'M': '#6a1a10', 'G': '#3c8a20', 'g': '#7cc83a'})
