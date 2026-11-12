@@ -26,6 +26,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.MORTAR);
                         output.accept(ModBlocks.MIXING_BOWL);
                         ModBlocks.STOVES.values().forEach(output::accept);
+                        ModBlocks.OVENS.values().forEach(output::accept);
 
                         output.accept(ModItems.FLINT_KNIFE);
                         output.accept(ModItems.IRON_KNIFE);
@@ -64,6 +65,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CAKE_BATTER);
                         output.accept(ModItems.RAW_PUMPKIN_PIE);
                         output.accept(ModItems.RAW_APPLE_PIE);
+                        output.accept(ModItems.APPLE_PIE);
                         output.accept(ModItems.SEARED_BEEF_STRIPS);
                         output.accept(ModItems.SEARED_BEEF_CUBES);
                         output.accept(ModItems.BROWNED_GROUND_BEEF);

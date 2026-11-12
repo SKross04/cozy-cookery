@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:baking",
+  "ingredient": {
+    "item": "cozycookery:cake_batter"
+  },
+  "cooking_time": 600,
+  "result": {
+    "id": "minecraft:cake",
+    "count": 1
+  }
+}

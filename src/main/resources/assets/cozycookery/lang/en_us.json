@@ -79,5 +79,12 @@
   "item.cozycookery.cookie_dough": "Cookie Dough",
   "item.cozycookery.cake_batter": "Cake Batter",
   "item.cozycookery.raw_pumpkin_pie": "Raw Pumpkin Pie",
-  "item.cozycookery.raw_apple_pie": "Raw Apple Pie"
+  "item.cozycookery.raw_apple_pie": "Raw Apple Pie",
+  "block.cozycookery.brick_oven": "Brick Oven",
+  "block.cozycookery.stone_brick_oven": "Stone Brick Oven",
+  "block.cozycookery.deepslate_brick_oven": "Deepslate Brick Oven",
+  "block.cozycookery.mud_brick_oven": "Mud Brick Oven",
+  "block.cozycookery.tuff_brick_oven": "Tuff Brick Oven",
+  "item.cozycookery.apple_pie": "Apple Pie",
+  "sounds.cozycookery.oven_ding": "Oven dings"
 }

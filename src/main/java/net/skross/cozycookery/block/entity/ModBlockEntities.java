@@ -45,6 +45,12 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("mixing_bowl_be", () -> BlockEntityType.Builder.of(
                     MixingBowlBlockEntity::new, ModBlocks.MIXING_BOWL.get()).build(null));
 
+    public static final Supplier<BlockEntityType<OvenBlockEntity>> OVEN_BE =
+            BLOCK_ENTITIES.register("oven_be", () -> BlockEntityType.Builder.of(
+                    OvenBlockEntity::new,
+                    ModBlocks.OVENS.values().stream().map(DeferredBlock::get).toArray(Block[]::new)
+            ).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

@@ -15,6 +15,7 @@ import net.skross.cozycookery.block.custom.CookingPotBlock;
 import net.skross.cozycookery.block.custom.FryingPanBlock;
 import net.skross.cozycookery.block.custom.MixingBowlBlock;
 import net.skross.cozycookery.block.custom.MortarBlock;
+import net.skross.cozycookery.block.custom.OvenBlock;
 import net.skross.cozycookery.block.custom.StoveBlock;
 import net.skross.cozycookery.item.ModItems;
 
@@ -109,6 +110,30 @@ public class ModBlocks {
                     .noOcclusion())));
         }
         return stoves;
+    }
+
+    // ---------- Ovens: same brick types as the stoves ----------
+    // Key = brick type ("stone_brick"), value = the registered block ("stone_brick_oven")
+    public static final Map<String, DeferredBlock<Block>> OVENS = registerOvens();
+
+    private static Map<String, DeferredBlock<Block>> registerOvens() {
+        Map<String, DeferredBlock<Block>> ovens = new LinkedHashMap<>();
+        for (String type : STOVE_TYPES) {
+            SoundType sound = switch (type) {
+                case "deepslate_brick" -> SoundType.DEEPSLATE_BRICKS;
+                case "mud_brick" -> SoundType.MUD_BRICKS;
+                case "tuff_brick" -> SoundType.TUFF_BRICKS;
+                default -> SoundType.STONE;
+            };
+            ovens.put(type, registerBlock(type + "_oven", () -> new OvenBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.STONE)
+                    .strength(2.0f, 6.0f)
+                    .requiresCorrectToolForDrops()
+                    .sound(sound)
+                    .lightLevel(state -> state.getValue(OvenBlock.LIT) ? 13 : 0)
+                    .noOcclusion())));
+        }
+        return ovens;
     }
 
     // Registers the block AND a BlockItem with the same name, so you can hold and place it.

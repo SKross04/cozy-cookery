@@ -40,5 +40,11 @@
     "sounds": [
       "cozycookery:mortar_grind"
     ]
+  },
+  "oven_ding": {
+    "subtitle": "sounds.cozycookery.oven_ding",
+    "sounds": [
+      "cozycookery:oven_ding"
+    ]
   }
 }

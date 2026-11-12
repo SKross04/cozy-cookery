@@ -20,6 +20,7 @@ public class ModSounds {
     public static final Supplier<SoundEvent> FRYING_PAN_SIZZLE = registerSoundEvent("frying_pan_sizzle");
     public static final Supplier<SoundEvent> FRYING_PAN_FLIP = registerSoundEvent("frying_pan_flip");
     public static final Supplier<SoundEvent> MORTAR_GRIND = registerSoundEvent("mortar_grind");
+    public static final Supplier<SoundEvent> OVEN_DING = registerSoundEvent("oven_ding");
 
     private static Supplier<SoundEvent> registerSoundEvent(String name) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(CozyCookery.MOD_ID, name);

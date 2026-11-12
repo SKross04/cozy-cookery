@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:baking",
+  "ingredient": {
+    "item": "cozycookery:cookie_dough"
+  },
+  "cooking_time": 300,
+  "result": {
+    "id": "minecraft:cookie",
+    "count": 8
+  }
+}

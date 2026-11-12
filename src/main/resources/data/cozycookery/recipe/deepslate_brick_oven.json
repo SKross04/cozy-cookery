@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "oven",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "B": {
+      "item": "minecraft:deepslate_bricks"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "B B",
+    "ICI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:deepslate_brick_oven"
+  }
+}

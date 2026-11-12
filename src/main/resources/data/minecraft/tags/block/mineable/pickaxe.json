@@ -7,6 +7,11 @@
     "cozycookery:mud_brick_stove",
     "cozycookery:tuff_brick_stove",
     "cozycookery:frying_pan",
-    "cozycookery:mortar"
+    "cozycookery:mortar",
+    "cozycookery:brick_oven",
+    "cozycookery:stone_brick_oven",
+    "cozycookery:deepslate_brick_oven",
+    "cozycookery:mud_brick_oven",
+    "cozycookery:tuff_brick_oven"
   ]
 }

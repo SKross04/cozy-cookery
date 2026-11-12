@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:baking",
+  "ingredient": {
+    "item": "cozycookery:bread_dough"
+  },
+  "cooking_time": 400,
+  "result": {
+    "id": "minecraft:bread",
+    "count": 1
+  }
+}

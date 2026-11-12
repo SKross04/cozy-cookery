@@ -77,4 +77,8 @@ public class ModFoodProperties {
     public static final FoodProperties CHARRED_SCRAPS = new FoodProperties.Builder()
             .nutrition(1).saturationModifier(0.1f)
             .effect(new MobEffectInstance(MobEffects.HUNGER, 300, 0), 0.3f).build();
+
+    // Apple pie: like vanilla pumpkin pie (8 hunger), a tiny bit more saturating
+    public static final FoodProperties APPLE_PIE = new FoodProperties.Builder()
+            .nutrition(8).saturationModifier(0.35f).build();
 }

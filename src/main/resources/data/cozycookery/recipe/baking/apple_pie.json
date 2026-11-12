@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:baking",
+  "ingredient": {
+    "item": "cozycookery:raw_apple_pie"
+  },
+  "cooking_time": 500,
+  "result": {
+    "id": "cozycookery:apple_pie",
+    "count": 1
+  }
+}
