@@ -239,3 +239,102 @@ bolognese_plate = draw([
 ], {'O': '#4a5060', 'B': '#b8c0cc', 'C': '#ffffff', 'J': '#e2e6ea', 'I': '#8a9aac',
     'Y': '#ffd84a', 'y': '#e8a820', 'w': '#fff4a8', 'R': '#c8201a', 'r': '#8e1012', 'h': '#ff5a3a',
     'M': '#6a1a10', 'G': '#3c8a20', 'g': '#7cc83a'})
+
+garlic_clove = draw([
+    "................",
+    "................",
+    "..........A.....",
+    ".........AE.....",
+    ".........AGA....",
+    "........AGHEA...",
+    ".......AGHFGDA..",
+    "......AGHFHGEDO.",
+    ".....AEHHGGEEDO.",
+    ".....AEHGGEEDDO.",
+    ".....ADEGEEEDDO.",
+    "......ADEEEDDO..",
+    "......OODDDDO...",
+    "........OOOO....",
+    "................",
+    "................",
+], {'O': '#4a2a3a', 'A': '#6a4a5a', 'D': '#a88a98', 'E': '#d8c8d0', 'G': '#ecdfe4', 'H': '#f8f2f4',
+    'F': '#ffffff'})
+
+cabbage_leaves = draw([
+    "................",
+    "................",
+    "........AAAA....",
+    "......AAGHHGA...",
+    ".....AGHIIHGEA..",
+    "....AGHIFHGEEDA.",
+    "...AGHIFHGGEDDO.",
+    "..AGHIFHGGEEDO..",
+    "..AGIFHGGEEDDO..",
+    ".AGHFHGGEEDDO...",
+    ".AGFHGEEEDDO....",
+    ".AFGGEEDDOO.....",
+    ".ADEEDDOO.......",
+    "..ODDOO.........",
+    "...OO...........",
+    "................",
+], {'O': '#0e3a0c', 'A': '#1a5a14', 'D': '#2a7a1e', 'E': '#3e9a2a', 'G': '#5cb83a', 'H': '#84d052',
+    'I': '#b0e47a', 'F': '#d8f4a8'})
+
+tomato_seeds = draw([
+    "................",
+    "................",
+    "................",
+    "................",
+    ".........OO.....",
+    "........OFHO....",
+    "....OO..OHGO....",
+    "...OFHO..OO.....",
+    "...OHGO....OO...",
+    "....OO....OFHO..",
+    ".......OO.OHGO..",
+    "......OFHO.OO...",
+    "......OHGO......",
+    ".......OO.......",
+    "................",
+    "................",
+], {'O': '#8a6a1a', 'F': '#fff4b0', 'H': '#f0d060', 'G': '#c8a030'})
+
+cabbage_seeds = draw([
+    "................",
+    "................",
+    "................",
+    "................",
+    "........OO......",
+    ".......OHGO.....",
+    "...OO..OGDO.....",
+    "..OHGO..OO..OO..",
+    "..OGDO.....OHGO.",
+    "...OO..OO..OGDO.",
+    ".......OHGO.OO..",
+    ".......OGDO.....",
+    "...OO...OO......",
+    "..OHGO..........",
+    "..OGDO..........",
+    "...OO...........",
+], {'O': '#2a1a10', 'H': '#8a6a4a', 'G': '#5e4430', 'D': '#3e2c1e'})
+
+# knife tiers: recolour the iron blade ramp (by brightness rank, like vanilla's sword tiers)
+IRON_RAMP = ['#181818', '#444444', '#6b6b6b', '#969696', '#bebebe', '#d8d8d8', '#ffffff']
+TIERS = {
+    'flint_knife': ['#0e0e10', '#2a2a30', '#3e3e46', '#55555e', '#6e6e78', '#8a8a94', '#b4b4bc'],
+    'iron_knife': IRON_RAMP,
+    'golden_knife': ['#3f2e0e', '#825d16', '#dc9613', '#e9b115', '#eaee57', '#fdff76', '#ffffff'],
+    'diamond_knife': ['#082520', '#0e3f36', '#156355', '#1e8a77', '#2bc7ac', '#33ebcb', '#a4fdf0'],
+    'netherite_knife': ['#160814', '#2f2122', '#4a2940', '#5d565d', '#706770', '#867b86', '#a89aa8'],
+}
+
+
+def knife_tier(name):
+    src = {hx(c): hx(t) for c, t in zip(IRON_RAMP, TIERS[name])}
+    img = knife.copy()
+    p = img.load()
+    for y in range(16):
+        for x in range(16):
+            if p[x, y] in src:
+                p[x, y] = src[p[x, y]]
+    return img

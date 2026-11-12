@@ -1,14 +1,13 @@
-# Cozy Cookery – art style
+# Cozy Cookery – art style (v4, approved)
 
-Original "cozy" style, inspired by the feel of Let's Do and Farmer's Delight, never a copy.
+Vanilla item technique + Let's Do charm. Scripts: `art-src/v4/` (`vanilla_style.py` = hand-pixelled sprites,
+`bowls.py` = every bowl dish incl. the vanilla stew overrides). Older experiments in v2/v3 are not used.
 
-- 16x16 textures, item textures drawn diagonally (handle bottom-left, tip top-right) like vanilla tools.
-- Warm, soft palettes; 3-4 shades per material; light comes from the top-left.
-- Outlines are a dark shade of the material itself (dark steel, dark red, dark wood), never pure black.
-- Small storytelling details: twine wraps, rivets, different woods per tool tier, butcher paper under ground meat.
-- Wood: warm honey/oak tones; blocks get bevelled edges and butcher-block strips.
-- Raw meat: marbling in fat colour; cooked food: golden-brown with darker crispy spots.
-- Blocks: chunky but low-profile 3D models (rounded corners via stepped elements, real holes in handles).
-
-The Python scripts in this folder generate the current textures (need Pillow): 
-`python art_common.py` is shared helpers; the others take an output folder as argument.
+- Hand-pixelled 16x16 grids, ~8-10 colours per item, like the current vanilla apple/carrot/potato.
+- Saturated base colour, a small bright highlight cluster on the top-left, darker shade + darkest outline on the bottom-right.
+- Outline = the object's own dark colours (warm dark top-left, darkest bottom-right), never pure black.
+- A little pixel texture (two neighbouring shades alternating) in big areas; no smooth gradients, no noise.
+- Produce gets Let's Do charm: leaf crowns, sprouts, roots.
+- Dishes are seen from above: round wooden bowl (light rim) or white plate (grey-blue outline) filling the slot,
+  food heaped inside as 3x2 pieces (light / highlight / dark + a shadow row), herbs as bright green specks.
+- Tools reuse vanilla's ramps by brightness rank (knife tiers = sword tiers, handle = stick colours).
