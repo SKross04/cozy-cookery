@@ -84,6 +84,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.APPLE_SLICES);
                         output.accept(ModItems.PUMPKIN_SLICE);
 
+                        output.accept(ModItems.RAW_PLATE);
+                        output.accept(ModItems.PLATE);
+                        output.accept(ModBlocks.FULL_BREAKFAST);
+
                         output.accept(ModItems.FLOUR);
                         output.accept(ModItems.BREAD_DOUGH);
                         output.accept(ModItems.COOKIE_DOUGH);

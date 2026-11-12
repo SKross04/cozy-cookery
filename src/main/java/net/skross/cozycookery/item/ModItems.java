@@ -38,6 +38,10 @@ public class ModItems {
     public static final DeferredItem<Item> WOODEN_SPATULA = ITEMS.register("wooden_spatula",
             () -> new SpatulaItem(new Item.Properties().durability(128)));
 
+    // ---------- Plates: 3 clay balls -> raw plate -> furnace -> plate ----------
+    public static final DeferredItem<Item> RAW_PLATE = ITEMS.registerSimpleItem("raw_plate");
+    public static final DeferredItem<Item> PLATE = ITEMS.registerSimpleItem("plate");
+
     // ---------- Baking ingredients ----------
     public static final DeferredItem<Item> FLOUR = ITEMS.registerSimpleItem("flour");
     // Raw doughs and batters from the mixing bowl (not edible, they go in the oven)

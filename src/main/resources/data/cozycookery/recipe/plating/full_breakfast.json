@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "plated_meal",
+  "ingredients": [
+    {
+      "item": "cozycookery:bacon"
+    },
+    {
+      "item": "cozycookery:fried_egg"
+    },
+    {
+      "item": "cozycookery:toast"
+    },
+    {
+      "item": "cozycookery:fried_mushrooms"
+    },
+    {
+      "item": "cozycookery:plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:full_breakfast"
+  }
+}

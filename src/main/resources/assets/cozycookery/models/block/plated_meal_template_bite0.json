@@ -1,0 +1,699 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "plate": "cozycookery:block/plate",
+    "particle": "cozycookery:block/plate"
+  },
+  "elements": [
+    {
+      "name": "foot",
+      "from": [
+        4,
+        0,
+        4
+      ],
+      "to": [
+        12,
+        0.5,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            15.5,
+            12,
+            16
+          ],
+          "texture": "#plate"
+        },
+        "south": {
+          "uv": [
+            4,
+            15.5,
+            12,
+            16
+          ],
+          "texture": "#plate"
+        },
+        "east": {
+          "uv": [
+            4,
+            15.5,
+            12,
+            16
+          ],
+          "texture": "#plate"
+        },
+        "west": {
+          "uv": [
+            4,
+            15.5,
+            12,
+            16
+          ],
+          "texture": "#plate"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#plate"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "dish",
+      "from": [
+        2,
+        0.5,
+        2
+      ],
+      "to": [
+        14,
+        1,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            15,
+            14,
+            15.5
+          ],
+          "texture": "#plate"
+        },
+        "south": {
+          "uv": [
+            2,
+            15,
+            14,
+            15.5
+          ],
+          "texture": "#plate"
+        },
+        "east": {
+          "uv": [
+            2,
+            15,
+            14,
+            15.5
+          ],
+          "texture": "#plate"
+        },
+        "west": {
+          "uv": [
+            2,
+            15,
+            14,
+            15.5
+          ],
+          "texture": "#plate"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#plate"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "rim_north",
+      "from": [
+        2,
+        1,
+        2
+      ],
+      "to": [
+        14,
+        1.5,
+        3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            14.5,
+            14,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "south": {
+          "uv": [
+            2,
+            14.5,
+            14,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "east": {
+          "uv": [
+            2,
+            14.5,
+            3,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "west": {
+          "uv": [
+            2,
+            14.5,
+            3,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            3
+          ],
+          "texture": "#plate"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            3
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "rim_south",
+      "from": [
+        2,
+        1,
+        13
+      ],
+      "to": [
+        14,
+        1.5,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            14.5,
+            14,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "south": {
+          "uv": [
+            2,
+            14.5,
+            14,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "east": {
+          "uv": [
+            13,
+            14.5,
+            14,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "west": {
+          "uv": [
+            13,
+            14.5,
+            14,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "up": {
+          "uv": [
+            2,
+            13,
+            14,
+            14
+          ],
+          "texture": "#plate"
+        },
+        "down": {
+          "uv": [
+            2,
+            13,
+            14,
+            14
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "rim_west",
+      "from": [
+        2,
+        1,
+        3
+      ],
+      "to": [
+        3,
+        1.5,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            14.5,
+            3,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "south": {
+          "uv": [
+            2,
+            14.5,
+            3,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "east": {
+          "uv": [
+            3,
+            14.5,
+            13,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "west": {
+          "uv": [
+            3,
+            14.5,
+            13,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "up": {
+          "uv": [
+            2,
+            3,
+            3,
+            13
+          ],
+          "texture": "#plate"
+        },
+        "down": {
+          "uv": [
+            2,
+            3,
+            3,
+            13
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "rim_east",
+      "from": [
+        13,
+        1,
+        3
+      ],
+      "to": [
+        14,
+        1.5,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            14.5,
+            14,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "south": {
+          "uv": [
+            13,
+            14.5,
+            14,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "east": {
+          "uv": [
+            3,
+            14.5,
+            13,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "west": {
+          "uv": [
+            3,
+            14.5,
+            13,
+            15
+          ],
+          "texture": "#plate"
+        },
+        "up": {
+          "uv": [
+            13,
+            3,
+            14,
+            13
+          ],
+          "texture": "#plate"
+        },
+        "down": {
+          "uv": [
+            13,
+            3,
+            14,
+            13
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "food_0",
+      "from": [
+        4,
+        1,
+        4
+      ],
+      "to": [
+        8,
+        3,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            13,
+            8,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "south": {
+          "uv": [
+            4,
+            13,
+            8,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "east": {
+          "uv": [
+            4,
+            13,
+            8,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "west": {
+          "uv": [
+            4,
+            13,
+            8,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            8,
+            8
+          ],
+          "texture": "#food"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            8,
+            8
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "food_1",
+      "from": [
+        8,
+        1,
+        4
+      ],
+      "to": [
+        12,
+        3,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            13,
+            12,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "south": {
+          "uv": [
+            8,
+            13,
+            12,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "east": {
+          "uv": [
+            4,
+            13,
+            8,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "west": {
+          "uv": [
+            4,
+            13,
+            8,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "up": {
+          "uv": [
+            8,
+            4,
+            12,
+            8
+          ],
+          "texture": "#food"
+        },
+        "down": {
+          "uv": [
+            8,
+            4,
+            12,
+            8
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "food_2",
+      "from": [
+        4,
+        1,
+        8
+      ],
+      "to": [
+        8,
+        3,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            13,
+            8,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "south": {
+          "uv": [
+            4,
+            13,
+            8,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "east": {
+          "uv": [
+            8,
+            13,
+            12,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "west": {
+          "uv": [
+            8,
+            13,
+            12,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "up": {
+          "uv": [
+            4,
+            8,
+            8,
+            12
+          ],
+          "texture": "#food"
+        },
+        "down": {
+          "uv": [
+            4,
+            8,
+            8,
+            12
+          ],
+          "texture": "#plate"
+        }
+      }
+    },
+    {
+      "name": "food_3",
+      "from": [
+        8,
+        1,
+        8
+      ],
+      "to": [
+        12,
+        3,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            13,
+            12,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "south": {
+          "uv": [
+            8,
+            13,
+            12,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "east": {
+          "uv": [
+            8,
+            13,
+            12,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "west": {
+          "uv": [
+            8,
+            13,
+            12,
+            15
+          ],
+          "texture": "#food_side"
+        },
+        "up": {
+          "uv": [
+            8,
+            8,
+            12,
+            12
+          ],
+          "texture": "#food"
+        },
+        "down": {
+          "uv": [
+            8,
+            8,
+            12,
+            12
+          ],
+          "texture": "#plate"
+        }
+      }
+    }
+  ]
+}

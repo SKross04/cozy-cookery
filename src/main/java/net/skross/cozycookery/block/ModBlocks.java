@@ -19,6 +19,7 @@ import net.skross.cozycookery.block.custom.MixingBowlBlock;
 import net.skross.cozycookery.block.custom.ModCropBlock;
 import net.skross.cozycookery.block.custom.MortarBlock;
 import net.skross.cozycookery.block.custom.OvenBlock;
+import net.skross.cozycookery.block.custom.PlatedMealBlock;
 import net.skross.cozycookery.block.custom.StoveBlock;
 import net.skross.cozycookery.block.custom.TomatoTrellisBlock;
 import net.skross.cozycookery.block.custom.TrellisBlock;
@@ -137,6 +138,19 @@ public class ModBlocks {
                 .offsetType(BlockBehaviour.OffsetType.XZ)
                 .ignitedByLava()
                 .pushReaction(PushReaction.DESTROY);
+    }
+
+    // ---------- Plated meals: placed and eaten bite by bite (4 bites) ----------
+    // Value per meal = (sum of its components + about 25% bonus) / 4 bites
+    public static final DeferredBlock<Block> FULL_BREAKFAST = registerMeal("full_breakfast", 5, 0.6f);
+
+    private static DeferredBlock<Block> registerMeal(String name, int nutritionPerBite, float saturationPerBite) {
+        return registerBlock(name, () -> new PlatedMealBlock(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.TERRACOTTA_WHITE)
+                .strength(0.5f)
+                .sound(SoundType.DECORATED_POT)
+                .noOcclusion()
+                .pushReaction(PushReaction.DESTROY), nutritionPerBite, saturationPerBite));
     }
 
     // ---------- Stoves: one per brick type, all using the same StoveBlock class ----------

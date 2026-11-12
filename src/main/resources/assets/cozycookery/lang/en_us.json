@@ -119,5 +119,8 @@
   "item.cozycookery.onion_soup": "Onion Soup",
   "item.cozycookery.cabbage_soup": "Cabbage Soup",
   "item.cozycookery.garden_salad": "Garden Salad",
-  "item.cozycookery.coleslaw": "Coleslaw"
+  "item.cozycookery.coleslaw": "Coleslaw",
+  "item.cozycookery.raw_plate": "Raw Plate",
+  "item.cozycookery.plate": "Plate",
+  "block.cozycookery.full_breakfast": "Full Breakfast"
 }
