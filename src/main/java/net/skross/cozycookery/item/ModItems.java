@@ -9,6 +9,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.item.custom.KnifeItem;
+import net.skross.cozycookery.item.custom.SpoonItem;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CozyCookery.MOD_ID);
@@ -24,6 +25,10 @@ public class ModItems {
             () -> new KnifeItem(Tiers.DIAMOND, knifeProperties(Tiers.DIAMOND)));
     public static final DeferredItem<Item> NETHERITE_KNIFE = ITEMS.register("netherite_knife",
             () -> new KnifeItem(Tiers.NETHERITE, knifeProperties(Tiers.NETHERITE).fireResistant()));
+
+    // Wooden spoon: 128 uses. Items with durability automatically stack to 1.
+    public static final DeferredItem<Item> WOODEN_SPOON = ITEMS.register("wooden_spoon",
+            () -> new SpoonItem(new Item.Properties().durability(128)));
 
     private static Item.Properties knifeProperties(Tier tier) {
         return new Item.Properties().attributes(SwordItem.createAttributes(tier, 1, -2.0f));

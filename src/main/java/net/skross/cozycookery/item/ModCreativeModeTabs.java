@@ -24,6 +24,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.GOLDEN_KNIFE);
                         output.accept(ModItems.DIAMOND_KNIFE);
                         output.accept(ModItems.NETHERITE_KNIFE);
+                        output.accept(ModItems.WOODEN_SPOON);
                     }).build());
 
     public static void register(IEventBus eventBus) {
