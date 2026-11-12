@@ -6,9 +6,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -16,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -86,8 +90,11 @@ public class TomatoTrellisBlock extends DoublePlantBlock implements Bonemealable
         int newAge = Math.min(MAX_AGE, age);
         BlockState lowerState = level.getBlockState(lower);
         BlockState upperState = level.getBlockState(lower.above());
-        if (lowerState.hasProperty(AGE)) level.setBlock(lower, lowerState.setValue(AGE, newAge), Block.UPDATE_CLIENTS);
-        if (upperState.hasProperty(AGE)) level.setBlock(lower.above(), upperState.setValue(AGE, newAge), Block.UPDATE_CLIENTS);
+        // UPDATE_KNOWN_SHAPE: change both halves without them checking each other in between
+        // (otherwise DoublePlantBlock may think the other half is gone and remove the plant)
+        int flags = Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE;
+        if (lowerState.hasProperty(AGE)) level.setBlock(lower, lowerState.setValue(AGE, newAge), flags);
+        if (upperState.hasProperty(AGE)) level.setBlock(lower.above(), upperState.setValue(AGE, newAge), flags);
     }
 
     // ---------- Bone meal ----------
@@ -104,6 +111,25 @@ public class TomatoTrellisBlock extends DoublePlantBlock implements Bonemealable
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         setAge(level, pos, state, state.getValue(AGE) + 1 + random.nextInt(2));
+    }
+
+    // ---------- Bone meal in your hand ----------
+    // Handled here ourselves: growing -> grow, ripe -> do nothing (pick with an empty hand or another item)
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!stack.is(Items.BONE_MEAL)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        if (state.getValue(AGE) >= MAX_AGE) {
+            return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        }
+        if (!level.isClientSide()) {
+            performBonemeal((ServerLevel) level, level.getRandom(), pos, state);
+            stack.consume(1, player);
+            level.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, pos, 15);
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
 
     // ---------- Picking (right-click when ripe) ----------
