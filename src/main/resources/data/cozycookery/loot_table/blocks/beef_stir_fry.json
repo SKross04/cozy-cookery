@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "cozycookery:beef_stir_fry",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "cozycookery:beef_stir_fry",
+                  "properties": {
+                    "bites": "0"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "cozycookery:plate"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "cozycookery:blocks/beef_stir_fry"
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "plated_meal",
+  "ingredients": [
+    {
+      "item": "minecraft:cooked_salmon"
+    },
+    {
+      "item": "cozycookery:fried_potato_cubes"
+    },
+    {
+      "item": "cozycookery:cabbage_leaves"
+    },
+    {
+      "item": "cozycookery:plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:salmon_dinner"
+  }
+}

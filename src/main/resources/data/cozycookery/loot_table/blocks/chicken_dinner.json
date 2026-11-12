@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "cozycookery:chicken_dinner",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "cozycookery:chicken_dinner",
+                  "properties": {
+                    "bites": "0"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "cozycookery:plate"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "cozycookery:blocks/chicken_dinner"
+}

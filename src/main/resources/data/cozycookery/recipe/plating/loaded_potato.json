@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "plated_meal",
+  "ingredients": [
+    {
+      "item": "minecraft:baked_potato"
+    },
+    {
+      "item": "cozycookery:bacon"
+    },
+    {
+      "item": "cozycookery:fried_onions"
+    },
+    {
+      "item": "cozycookery:plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:loaded_potato"
+  }
+}

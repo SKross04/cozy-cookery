@@ -6,6 +6,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.util.ModTags;
 
@@ -31,6 +32,19 @@ public class ModEvents {
             if (!player.getInventory().add(bowl)) {
                 player.drop(bowl, false);        // inventory full -> drop it
             }
+        }
+    }
+
+    // Crafting a bowl dish onto a plate (tag cozycookery:plated_bowl_dishes) gives you the empty bowl back
+    @SubscribeEvent
+    public static void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
+        Player player = event.getEntity();
+        if (player.level().isClientSide() || !event.getCrafting().is(ModTags.Items.PLATED_BOWL_DISHES)) {
+            return;
+        }
+        ItemStack bowl = new ItemStack(Items.BOWL);
+        if (!player.getInventory().add(bowl)) {
+            player.drop(bowl, false);
         }
     }
 }

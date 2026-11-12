@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cozycookery:item/pork_and_cabbage"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "cozycookery:block/plated_meal_template_bite3",
+  "textures": {
+    "food": "cozycookery:block/loaded_potato_top",
+    "food_side": "cozycookery:block/loaded_potato_side"
+  }
+}

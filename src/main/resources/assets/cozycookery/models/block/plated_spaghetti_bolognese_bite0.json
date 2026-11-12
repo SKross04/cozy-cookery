@@ -1,0 +1,7 @@
+{
+  "parent": "cozycookery:block/plated_meal_template_bite0",
+  "textures": {
+    "food": "cozycookery:block/plated_spaghetti_bolognese_top",
+    "food_side": "cozycookery:block/plated_spaghetti_bolognese_side"
+  }
+}

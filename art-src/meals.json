@@ -1,0 +1,40 @@
+{
+ "component_meals": [
+  {"name":"steak_and_chips","components":["seared_beef_strips","potato_chips","fried_onions","seared_beef_strips"],
+   "recipe":["seared_beef_strips","seared_beef_strips","potato_chips","fried_onions"],"bite":7,"sat":0.8,"title":"Steak & Chips"},
+  {"name":"chicken_dinner","components":["cooked_chicken_drumstick","cooked_chicken_wing","fried_potato_cubes","cabbage_leaves"],
+   "recipe":["cooked_chicken_drumstick","cooked_chicken_drumstick","cooked_chicken_wing","cooked_chicken_wing","fried_potato_cubes","cabbage_leaves"],"bite":4,"sat":0.6,"title":"Chicken Dinner"},
+  {"name":"pancake_stack","components":["pancake","pancake","minecraft:sweet_berries","pancake"],
+   "recipe":["pancake","pancake","pancake","minecraft:sweet_berries"],"alt_recipe":["pancake","pancake","pancake","minecraft:honey_bottle"],"bite":4,"sat":0.6,"title":"Pancake Stack"},
+  {"name":"beef_stir_fry","components":["seared_beef_cubes","fried_onions","carrot_slices","shredded_cabbage"],
+   "recipe":["seared_beef_cubes","fried_onions","carrot_slices","shredded_cabbage"],"bite":5,"sat":0.6,"title":"Beef Stir-Fry"},
+  {"name":"pork_and_cabbage","components":["fried_pork_cubes","shredded_cabbage","fried_potato_cubes","fried_pork_cubes"],
+   "recipe":["fried_pork_cubes","shredded_cabbage","fried_potato_cubes"],"bite":4,"sat":0.6,"title":"Pork & Cabbage"},
+  {"name":"mutton_dinner","components":["seared_mutton_strips","fried_potato_cubes","carrot_slices","seared_mutton_strips"],
+   "recipe":["seared_mutton_strips","seared_mutton_strips","fried_potato_cubes","carrot_slices"],"bite":6,"sat":0.8,"title":"Mutton Dinner"},
+  {"name":"fish_and_chips","components":["minecraft:cooked_cod","potato_chips","diced_tomato","minecraft:cooked_cod"],
+   "recipe":["minecraft:cooked_cod","potato_chips","diced_tomato"],"bite":4,"sat":0.6,"title":"Fish & Chips"},
+  {"name":"salmon_dinner","components":["minecraft:cooked_salmon","fried_potato_cubes","cabbage_leaves","minecraft:cooked_salmon"],
+   "recipe":["minecraft:cooked_salmon","fried_potato_cubes","cabbage_leaves"],"bite":4,"sat":0.6,"title":"Salmon Dinner"},
+  {"name":"loaded_potato","components":["minecraft:baked_potato","bacon","fried_onions","minecraft:baked_potato"],
+   "recipe":["minecraft:baked_potato","bacon","fried_onions"],"bite":5,"sat":0.6,"title":"Loaded Potato"},
+  {"name":"omelette_plate","components":["omelette","omelette","omelette","omelette"],
+   "recipe":["omelette"],"bite":2,"sat":0.6,"title":"Omelette Plate"}
+ ],
+ "bowl_dishes": [
+  {"name":"plated_beef_stew","dish":"cozycookery:beef_stew","colour":"#7E3A22","palette_from":"beef_stew","bite":3,"title":"Plate of Beef Stew"},
+  {"name":"plated_chicken_soup","dish":"cozycookery:chicken_soup","colour":"#E2B85A","palette_from":"chicken_soup","bite":2,"title":"Plate of Chicken Soup"},
+  {"name":"plated_vegetable_soup","dish":"cozycookery:vegetable_soup","colour":"#8A9A4A","palette_from":"vegetable_soup","bite":2,"title":"Plate of Vegetable Soup"},
+  {"name":"plated_pumpkin_soup","dish":"cozycookery:pumpkin_soup","colour":"#E08A2C","palette_from":"pumpkin_soup","bite":2,"title":"Plate of Pumpkin Soup"},
+  {"name":"plated_tomato_soup","dish":"cozycookery:tomato_soup","colour":"#C8402E","palette_from":"tomato_soup","bite":2,"title":"Plate of Tomato Soup"},
+  {"name":"plated_onion_soup","dish":"cozycookery:onion_soup","colour":"#B8833E","palette_from":"onion_soup","bite":2,"title":"Plate of Onion Soup"},
+  {"name":"plated_cabbage_soup","dish":"cozycookery:cabbage_soup","colour":"#9CB45A","palette_from":"cabbage_soup","bite":2,"title":"Plate of Cabbage Soup"},
+  {"name":"plated_mutton_stew","dish":"cozycookery:mutton_stew","colour":"#8A5A3A","palette_from":"mutton_stew","bite":3,"title":"Plate of Mutton Stew"},
+  {"name":"plated_spaghetti_pomodoro","dish":"cozycookery:spaghetti_pomodoro","colour":"#D24B32","palette_from":"spaghetti_pomodoro","chunks":[[250,236,180],[244,224,160],[250,236,180]],"bite":2,"title":"Plate of Spaghetti Pomodoro"},
+  {"name":"plated_spaghetti_bolognese","dish":"cozycookery:spaghetti_bolognese","colour":"#A0402A","palette_from":"spaghetti_bolognese","chunks":[[250,236,180],[244,224,160],[250,236,180]],"bite":3,"title":"Plate of Spaghetti Bolognese"},
+  {"name":"plated_spaghetti_and_meatballs","dish":"cozycookery:spaghetti_and_meatballs","colour":"#B8452E","palette_from":"spaghetti_and_meatballs","chunks":[[250,236,180],[146,82,50],[250,236,180]],"bite":2,"title":"Plate of Spaghetti & Meatballs"},
+  {"name":"plated_mushroom_stew","dish":"minecraft:mushroom_stew","colour":"#9A6A44","chunks":[[214,170,104],[150,104,70]],"bite":2,"title":"Plate of Mushroom Stew"},
+  {"name":"plated_beetroot_soup","dish":"minecraft:beetroot_soup","colour":"#A8263A","chunks":[[164,30,66],[204,64,100]],"bite":2,"title":"Plate of Beetroot Soup"},
+  {"name":"plated_rabbit_stew","dish":"minecraft:rabbit_stew","colour":"#B66A34","chunks":[[236,132,36],[236,214,140],[150,104,70]],"bite":3,"title":"Plate of Rabbit Stew"}
+ ]
+}

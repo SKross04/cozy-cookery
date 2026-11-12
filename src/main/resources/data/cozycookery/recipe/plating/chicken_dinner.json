@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "plated_meal",
+  "ingredients": [
+    {
+      "item": "cozycookery:cooked_chicken_drumstick"
+    },
+    {
+      "item": "cozycookery:cooked_chicken_drumstick"
+    },
+    {
+      "item": "cozycookery:cooked_chicken_wing"
+    },
+    {
+      "item": "cozycookery:cooked_chicken_wing"
+    },
+    {
+      "item": "cozycookery:fried_potato_cubes"
+    },
+    {
+      "item": "cozycookery:cabbage_leaves"
+    },
+    {
+      "item": "cozycookery:plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:chicken_dinner"
+  }
+}

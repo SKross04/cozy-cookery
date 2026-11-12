@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "plated_meal",
+  "ingredients": [
+    {
+      "item": "cozycookery:pancake"
+    },
+    {
+      "item": "cozycookery:pancake"
+    },
+    {
+      "item": "cozycookery:pancake"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "cozycookery:plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:pancake_stack"
+  }
+}

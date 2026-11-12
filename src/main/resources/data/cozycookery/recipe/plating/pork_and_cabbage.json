@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "plated_meal",
+  "ingredients": [
+    {
+      "item": "cozycookery:fried_pork_cubes"
+    },
+    {
+      "item": "cozycookery:shredded_cabbage"
+    },
+    {
+      "item": "cozycookery:fried_potato_cubes"
+    },
+    {
+      "item": "cozycookery:plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:pork_and_cabbage"
+  }
+}

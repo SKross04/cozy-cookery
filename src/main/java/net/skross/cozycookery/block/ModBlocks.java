@@ -26,6 +26,7 @@ import net.skross.cozycookery.block.custom.TrellisBlock;
 import net.skross.cozycookery.block.custom.WildCropBlock;
 import net.skross.cozycookery.item.ModItems;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,15 +143,46 @@ public class ModBlocks {
 
     // ---------- Plated meals: placed and eaten bite by bite (4 bites) ----------
     // Value per meal = (sum of its components + about 25% bonus) / 4 bites
+    // All meals, in order (used for the creative tab)
+    public static final List<DeferredBlock<Block>> MEALS = new ArrayList<>();
+
     public static final DeferredBlock<Block> FULL_BREAKFAST = registerMeal("full_breakfast", 5, 0.6f);
+    public static final DeferredBlock<Block> STEAK_AND_CHIPS = registerMeal("steak_and_chips", 7, 0.8f);
+    public static final DeferredBlock<Block> CHICKEN_DINNER = registerMeal("chicken_dinner", 4, 0.6f);
+    public static final DeferredBlock<Block> PANCAKE_STACK = registerMeal("pancake_stack", 4, 0.6f);
+    public static final DeferredBlock<Block> BEEF_STIR_FRY = registerMeal("beef_stir_fry", 5, 0.6f);
+    public static final DeferredBlock<Block> PORK_AND_CABBAGE = registerMeal("pork_and_cabbage", 4, 0.6f);
+    public static final DeferredBlock<Block> MUTTON_DINNER = registerMeal("mutton_dinner", 6, 0.8f);
+    public static final DeferredBlock<Block> FISH_AND_CHIPS = registerMeal("fish_and_chips", 4, 0.6f);
+    public static final DeferredBlock<Block> SALMON_DINNER = registerMeal("salmon_dinner", 4, 0.6f);
+    public static final DeferredBlock<Block> LOADED_POTATO = registerMeal("loaded_potato", 5, 0.6f);
+    public static final DeferredBlock<Block> OMELETTE_PLATE = registerMeal("omelette_plate", 2, 0.6f);
+
+    // Plate versions of the bowl dishes: bowl dish + plate in the crafting table (you get the bowl back)
+    public static final DeferredBlock<Block> PLATED_BEEF_STEW = registerMeal("plated_beef_stew", 3, 0.6f);
+    public static final DeferredBlock<Block> PLATED_CHICKEN_SOUP = registerMeal("plated_chicken_soup", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_VEGETABLE_SOUP = registerMeal("plated_vegetable_soup", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_PUMPKIN_SOUP = registerMeal("plated_pumpkin_soup", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_TOMATO_SOUP = registerMeal("plated_tomato_soup", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_ONION_SOUP = registerMeal("plated_onion_soup", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_CABBAGE_SOUP = registerMeal("plated_cabbage_soup", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_MUTTON_STEW = registerMeal("plated_mutton_stew", 3, 0.6f);
+    public static final DeferredBlock<Block> PLATED_SPAGHETTI_POMODORO = registerMeal("plated_spaghetti_pomodoro", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_SPAGHETTI_BOLOGNESE = registerMeal("plated_spaghetti_bolognese", 3, 0.6f);
+    public static final DeferredBlock<Block> PLATED_SPAGHETTI_AND_MEATBALLS = registerMeal("plated_spaghetti_and_meatballs", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_MUSHROOM_STEW = registerMeal("plated_mushroom_stew", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_BEETROOT_SOUP = registerMeal("plated_beetroot_soup", 2, 0.6f);
+    public static final DeferredBlock<Block> PLATED_RABBIT_STEW = registerMeal("plated_rabbit_stew", 3, 0.6f);
 
     private static DeferredBlock<Block> registerMeal(String name, int nutritionPerBite, float saturationPerBite) {
-        return registerBlock(name, () -> new PlatedMealBlock(BlockBehaviour.Properties.of()
+        DeferredBlock<Block> meal = registerBlock(name, () -> new PlatedMealBlock(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.TERRACOTTA_WHITE)
                 .strength(0.5f)
                 .sound(SoundType.DECORATED_POT)
                 .noOcclusion()
                 .pushReaction(PushReaction.DESTROY), nutritionPerBite, saturationPerBite));
+        MEALS.add(meal);
+        return meal;
     }
 
     // ---------- Stoves: one per brick type, all using the same StoveBlock class ----------

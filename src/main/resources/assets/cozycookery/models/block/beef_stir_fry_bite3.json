@@ -1,0 +1,7 @@
+{
+  "parent": "cozycookery:block/plated_meal_template_bite3",
+  "textures": {
+    "food": "cozycookery:block/beef_stir_fry_top",
+    "food_side": "cozycookery:block/beef_stir_fry_side"
+  }
+}

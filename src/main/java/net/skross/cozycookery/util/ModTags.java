@@ -21,6 +21,8 @@ public class ModTags {
     public static class Items {
         // Foods served in a bowl: stack to 4 and give the bowl back (data/cozycookery/tags/item/bowl_foods.json)
         public static final TagKey<Item> BOWL_FOODS = createTag("bowl_foods");
+        // Plated meals made from a bowl dish: crafting them gives the bowl back
+        public static final TagKey<Item> PLATED_BOWL_DISHES = createTag("plated_bowl_dishes");
 
         private static TagKey<Item> createTag(String name) {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(CozyCookery.MOD_ID, name));

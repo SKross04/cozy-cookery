@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "plated_meal",
+  "ingredients": [
+    {
+      "item": "cozycookery:seared_beef_strips"
+    },
+    {
+      "item": "cozycookery:seared_beef_strips"
+    },
+    {
+      "item": "cozycookery:potato_chips"
+    },
+    {
+      "item": "cozycookery:fried_onions"
+    },
+    {
+      "item": "cozycookery:plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:steak_and_chips"
+  }
+}

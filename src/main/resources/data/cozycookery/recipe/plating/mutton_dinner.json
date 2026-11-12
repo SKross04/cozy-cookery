@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "plated_meal",
+  "ingredients": [
+    {
+      "item": "cozycookery:seared_mutton_strips"
+    },
+    {
+      "item": "cozycookery:seared_mutton_strips"
+    },
+    {
+      "item": "cozycookery:fried_potato_cubes"
+    },
+    {
+      "item": "cozycookery:carrot_slices"
+    },
+    {
+      "item": "cozycookery:plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:mutton_dinner"
+  }
+}

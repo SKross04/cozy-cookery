@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "cozycookery:steak_and_chips",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "cozycookery:steak_and_chips",
+                  "properties": {
+                    "bites": "0"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "cozycookery:plate"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "cozycookery:blocks/steak_and_chips"
+}

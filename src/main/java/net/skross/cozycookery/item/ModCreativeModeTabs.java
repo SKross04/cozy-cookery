@@ -96,7 +96,7 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModItems.RAW_PLATE);
                         output.accept(ModItems.PLATE);
-                        output.accept(ModBlocks.FULL_BREAKFAST);
+                        ModBlocks.MEALS.forEach(output::accept);
 
                         output.accept(ModItems.FLOUR);
                         output.accept(ModItems.BREAD_DOUGH);

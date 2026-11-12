@@ -1,0 +1,7 @@
+{
+  "parent": "cozycookery:block/plated_meal_template_bite2",
+  "textures": {
+    "food": "cozycookery:block/plated_mutton_stew_top",
+    "food_side": "cozycookery:block/plated_mutton_stew_side"
+  }
+}

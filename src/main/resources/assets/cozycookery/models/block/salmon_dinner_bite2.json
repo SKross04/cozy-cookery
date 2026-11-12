@@ -1,0 +1,7 @@
+{
+  "parent": "cozycookery:block/plated_meal_template_bite2",
+  "textures": {
+    "food": "cozycookery:block/salmon_dinner_top",
+    "food_side": "cozycookery:block/salmon_dinner_side"
+  }
+}

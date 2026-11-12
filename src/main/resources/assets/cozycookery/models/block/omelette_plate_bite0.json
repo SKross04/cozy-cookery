@@ -1,0 +1,7 @@
+{
+  "parent": "cozycookery:block/plated_meal_template_bite0",
+  "textures": {
+    "food": "cozycookery:block/omelette_plate_top",
+    "food_side": "cozycookery:block/omelette_plate_side"
+  }
+}

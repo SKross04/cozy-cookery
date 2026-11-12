@@ -1,0 +1,7 @@
+{
+  "parent": "cozycookery:block/plated_meal_template_bite1",
+  "textures": {
+    "food": "cozycookery:block/plated_cabbage_soup_top",
+    "food_side": "cozycookery:block/plated_cabbage_soup_side"
+  }
+}
