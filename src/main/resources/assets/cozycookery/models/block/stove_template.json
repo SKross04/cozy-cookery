@@ -4,7 +4,8 @@
     "particle": "#bricks",
     "top": "cozycookery:block/stove_top",
     "iron": "cozycookery:block/stove_iron",
-    "firebox": "cozycookery:block/stove_firebox"
+    "soot": "cozycookery:block/stove_soot",
+    "bed": "cozycookery:block/stove_ash"
   },
   "elements": [
     {
@@ -41,7 +42,7 @@
           "cullface": "down"
         },
         "up": {
-          "texture": "#firebox"
+          "texture": "#soot"
         }
       }
     },
@@ -71,7 +72,7 @@
           "cullface": "west"
         },
         "east": {
-          "texture": "#firebox"
+          "texture": "#soot"
         }
       }
     },
@@ -101,7 +102,7 @@
           "cullface": "east"
         },
         "west": {
-          "texture": "#firebox"
+          "texture": "#soot"
         }
       }
     },
@@ -119,7 +120,7 @@
       ],
       "faces": {
         "north": {
-          "texture": "#firebox"
+          "texture": "#soot"
         },
         "south": {
           "texture": "#bricks",
@@ -160,7 +161,7 @@
           "texture": "#bricks"
         },
         "down": {
-          "texture": "#firebox"
+          "texture": "#soot"
         }
       }
     },
@@ -205,13 +206,10 @@
       "to": [
         13,
         9,
-        0.5
+        0
       ],
       "faces": {
         "north": {
-          "texture": "#iron"
-        },
-        "south": {
           "texture": "#iron"
         },
         "east": {
@@ -238,13 +236,10 @@
       "to": [
         13,
         2,
-        0.5
+        0
       ],
       "faces": {
         "north": {
-          "texture": "#iron"
-        },
-        "south": {
           "texture": "#iron"
         },
         "east": {
@@ -271,13 +266,10 @@
       "to": [
         4,
         8,
-        0.5
+        0
       ],
       "faces": {
         "north": {
-          "texture": "#iron"
-        },
-        "south": {
           "texture": "#iron"
         },
         "east": {
@@ -304,13 +296,10 @@
       "to": [
         13,
         8,
-        0.5
+        0
       ],
       "faces": {
         "north": {
-          "texture": "#iron"
-        },
-        "south": {
           "texture": "#iron"
         },
         "east": {
@@ -324,6 +313,30 @@
         },
         "down": {
           "texture": "#iron"
+        }
+      }
+    },
+    {
+      "name": "bed",
+      "from": [
+        4,
+        2,
+        0.5
+      ],
+      "to": [
+        12,
+        2.5,
+        4
+      ],
+      "faces": {
+        "up": {
+          "texture": "#bed",
+          "uv": [
+            4,
+            0,
+            12,
+            3.5
+          ]
         }
       }
     }

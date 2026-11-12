@@ -4,9 +4,13 @@
   "key": {
     "I": {
       "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
     }
   },
   "pattern": [
+    "C C",
     "I I",
     "III"
   ],

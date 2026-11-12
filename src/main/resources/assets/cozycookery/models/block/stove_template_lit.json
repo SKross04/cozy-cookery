@@ -4,7 +4,9 @@
     "particle": "#bricks",
     "top": "cozycookery:block/stove_top",
     "iron": "cozycookery:block/stove_iron",
-    "firebox": "cozycookery:block/stove_firebox_lit"
+    "soot": "cozycookery:block/stove_soot",
+    "bed": "cozycookery:block/stove_embers",
+    "flame": "cozycookery:block/stove_flame"
   },
   "elements": [
     {
@@ -41,11 +43,7 @@
           "cullface": "down"
         },
         "up": {
-          "texture": "#firebox",
-          "neoforge_data": {
-            "block_light": 15,
-            "sky_light": 15
-          }
+          "texture": "#soot"
         }
       }
     },
@@ -75,11 +73,7 @@
           "cullface": "west"
         },
         "east": {
-          "texture": "#firebox",
-          "neoforge_data": {
-            "block_light": 15,
-            "sky_light": 15
-          }
+          "texture": "#soot"
         }
       }
     },
@@ -109,11 +103,7 @@
           "cullface": "east"
         },
         "west": {
-          "texture": "#firebox",
-          "neoforge_data": {
-            "block_light": 15,
-            "sky_light": 15
-          }
+          "texture": "#soot"
         }
       }
     },
@@ -131,11 +121,7 @@
       ],
       "faces": {
         "north": {
-          "texture": "#firebox",
-          "neoforge_data": {
-            "block_light": 15,
-            "sky_light": 15
-          }
+          "texture": "#soot"
         },
         "south": {
           "texture": "#bricks",
@@ -176,11 +162,7 @@
           "texture": "#bricks"
         },
         "down": {
-          "texture": "#firebox",
-          "neoforge_data": {
-            "block_light": 15,
-            "sky_light": 15
-          }
+          "texture": "#soot"
         }
       }
     },
@@ -225,13 +207,10 @@
       "to": [
         13,
         9,
-        0.5
+        0
       ],
       "faces": {
         "north": {
-          "texture": "#iron"
-        },
-        "south": {
           "texture": "#iron"
         },
         "east": {
@@ -258,13 +237,10 @@
       "to": [
         13,
         2,
-        0.5
+        0
       ],
       "faces": {
         "north": {
-          "texture": "#iron"
-        },
-        "south": {
           "texture": "#iron"
         },
         "east": {
@@ -291,13 +267,10 @@
       "to": [
         4,
         8,
-        0.5
+        0
       ],
       "faces": {
         "north": {
-          "texture": "#iron"
-        },
-        "south": {
           "texture": "#iron"
         },
         "east": {
@@ -324,13 +297,10 @@
       "to": [
         13,
         8,
-        0.5
+        0
       ],
       "faces": {
         "north": {
-          "texture": "#iron"
-        },
-        "south": {
           "texture": "#iron"
         },
         "east": {
@@ -346,6 +316,63 @@
           "texture": "#iron"
         }
       }
+    },
+    {
+      "name": "bed",
+      "from": [
+        4,
+        2,
+        0.5
+      ],
+      "to": [
+        12,
+        2.5,
+        4
+      ],
+      "faces": {
+        "up": {
+          "texture": "#bed",
+          "uv": [
+            4,
+            0,
+            12,
+            3.5
+          ],
+          "neoforge_data": {
+            "block_light": 15,
+            "sky_light": 15
+          }
+        }
+      }
+    },
+    {
+      "name": "flames",
+      "from": [
+        4.5,
+        2.5,
+        3.5
+      ],
+      "to": [
+        11.5,
+        7.5,
+        3.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#flame",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "neoforge_data": {
+            "block_light": 15,
+            "sky_light": 15
+          }
+        }
+      }
     }
-  ]
+  ],
+  "render_type": "minecraft:cutout"
 }

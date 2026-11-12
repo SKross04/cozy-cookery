@@ -6,12 +6,15 @@
     "I": {
       "item": "minecraft:iron_ingot"
     },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
     "B": {
       "item": "minecraft:tuff_bricks"
     }
   },
   "pattern": [
-    "III",
+    "ICI",
     "B B",
     "BBB"
   ],

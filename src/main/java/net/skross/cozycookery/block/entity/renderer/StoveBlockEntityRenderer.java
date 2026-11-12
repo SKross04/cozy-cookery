@@ -32,18 +32,20 @@ public class StoveBlockEntityRenderer implements BlockEntityRenderer<StoveBlockE
             if (stack.isEmpty()) {
                 continue;
             }
-            // 2 rows of 4 inside the firebox (firebox: x 4-12, y 2, z 0-4 in the model)
-            float x = (5f + (i % 4) * 2f) / 16f;
-            float z = (1.3f + (i / 4) * 1.5f) / 16f;
+            // A small pile in the firebox: 2 rows of 4, each piece a tiny bit higher than the one before,
+            // so pieces that overlap never flicker (no "z-fighting")
+            float x = (5.2f + (i % 4) * 1.9f) / 16f;
+            float y = (2.6f + i * 0.08f) / 16f;
+            float z = (1.4f + (i / 4) * 1.4f) / 16f;
 
             poseStack.pushPose();
             poseStack.translate(0.5f, 0f, 0.5f);
             poseStack.mulPose(Axis.YP.rotationDegrees(-rotation));   // same rotation as the block model
             poseStack.translate(-0.5f, 0f, -0.5f);
-            poseStack.translate(x, 2.2f / 16f, z);
+            poseStack.translate(x, y, z);
             poseStack.mulPose(Axis.XP.rotationDegrees(90f));          // lie flat
             poseStack.mulPose(Axis.ZP.rotationDegrees(i * 47f));      // each piece a bit differently turned
-            poseStack.scale(0.28f, 0.28f, 0.28f);
+            poseStack.scale(0.22f, 0.22f, 0.22f);
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, light, OverlayTexture.NO_OVERLAY,
                     poseStack, bufferSource, stove.getLevel(), i);
             poseStack.popPose();
