@@ -89,6 +89,5 @@ public class CozyCookeryClient {
             return contents != null ? 0xFF000000 | contents.color() : 0xFFFFFFFF;
         }, ModBlocks.MIXING_BOWL.get().asItem());
     }
-
-    }
 }
+
