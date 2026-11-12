@@ -55,7 +55,7 @@ R = {
     'rawpork': ramp('#5a2228', '#994450', '#cc6e76', '#e8949a', '#f6bcbe', '#ffe0e0'),
     'rawmutton': ramp('#3e0e12', '#701c20', '#a0322e', '#c44c42', '#dc7464', '#f0a898'),
     'rawchicken': ramp('#6a3a36', '#b06a62', '#dc9a8e', '#f0bcae', '#fad8cc', '#fff0ea'),
-    'fat':     ramp('#7a6a62', '#c2b2a6', '#e6dacc', '#f4ece2', '#fcf8f2', '#ffffff'),
+    'fat':     ramp('#7a4a4a', '#c8948e', '#eec6bc', '#f8dcd2', '#fff0ea', '#ffffff'),
     'cooked':  ramp('#2c1406', '#5a2c0e', '#8a4818', '#b06628', '#d08a40', '#ecb468'),
     'crispy':  ramp('#2a1004', '#552008', '#86380e', '#b25a1c', '#d8822e', '#f2b052'),
     'bone':    ramp('#5a5044', '#9a8e7e', '#cfc4b2', '#e8e0d0', '#f6f2e8', '#ffffff'),
@@ -68,6 +68,7 @@ R = {
     'egg':     ramp('#8a6a10', '#c89a12', '#f0be1c', '#fad44a', '#ffe888', '#fff8d0'),
     # sauces & liquids
     'sauce':   ramp('#3a0808', '#6a1210', '#9e2214', '#c63c1c', '#e2602e', '#f6965a'),
+    'stewred': ramp('#2a0e06', '#5a1e0e', '#8a3418', '#ac4a22', '#c86a34', '#e09050'),
     'stew':    ramp('#2a1206', '#4e2410', '#74381a', '#965024', '#b46e36', '#d0904e'),
     'broth':   ramp('#5a3a0c', '#8e6418', '#c08e2a', '#dcae46', '#f0cc6e', '#fae6a4'),
     'water':   ramp('#14234e', '#1e3a7a', '#2c56a8', '#3e72c8', '#5a92e0', '#8cb8f2'),
@@ -85,6 +86,7 @@ class Sprite:
         self.w, self.h = w, h
         self.px = {}           # (x,y) -> [mat, level, layer]
         self.layer = 0
+        self.flat = set()      # layers that never get a rim (sprinkles, veins)
         self.rnd = random.Random(seed)
 
     # --- raw put ---
@@ -120,6 +122,45 @@ class Sprite:
                     best = (l, x, y)
         if shine and best:
             self.put(best[1], best[2], mat, 5)
+        return self
+
+
+    def blob(self, cx, cy, rx, ry, mat, base=3.0, spread=1.5, wobble=0.10, tex=0.45,
+             shine=True, clip=None, lo=1, hi=4, seed=None):
+        """Organic, textured, 3/4-lit lump (food pieces, produce). Light from the top-left."""
+        self.new_layer()
+        rnd = random.Random(seed if seed is not None else self.rnd.random())
+        ph = [rnd.uniform(0, 6.28) for _ in range(3)]
+        cells = {}
+        pts = []
+        for y in range(self.h):
+            for x in range(self.w):
+                dx, dy = (x + 0.5 - cx) / rx, (y + 0.5 - cy) / ry
+                a = math.atan2(dy, dx)
+                r = 1 + wobble * (math.sin(3 * a + ph[0]) * 0.6 + math.sin(5 * a + ph[1]) * 0.4)
+                d = (dx * dx + dy * dy) / (r * r)
+                if d > 1 or (clip and not clip(x, y)):
+                    continue
+                nz = math.sqrt(max(0.0, 1 - d))
+                l = dx * -0.55 + dy * -0.62 + nz * 0.56
+                key = (x // 2, y)                       # 2-px clusters = pixel-art texture
+                if key not in cells:
+                    cells[key] = rnd.uniform(-tex, tex)
+                pts.append((l, x, y, cells[key]))
+        for l, x, y, n in pts:
+            v = base + (l - 0.42) * spread * 2.0 + n
+            self.put(x, y, mat, max(lo, min(hi, int(round(v)))))
+        if shine and pts:
+            top = sorted(pts, reverse=True)[:2]
+            for l, x, y, n in top:
+                self.put(x, y, mat, 5)
+        return self
+
+    def sprinkle(self, pts, mat, lvls=(3, 4)):
+        self.new_layer()
+        self.flat.add(self.layer)
+        for i, (x, y) in enumerate(pts):
+            self.put(x, y, mat, lvls[i % len(lvls)])
         return self
 
     def rect(self, x0, y0, x1, y1, mat, lvl=3, bevel=True):
@@ -173,21 +214,21 @@ class Sprite:
 
     # --- render ---
     def render(self, outline=True, inner=True):
+        """Outer edge -> darkest shade. A piece lying on top of another gets its own dark rim
+        (like Farmer's Delight / Let's Do food piles)."""
         img = Image.new('RGBA', (self.w, self.h), (0, 0, 0, 0))
         p = img.load()
         out = {}
         for (x, y), (m, l, layer) in self.px.items():
             lvl = l
             if outline:
-                edge = any((x + dx, y + dy) not in self.px for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
-                if edge:
+                if any((x + dx, y + dy) not in self.px for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
                     lvl = 0
                 elif inner:
-                    # where a lower layer meets a higher layer below/right of it -> one step darker
-                    for dx, dy in ((1, 0), (0, 1)):
+                    for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
                         q = self.px.get((x + dx, y + dy))
-                        if q and q[2] > layer and q[0] != m:
-                            lvl = max(1, l - 1)
+                        if q and q[2] < layer and layer not in self.flat and l < 5:
+                            lvl = 1 if (dx > 0 or dy > 0) else min(lvl, 2)
             out[(x, y)] = R[m][lvl]
         for (x, y), c in out.items():
             p[x, y] = c + (255,)
