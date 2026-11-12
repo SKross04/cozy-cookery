@@ -11,6 +11,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
+import net.skross.cozycookery.block.custom.CookingPotBlock;
 import net.skross.cozycookery.item.ModItems;
 
 import java.util.function.Supplier;
@@ -24,6 +25,13 @@ public class ModBlocks {
                     .strength(0.5f)
                     .sound(SoundType.WOOD)
                     .ignitedByLava()
+                    .noOcclusion()));
+
+    public static final DeferredBlock<Block> COOKING_POT = registerBlock("cooking_pot",
+            () -> new CookingPotBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL)
+                    .strength(2.0f, 6.0f)
+                    .sound(SoundType.LANTERN)
                     .noOcclusion()));
 
     // Registers the block AND a BlockItem with the same name, so you can hold and place it.

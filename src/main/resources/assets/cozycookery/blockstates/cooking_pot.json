@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=north,liquid=empty": {
+      "model": "cozycookery:block/cooking_pot"
+    },
+    "facing=east,liquid=empty": {
+      "model": "cozycookery:block/cooking_pot",
+      "y": 90
+    },
+    "facing=south,liquid=empty": {
+      "model": "cozycookery:block/cooking_pot",
+      "y": 180
+    },
+    "facing=west,liquid=empty": {
+      "model": "cozycookery:block/cooking_pot",
+      "y": 270
+    },
+    "facing=north,liquid=water": {
+      "model": "cozycookery:block/cooking_pot_water"
+    },
+    "facing=east,liquid=water": {
+      "model": "cozycookery:block/cooking_pot_water",
+      "y": 90
+    },
+    "facing=south,liquid=water": {
+      "model": "cozycookery:block/cooking_pot_water",
+      "y": 180
+    },
+    "facing=west,liquid=water": {
+      "model": "cozycookery:block/cooking_pot_water",
+      "y": 270
+    },
+    "facing=north,liquid=soup": {
+      "model": "cozycookery:block/cooking_pot_soup"
+    },
+    "facing=east,liquid=soup": {
+      "model": "cozycookery:block/cooking_pot_soup",
+      "y": 90
+    },
+    "facing=south,liquid=soup": {
+      "model": "cozycookery:block/cooking_pot_soup",
+      "y": 180
+    },
+    "facing=west,liquid=soup": {
+      "model": "cozycookery:block/cooking_pot_soup",
+      "y": 270
+    }
+  }
+}

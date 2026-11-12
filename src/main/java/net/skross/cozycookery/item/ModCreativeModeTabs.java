@@ -21,6 +21,7 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.cozycookery.cozy_cookery_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModBlocks.CHOPPING_BOARD);
+                        output.accept(ModBlocks.COOKING_POT);
 
                         output.accept(ModItems.FLINT_KNIFE);
                         output.accept(ModItems.IRON_KNIFE);
