@@ -23,6 +23,7 @@
     ]
   ],
   "cooking_time": 600,
+  "color": "#B66A34",
   "result": {
     "id": "minecraft:rabbit_stew",
     "count": 2

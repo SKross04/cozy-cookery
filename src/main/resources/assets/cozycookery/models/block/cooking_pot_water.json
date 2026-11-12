@@ -513,7 +513,8 @@
             13,
             13
           ],
-          "texture": "#liquid"
+          "texture": "#liquid",
+          "tintindex": 0
         }
       }
     }

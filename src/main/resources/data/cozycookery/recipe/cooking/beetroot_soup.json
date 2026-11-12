@@ -21,6 +21,7 @@
     }
   ],
   "cooking_time": 400,
+  "color": "#A8263A",
   "result": {
     "id": "minecraft:beetroot_soup",
     "count": 2

@@ -21,6 +21,7 @@
     }
   ],
   "cooking_time": 600,
+  "color": "#E2B85A",
   "result": {
     "id": "cozycookery:chicken_soup",
     "count": 2

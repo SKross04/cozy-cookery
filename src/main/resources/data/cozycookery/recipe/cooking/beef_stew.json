@@ -12,6 +12,7 @@
     }
   ],
   "cooking_time": 600,
+  "color": "#7E3A22",
   "result": {
     "id": "cozycookery:beef_stew",
     "count": 2

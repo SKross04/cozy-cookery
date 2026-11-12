@@ -27,7 +27,7 @@ tex("cooking_pot_inner", lambda x,y: IRON[1] if rnd.random()<0.8 else IRON[0])
 tex("cooking_pot_top", lambda x,y: COPPER[3] if (x+y)%5 else COPPER[2])
 tex("cooking_pot_bottom", lambda x,y: IRON[0] if (x in (2,13) or y in (2,13)) else IRON[1])
 # animated water (8 frames)
-W=[(44,88,156),(58,112,186),(80,138,206),(160,204,236)]
+W=[(176,176,176),(198,198,198),(220,220,220),(250,250,250)]  # greyscale, tinted in-game
 img=Image.new("RGBA",(16,128)); px=img.load()
 for f in range(8):
     for y in range(16):
@@ -38,8 +38,8 @@ for f in range(8):
 img.save(f"{out}/cooking_pot_water.png")
 open(f"{out}/cooking_pot_water.png.mcmeta","w").write('{\n  "animation": {\n    "frametime": 3,\n    "interpolate": true\n  }\n}\n')
 # animated soup (8 frames): warm broth with floating bits
-S=[(150,78,30),(186,110,46),(210,140,66),(238,192,120)]
-bits=[(rnd.randrange(16),rnd.randrange(16),rnd.choice([(232,128,40),(108,150,52),(240,220,170)])) for _ in range(9)]
+S=[(168,168,168),(196,196,196),(220,220,220),(246,246,246)]  # greyscale, tinted in-game
+bits=[(rnd.randrange(16),rnd.randrange(16),rnd.choice([(255,255,255),(140,140,140)])) for _ in range(9)]
 img=Image.new("RGBA",(16,128)); px=img.load()
 for f in range(8):
     for y in range(16):

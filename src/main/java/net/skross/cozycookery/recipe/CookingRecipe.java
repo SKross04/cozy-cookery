@@ -1,6 +1,7 @@
 package net.skross.cozycookery.recipe;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
@@ -23,9 +24,10 @@ import java.util.List;
  *
  * ingredients:  what has to be in the pot (shapeless: the order doesn't matter), max 6
  * cooking_time: how long it simmers, in ticks (20 ticks = 1 second)
+ * color:        the colour of the soup in the pot, like "#7E3A22" (optional)
  * result:       the dish + how many servings (count). Each serving is scooped out with a bowl.
  */
-public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, ItemStack result)
+public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, int color, ItemStack result)
         implements Recipe<CookingRecipeInput> {
 
     @Override
@@ -75,9 +77,21 @@ public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, ItemS
     }
 
     public static class Serializer implements RecipeSerializer<CookingRecipe> {
+        // Reads a colour written as "#RRGGBB" in the JSON file
+        private static final Codec<Integer> HEX_COLOR = Codec.STRING.comapFlatMap(
+                text -> {
+                    try {
+                        return DataResult.success(Integer.parseInt(text.replace("#", ""), 16));
+                    } catch (NumberFormatException e) {
+                        return DataResult.error(() -> "Not a colour: " + text);
+                    }
+                },
+                color -> String.format("#%06X", color));
+
         public static final MapCodec<CookingRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
                 Ingredient.CODEC_NONEMPTY.listOf().fieldOf("ingredients").forGetter(CookingRecipe::ingredients),
                 Codec.INT.optionalFieldOf("cooking_time", 600).forGetter(CookingRecipe::cookingTime),
+                HEX_COLOR.optionalFieldOf("color", 0xB66A34).forGetter(CookingRecipe::color),
                 ItemStack.CODEC.fieldOf("result").forGetter(CookingRecipe::result)
         ).apply(inst, CookingRecipe::new));
 
@@ -85,6 +99,7 @@ public record CookingRecipe(List<Ingredient> ingredients, int cookingTime, ItemS
                 StreamCodec.composite(
                         Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), CookingRecipe::ingredients,
                         ByteBufCodecs.VAR_INT, CookingRecipe::cookingTime,
+                        ByteBufCodecs.INT, CookingRecipe::color,
                         ItemStack.STREAM_CODEC, CookingRecipe::result,
                         CookingRecipe::new);
 

@@ -9,7 +9,10 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.skross.cozycookery.block.ModBlocks;
+import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
 import net.skross.cozycookery.block.entity.ModBlockEntities;
 import net.skross.cozycookery.block.entity.renderer.ChoppingBoardBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.CookingPotBlockEntityRenderer;
@@ -40,5 +43,16 @@ public class CozyCookeryClient {
         event.registerBlockEntityRenderer(ModBlockEntities.CHOPPING_BOARD_BE.get(), ChoppingBoardBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.STOVE_BE.get(), StoveBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.COOKING_POT_BE.get(), CookingPotBlockEntityRenderer::new);
+    }
+
+    // Colours the water/soup surface in the cooking pot ("tintindex": 0 in the pot models)
+    @SubscribeEvent
+    static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register((state, level, pos, tintIndex) -> {
+            if (level != null && pos != null && level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot) {
+                return pot.getLiquidColor();
+            }
+            return CookingPotBlockEntity.WATER_COLOR;
+        }, ModBlocks.COOKING_POT.get());
     }
 }

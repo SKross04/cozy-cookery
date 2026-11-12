@@ -15,6 +15,7 @@
     }
   ],
   "cooking_time": 400,
+  "color": "#9A6A44",
   "result": {
     "id": "minecraft:mushroom_stew",
     "count": 2
