@@ -22,5 +22,17 @@
     "sounds": [
       "cozycookery:cooking_pot_blub"
     ]
+  },
+  "frying_pan_sizzle": {
+    "subtitle": "sounds.cozycookery.frying_pan_sizzle",
+    "sounds": [
+      "cozycookery:frying_pan_sizzle"
+    ]
+  },
+  "frying_pan_flip": {
+    "subtitle": "sounds.cozycookery.frying_pan_flip",
+    "sounds": [
+      "cozycookery:frying_pan_flip"
+    ]
   }
 }

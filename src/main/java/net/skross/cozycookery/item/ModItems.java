@@ -10,6 +10,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.item.custom.KnifeItem;
+import net.skross.cozycookery.item.custom.SpatulaItem;
 import net.skross.cozycookery.item.custom.SpoonItem;
 
 public class ModItems {
@@ -30,6 +31,10 @@ public class ModItems {
     // Wooden spoon: 128 uses. Items with durability automatically stack to 1.
     public static final DeferredItem<Item> WOODEN_SPOON = ITEMS.register("wooden_spoon",
             () -> new SpoonItem(new Item.Properties().durability(128)));
+
+    // Wooden spatula: flips food in the frying pan. 128 uses.
+    public static final DeferredItem<Item> WOODEN_SPATULA = ITEMS.register("wooden_spatula",
+            () -> new SpatulaItem(new Item.Properties().durability(128)));
 
     // ---------- Meat cuts (from the chopping board) ----------
     public static final DeferredItem<Item> RAW_BEEF_STRIPS = food("raw_beef_strips", ModFoodProperties.RAW_BEEF_CUT);
@@ -59,6 +64,22 @@ public class ModItems {
     public static final DeferredItem<Item> PUMPKIN_SLICE = food("pumpkin_slice", ModFoodProperties.PUMPKIN_SLICE);
     // Mushrooms aren't edible raw in vanilla, so sliced mushrooms aren't either
     public static final DeferredItem<Item> SLICED_MUSHROOMS = ITEMS.registerSimpleItem("sliced_mushrooms");
+
+    // ---------- Fried in the frying pan ----------
+    public static final DeferredItem<Item> SEARED_BEEF_STRIPS = food("seared_beef_strips", ModFoodProperties.SEARED_BEEF);
+    public static final DeferredItem<Item> SEARED_BEEF_CUBES = food("seared_beef_cubes", ModFoodProperties.SEARED_BEEF);
+    public static final DeferredItem<Item> BROWNED_GROUND_BEEF = food("browned_ground_beef", ModFoodProperties.SEARED_BEEF);
+    public static final DeferredItem<Item> BACON = food("bacon", ModFoodProperties.FRIED_PORK);
+    public static final DeferredItem<Item> FRIED_PORK_CUBES = food("fried_pork_cubes", ModFoodProperties.FRIED_PORK);
+    public static final DeferredItem<Item> BROWNED_GROUND_PORK = food("browned_ground_pork", ModFoodProperties.FRIED_PORK);
+    public static final DeferredItem<Item> SEARED_MUTTON_STRIPS = food("seared_mutton_strips", ModFoodProperties.SEARED_MUTTON);
+    public static final DeferredItem<Item> SEARED_MUTTON_CUBES = food("seared_mutton_cubes", ModFoodProperties.SEARED_MUTTON);
+    public static final DeferredItem<Item> BROWNED_GROUND_MUTTON = food("browned_ground_mutton", ModFoodProperties.SEARED_MUTTON);
+    public static final DeferredItem<Item> POTATO_CHIPS = food("potato_chips", ModFoodProperties.FRIED_POTATO);
+    public static final DeferredItem<Item> FRIED_POTATO_CUBES = food("fried_potato_cubes", ModFoodProperties.FRIED_POTATO);
+    public static final DeferredItem<Item> FRIED_MUSHROOMS = food("fried_mushrooms", ModFoodProperties.FRIED_MUSHROOMS);
+    public static final DeferredItem<Item> FRIED_EGG = food("fried_egg", ModFoodProperties.FRIED_EGG);
+    public static final DeferredItem<Item> CHARRED_SCRAPS = food("charred_scraps", ModFoodProperties.CHARRED_SCRAPS);
 
     // ---------- Pot dishes: served in bowls, stack to 4 ----------
     public static final DeferredItem<Item> BEEF_STEW = bowlFood("beef_stew", ModFoodProperties.BEEF_STEW);

@@ -59,4 +59,22 @@ public class ModFoodProperties {
     // Pumpkin soup: 4 pumpkin slices + carrot + potato (4 + 3 + 5 = 12) -> 2 x 6
     public static final FoodProperties PUMPKIN_SOUP = new FoodProperties.Builder()
             .nutrition(6).saturationModifier(0.6f).build();
+
+    // ---------- Fried in the pan (same value as the vanilla cooked meat they come from) ----------
+    public static final FoodProperties SEARED_BEEF = new FoodProperties.Builder()     // like steak
+            .nutrition(8).saturationModifier(0.8f).build();
+    public static final FoodProperties FRIED_PORK = new FoodProperties.Builder()      // like a cooked porkchop
+            .nutrition(8).saturationModifier(0.8f).build();
+    public static final FoodProperties SEARED_MUTTON = new FoodProperties.Builder()   // like cooked mutton
+            .nutrition(6).saturationModifier(0.8f).build();
+    public static final FoodProperties FRIED_POTATO = new FoodProperties.Builder()    // like a baked potato
+            .nutrition(5).saturationModifier(0.6f).build();
+    public static final FoodProperties FRIED_MUSHROOMS = new FoodProperties.Builder()
+            .nutrition(2).saturationModifier(0.3f).build();
+    public static final FoodProperties FRIED_EGG = new FoodProperties.Builder()
+            .nutrition(3).saturationModifier(0.6f).build();
+    // You forgot to flip it... 30% chance of Hunger
+    public static final FoodProperties CHARRED_SCRAPS = new FoodProperties.Builder()
+            .nutrition(1).saturationModifier(0.1f)
+            .effect(new MobEffectInstance(MobEffects.HUNGER, 300, 0), 0.3f).build();
 }

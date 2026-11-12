@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:raw_pork_strips"
+  },
+  "cooking_time": 300,
+  "result": {
+    "id": "cozycookery:bacon",
+    "count": 1
+  }
+}

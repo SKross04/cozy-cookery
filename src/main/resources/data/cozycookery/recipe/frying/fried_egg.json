@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "minecraft:egg"
+  },
+  "cooking_time": 200,
+  "result": {
+    "id": "cozycookery:fried_egg",
+    "count": 1
+  }
+}

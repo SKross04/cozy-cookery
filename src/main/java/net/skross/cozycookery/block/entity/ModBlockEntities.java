@@ -33,6 +33,10 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("cooking_pot_be", () -> BlockEntityType.Builder.of(
                     CookingPotBlockEntity::new, ModBlocks.COOKING_POT.get()).build(null));
 
+    public static final Supplier<BlockEntityType<FryingPanBlockEntity>> FRYING_PAN_BE =
+            BLOCK_ENTITIES.register("frying_pan_be", () -> BlockEntityType.Builder.of(
+                    FryingPanBlockEntity::new, ModBlocks.FRYING_PAN.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

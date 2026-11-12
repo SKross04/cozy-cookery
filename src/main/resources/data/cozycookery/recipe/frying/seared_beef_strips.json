@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:raw_beef_strips"
+  },
+  "cooking_time": 300,
+  "result": {
+    "id": "cozycookery:seared_beef_strips",
+    "count": 1
+  }
+}

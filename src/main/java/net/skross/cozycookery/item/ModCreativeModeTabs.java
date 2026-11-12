@@ -22,6 +22,7 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
                         ModBlocks.CHOPPING_BOARDS.values().forEach(output::accept);
                         output.accept(ModBlocks.COOKING_POT);
+                        output.accept(ModBlocks.FRYING_PAN);
                         ModBlocks.STOVES.values().forEach(output::accept);
 
                         output.accept(ModItems.FLINT_KNIFE);
@@ -30,6 +31,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.DIAMOND_KNIFE);
                         output.accept(ModItems.NETHERITE_KNIFE);
                         output.accept(ModItems.WOODEN_SPOON);
+                        output.accept(ModItems.WOODEN_SPATULA);
 
                         output.accept(ModItems.RAW_BEEF_STRIPS);
                         output.accept(ModItems.RAW_BEEF_CUBES);
@@ -53,6 +55,21 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SLICED_MUSHROOMS);
                         output.accept(ModItems.APPLE_SLICES);
                         output.accept(ModItems.PUMPKIN_SLICE);
+
+                        output.accept(ModItems.SEARED_BEEF_STRIPS);
+                        output.accept(ModItems.SEARED_BEEF_CUBES);
+                        output.accept(ModItems.BROWNED_GROUND_BEEF);
+                        output.accept(ModItems.BACON);
+                        output.accept(ModItems.FRIED_PORK_CUBES);
+                        output.accept(ModItems.BROWNED_GROUND_PORK);
+                        output.accept(ModItems.SEARED_MUTTON_STRIPS);
+                        output.accept(ModItems.SEARED_MUTTON_CUBES);
+                        output.accept(ModItems.BROWNED_GROUND_MUTTON);
+                        output.accept(ModItems.POTATO_CHIPS);
+                        output.accept(ModItems.FRIED_POTATO_CUBES);
+                        output.accept(ModItems.FRIED_MUSHROOMS);
+                        output.accept(ModItems.FRIED_EGG);
+                        output.accept(ModItems.CHARRED_SCRAPS);
 
                         output.accept(ModItems.BEEF_STEW);
                         output.accept(ModItems.CHICKEN_SOUP);

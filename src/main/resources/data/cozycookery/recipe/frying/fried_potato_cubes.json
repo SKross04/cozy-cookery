@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:potato_cubes"
+  },
+  "cooking_time": 200,
+  "result": {
+    "id": "cozycookery:fried_potato_cubes",
+    "count": 1
+  }
+}

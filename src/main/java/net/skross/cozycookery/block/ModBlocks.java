@@ -12,6 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
+import net.skross.cozycookery.block.custom.FryingPanBlock;
 import net.skross.cozycookery.block.custom.StoveBlock;
 import net.skross.cozycookery.item.ModItems;
 
@@ -56,6 +57,13 @@ public class ModBlocks {
             () -> new CookingPotBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.METAL)
                     .strength(2.0f, 6.0f)
+                    .sound(SoundType.LANTERN)
+                    .noOcclusion()));
+
+    public static final DeferredBlock<Block> FRYING_PAN = registerBlock("frying_pan",
+            () -> new FryingPanBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.METAL)
+                    .strength(1.5f, 6.0f)
                     .sound(SoundType.LANTERN)
                     .noOcclusion()));
 

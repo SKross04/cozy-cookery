@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:sliced_mushrooms"
+  },
+  "cooking_time": 200,
+  "result": {
+    "id": "cozycookery:fried_mushrooms",
+    "count": 1
+  }
+}

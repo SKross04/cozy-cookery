@@ -12,6 +12,15 @@
     "cozycookery:raw_chicken_drumstick",
     "cozycookery:raw_chicken_wing",
     "cozycookery:cooked_chicken_drumstick",
-    "cozycookery:cooked_chicken_wing"
+    "cozycookery:cooked_chicken_wing",
+    "cozycookery:seared_beef_strips",
+    "cozycookery:seared_beef_cubes",
+    "cozycookery:browned_ground_beef",
+    "cozycookery:bacon",
+    "cozycookery:fried_pork_cubes",
+    "cozycookery:browned_ground_pork",
+    "cozycookery:seared_mutton_strips",
+    "cozycookery:seared_mutton_cubes",
+    "cozycookery:browned_ground_mutton"
   ]
 }

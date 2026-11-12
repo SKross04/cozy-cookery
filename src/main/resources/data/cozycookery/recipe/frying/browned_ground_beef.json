@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:ground_beef"
+  },
+  "cooking_time": 300,
+  "result": {
+    "id": "cozycookery:browned_ground_beef",
+    "count": 1
+  }
+}

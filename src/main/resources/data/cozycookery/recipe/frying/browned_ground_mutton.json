@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:ground_mutton"
+  },
+  "cooking_time": 300,
+  "result": {
+    "id": "cozycookery:browned_ground_mutton",
+    "count": 1
+  }
+}

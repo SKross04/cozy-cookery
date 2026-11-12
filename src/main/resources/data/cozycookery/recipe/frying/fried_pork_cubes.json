@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:raw_pork_cubes"
+  },
+  "cooking_time": 300,
+  "result": {
+    "id": "cozycookery:fried_pork_cubes",
+    "count": 1
+  }
+}

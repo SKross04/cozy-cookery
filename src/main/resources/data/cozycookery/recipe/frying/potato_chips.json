@@ -1,0 +1,11 @@
+{
+  "type": "cozycookery:frying",
+  "ingredient": {
+    "item": "cozycookery:potato_slices"
+  },
+  "cooking_time": 200,
+  "result": {
+    "id": "cozycookery:potato_chips",
+    "count": 1
+  }
+}
