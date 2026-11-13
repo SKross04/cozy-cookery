@@ -68,7 +68,7 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
 
     // ---------- The knife during the close-up: it hovers over the board and comes down when you chop ----------
     public static final float KNIFE_SCALE = 0.34f;
-    public static final float KNIFE_LEAN_BACK = 35f; // degrees the flat side tilts up towards the camera
+    public static final float KNIFE_ROLL = 25f; // degrees the blade is rolled so its flat side shows
     public static final float KNIFE_HOVER = 0.18f;
 
     public static float knifeLift(ChoppingBoardBlockEntity board) {
@@ -79,7 +79,7 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
         return KNIFE_HOVER * Math.abs(1f - 2f * t); // down, then back up
     }
 
-    // Held straight: blade level with the board, edge down, the flat side facing you
+    // Held straight: blade level with the board, edge down, handle pointing at you
     private void renderKnife(ChoppingBoardBlockEntity board, PoseStack poseStack, MultiBufferSource buffers, int light) {
         Vec3 cam = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
         BlockPos pos = board.getBlockPos();
@@ -87,10 +87,12 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
         double hz = cam.z - (pos.getZ() + 0.5);
         poseStack.pushPose();
         poseStack.translate(0.5 + board.clientKnifeX, BOARD_TOP + 0.04 + knifeLift(board), 0.5 + board.clientKnifeZ);
-        poseStack.mulPose(Axis.YP.rotation((float) Math.atan2(hx, hz))); // flat side towards the camera
-        poseStack.mulPose(Axis.XP.rotationDegrees(-KNIFE_LEAN_BACK));      // ...and tilted up so you see the blade
+        // the knife's length points at the camera: handle towards you, tip away from you
+        poseStack.mulPose(Axis.YP.rotation((float) Math.atan2(hz, -hx)));
+        // edge down, rolled a little around its length so you still see the flat of the blade from above
+        poseStack.mulPose(Axis.XP.rotationDegrees(KNIFE_ROLL));
         poseStack.scale(KNIFE_SCALE, KNIFE_SCALE, KNIFE_SCALE);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(-135f));                // icon diagonal -> level, tip to the right
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-135f));                // icon diagonal -> level (handle at -X, tip at +X)
         Minecraft.getInstance().getItemRenderer().renderStatic(board.clientKnife, ItemDisplayContext.FIXED, light,
                 OverlayTexture.NO_OVERLAY, poseStack, buffers, board.getLevel(), 97);
         poseStack.popPose();
