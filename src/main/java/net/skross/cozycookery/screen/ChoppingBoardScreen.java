@@ -47,14 +47,14 @@ public class ChoppingBoardScreen extends StationScreen<ChoppingBoardMenu> {
     }
 
     @Override
-    protected void onOpen() {
+    protected void onCloseUpStart() {
         if (toolMode()) {
             menu.board.clientKnife = knife().copy();
         }
     }
 
     @Override
-    protected void onClose() {
+    protected void onCloseUpEnd() {
         menu.board.clientKnife = ItemStack.EMPTY;
     }
 

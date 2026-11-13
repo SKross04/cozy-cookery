@@ -63,14 +63,14 @@ public class FryingPanScreen extends StationScreen<FryingPanMenu> {
     }
 
     @Override
-    protected void onOpen() {
+    protected void onCloseUpStart() {
         if (toolMode()) {
             menu.pan.clientSpatulaIn = true;
         }
     }
 
     @Override
-    protected void onClose() {
+    protected void onCloseUpEnd() {
         menu.pan.clientSpatulaIn = false;
     }
 

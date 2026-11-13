@@ -46,10 +46,10 @@ public abstract class StationScreen<M extends StationMenu> extends AbstractConta
         return false;
     }
 
-    protected void onOpen() {
+    protected void onCloseUpStart() {
     }
 
-    protected void onClose() {
+    protected void onCloseUpEnd() {
     }
 
     protected void tickTool(int mouseX, int mouseY) {
@@ -67,13 +67,13 @@ public abstract class StationScreen<M extends StationMenu> extends AbstractConta
     protected void init() {
         super.init();
         CloseUpCamera.start(menu.pos, surfaceHeight());
-        onOpen();
+        onCloseUpStart();
     }
 
     @Override
     public void removed() {
         super.removed();
-        onClose();
+        onCloseUpEnd();
         setCursorHidden(false);
         CloseUpCamera.stop();
     }
