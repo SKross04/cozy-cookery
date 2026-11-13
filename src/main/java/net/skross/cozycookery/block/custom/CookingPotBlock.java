@@ -47,6 +47,7 @@ import net.skross.cozycookery.menu.CloseUpMode;
 import net.skross.cozycookery.menu.CookingPotMenu;
 import net.skross.cozycookery.sound.ModSounds;
 import net.skross.cozycookery.util.ModTags;
+import net.skross.cozycookery.util.ToolAccess;
 import org.jetbrains.annotations.Nullable;
 
 public class CookingPotBlock extends BaseEntityBlock {
@@ -179,7 +180,7 @@ public class CookingPotBlock extends BaseEntityBlock {
         // Spoon -> lean in with the spoon: stir in circles in the close-up (see CookingPotScreen + StirPayload)
         if (stack.getItem() instanceof SpoonItem) {
             if (!level.isClientSide()) {
-                openCloseUp(player, pot, CloseUpMode.TOOL);
+                openCloseUp(player, pot, ToolAccess.HAND);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
@@ -243,18 +244,23 @@ public class CookingPotBlock extends BaseEntityBlock {
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
         if (!level.isClientSide()) {
-            openCloseUp(player, pot, CloseUpMode.ADD);
+            // a spoon on a tool rack nearby counts as "in your hand"
+            openCloseUp(player, pot, ToolAccess.find(player, pos, s -> s.getItem() instanceof SpoonItem));
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
-    public static void openCloseUp(Player player, CookingPotBlockEntity pot, CloseUpMode mode) {
+    // tool == null -> add-ingredients-only close-up; otherwise the spoon close-up
+    public static void openCloseUp(Player player, CookingPotBlockEntity pot, @Nullable ToolAccess tool) {
+        CloseUpMode mode = tool == null ? CloseUpMode.ADD : CloseUpMode.TOOL;
+        ToolAccess access = tool == null ? ToolAccess.HAND : tool;
         player.openMenu(new SimpleMenuProvider(
-                        (containerId, inventory, p) -> new CookingPotMenu(containerId, inventory, pot, mode),
+                        (containerId, inventory, p) -> new CookingPotMenu(containerId, inventory, pot, mode, access),
                         Component.translatable("block.cozycookery.cooking_pot")),
                 buf -> {
                     buf.writeBlockPos(pot.getBlockPos());
                     buf.writeEnum(mode);
+                    access.write(buf);
                 });
     }
 

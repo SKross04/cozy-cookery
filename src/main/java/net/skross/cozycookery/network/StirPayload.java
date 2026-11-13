@@ -7,8 +7,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -43,15 +41,15 @@ public record StirPayload(BlockPos pos, boolean fullTurn) implements CustomPacke
                 || menu.mode != CloseUpMode.TOOL || !menu.pos.equals(payload.pos())) {
             return;
         }
-        ItemStack spoon = player.getItemInHand(InteractionHand.MAIN_HAND);
+        ItemStack spoon = menu.tool.get(player); // in your hand or on a tool rack
         if (!(spoon.getItem() instanceof SpoonItem) || !menu.pot.stir(player.level())) {
             return;
         }
         if (payload.fullTurn()) {
             player.level().playSound(null, payload.pos(), ModSounds.COOKING_POT_STIR.get(), SoundSource.BLOCKS,
                     1.0f, 0.9f + player.level().getRandom().nextFloat() * 0.2f);
-            spoon.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-            if (spoon.isEmpty()) {
+            menu.tool.damage(player);
+            if (menu.tool.get(player).isEmpty()) {
                 player.closeContainer(); // the spoon broke
             }
         }

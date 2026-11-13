@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
+import net.skross.cozycookery.util.ToolAccess;
 
 /**
  * The server side of the pot close-up. It links your inventory to the pot's 8 ingredient slots,
@@ -31,20 +32,23 @@ public class CookingPotMenu extends AbstractContainerMenu {
     public final CookingPotBlockEntity pot;
     public final BlockPos pos;
     public final CloseUpMode mode;
+    public final ToolAccess tool; // where the spoon comes from (your hand or a tool rack)
 
-    // Client side: the server sent the pot position and the mode
+    // Client side: the server sent the pot position, the mode and where the tool is
     public CookingPotMenu(int containerId, Inventory inventory, RegistryFriendlyByteBuf extraData) {
         this(containerId, inventory,
                 (CookingPotBlockEntity) inventory.player.level().getBlockEntity(extraData.readBlockPos()),
-                extraData.readEnum(CloseUpMode.class));
+                extraData.readEnum(CloseUpMode.class), ToolAccess.read(extraData));
     }
 
     // Server side
-    public CookingPotMenu(int containerId, Inventory inventory, CookingPotBlockEntity pot, CloseUpMode mode) {
+    public CookingPotMenu(int containerId, Inventory inventory, CookingPotBlockEntity pot, CloseUpMode mode,
+                          ToolAccess tool) {
         super(ModMenuTypes.COOKING_POT_MENU.get(), containerId);
         this.pot = pot;
         this.pos = pot.getBlockPos();
         this.mode = mode;
+        this.tool = tool;
 
         // The pot's ingredients: a small "In the pot" panel on the right, so the pot itself stays free
         for (int i = 0; i < POT_SLOTS; i++) {

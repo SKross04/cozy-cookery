@@ -1,6 +1,7 @@
 package net.skross.cozycookery.block;
 
 import net.skross.cozycookery.block.custom.CookbookBlock;
+import net.skross.cozycookery.block.custom.ToolRackBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -95,6 +96,14 @@ public class ModBlocks {
                     .noOcclusion()));
 
     // ---------- Trellis + tomatoes (2 blocks tall) ----------
+    // Wall rack for kitchen tools: nearby stations use the tools hanging on it
+    public static final DeferredBlock<Block> TOOL_RACK = registerBlock("tool_rack",
+            () -> new ToolRackBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.WOOD)
+                    .strength(1.0f)
+                    .sound(SoundType.WOOD)
+                    .noOcclusion()));
+
     // The cookbook lying open on a counter (its item is the Cookbook in ModItems)
     public static final DeferredBlock<Block> COOKBOOK = BLOCKS.register("cookbook",
             () -> new CookbookBlock(BlockBehaviour.Properties.of()

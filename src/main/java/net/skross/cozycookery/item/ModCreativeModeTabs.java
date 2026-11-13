@@ -29,6 +29,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.WOODEN_SPOON);
                         output.accept(ModItems.WOODEN_SPATULA);
                         output.accept(ModItems.COOKBOOK);
+                        output.accept(ModBlocks.TOOL_RACK);
 
                         // Workstations
                         ModBlocks.CHOPPING_BOARDS.values().forEach(output::accept);

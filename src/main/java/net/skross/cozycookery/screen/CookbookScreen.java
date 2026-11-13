@@ -130,6 +130,7 @@ public class CookbookScreen extends Screen {
         guide("mixing_bowl", ModBlocks.MIXING_BOWL.get());
         guide("oven", ModBlocks.OVENS.values().iterator().next().get());
         guide("plates", ModItems.PLATE.get());
+        guide("tool_rack", ModBlocks.TOOL_RACK.get());
         guide("farming", ModItems.TOMATO_SEEDS.get());
 
         // One chapter per station

@@ -24,6 +24,7 @@ import net.skross.cozycookery.block.entity.renderer.MixingBowlBlockEntityRendere
 import net.skross.cozycookery.block.entity.renderer.MortarBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.OvenBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.StoveBlockEntityRenderer;
+import net.skross.cozycookery.block.entity.renderer.ToolRackBlockEntityRenderer;
 import net.skross.cozycookery.component.ModDataComponents;
 import net.skross.cozycookery.component.SoupContents;
 
@@ -59,6 +60,7 @@ public class CozyCookeryClient {
         event.registerBlockEntityRenderer(ModBlockEntities.MORTAR_BE.get(), MortarBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.MIXING_BOWL_BE.get(), MixingBowlBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.OVEN_BE.get(), OvenBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.TOOL_RACK_BE.get(), ToolRackBlockEntityRenderer::new);
     }
 
     // Colours the water/soup surface in the cooking pot ("tintindex": 0 in the pot models)

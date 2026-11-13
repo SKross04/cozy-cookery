@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "N N",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cozycookery:tool_rack"
+  }
+}

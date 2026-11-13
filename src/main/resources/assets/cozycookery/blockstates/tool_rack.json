@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "cozycookery:block/tool_rack"
+    },
+    "facing=west": {
+      "model": "cozycookery:block/tool_rack",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "cozycookery:block/tool_rack",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "cozycookery:block/tool_rack",
+      "y": 270
+    }
+  }
+}

@@ -208,5 +208,8 @@
   "cookbook.cozycookery.note.grinding": "Mortar and pestle",
   "cookbook.cozycookery.note.mixing": "Mixing bowl • mix with the spoon",
   "cookbook.cozycookery.note.baking": "Brick oven • about %s s",
-  "cookbook.cozycookery.note.plating": "Crafting table"
+  "cookbook.cozycookery.note.plating": "Crafting table",
+  "block.cozycookery.tool_rack": "Tool Rack",
+  "cookbook.cozycookery.guide.tool_rack": "Tool rack",
+  "cookbook.cozycookery.guide.tool_rack.text": "Hang knives, spoons and spatulas on its hooks. When you lean in over a station with a bare hand, it picks the right tool from a rack nearby by itself."
 }
