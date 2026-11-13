@@ -64,7 +64,7 @@ public class CookingPotBlockEntityRenderer implements BlockEntityRenderer<Cookin
 
     // ---------- The wooden spoon standing in the pot ----------
     public static final float SPOON_SCALE = 0.45f;
-    private static final float SPOON_TILT = 25f;   // degrees the handle leans towards you
+    private static final float SPOON_TILT = 0f;    // degrees the handle leans towards you (0 = straight up)
     private static final float BOWL_OFFSET = 0.46f; // icon units from the icon's middle to the spoon's bowl
     private static final float TIP_OFFSET = 0.60f;  // icon units from the icon's middle to the handle's tip
 
