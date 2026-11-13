@@ -7,6 +7,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.event.RenderHandEvent;
+import net.neoforged.neoforge.client.event.RenderPlayerEvent;
+import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.skross.cozycookery.client.CloseUpCamera;
 import net.skross.cozycookery.CozyCookery;
@@ -38,6 +40,14 @@ public class ModClientGameEvents {
     @SubscribeEvent
     public static void onRenderGuiLayer(RenderGuiLayerEvent.Pre event) {
         if (CloseUpCamera.isActive()) {
+            event.setCanceled(true);
+        }
+    }
+
+    // Close-up mode: your own character is hidden, so your head never blocks the view of the station
+    @SubscribeEvent
+    public static void onRenderPlayer(RenderPlayerEvent.Pre event) {
+        if (CloseUpCamera.isActive() && event.getEntity() == Minecraft.getInstance().player) {
             event.setCanceled(true);
         }
     }
