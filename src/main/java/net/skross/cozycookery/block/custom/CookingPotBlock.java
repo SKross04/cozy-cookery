@@ -12,7 +12,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -177,17 +176,10 @@ public class CookingPotBlock extends BaseEntityBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        // Spoon -> stir (only counts when the pot asks for it, then it costs 1 durability)
+        // Spoon -> lean in with the spoon: stir in circles in the close-up (see CookingPotScreen + StirPayload)
         if (stack.getItem() instanceof SpoonItem) {
-            if (liquid != PotLiquid.WATER || !pot.hasIngredients()) {
-                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
-            }
             if (!level.isClientSide()) {
-                level.playSound(null, pos, ModSounds.COOKING_POT_STIR.get(), SoundSource.BLOCKS,
-                        1.0f, 0.9f + level.getRandom().nextFloat() * 0.2f);
-                if (pot.stir(level)) {
-                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-                }
+                openCloseUp(player, pot, CloseUpMode.TOOL);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
@@ -274,16 +266,17 @@ public class CookingPotBlock extends BaseEntityBlock {
         }
         double surfaceY = pos.getY() + 7.2 / 16.0;
 
-        // The pot asks for a stir: big bubbles, splashes and a burst of steam
-        if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot && pot.needsStir()) {
-            for (int i = 0; i < 4; i++) {
-                double x = pos.getX() + 0.25 + random.nextDouble() * 0.5;
-                double z = pos.getZ() + 0.25 + random.nextDouble() * 0.5;
-                level.addParticle(ParticleTypes.SPLASH, x, surfaceY + 0.05, z, 0.0, 0.1, 0.0);
-                level.addParticle(ParticleTypes.BUBBLE_POP, x, surfaceY, z, 0.0, 0.06, 0.0);
+        // Not stirred for too long: it sticks to the bottom -> dark smoke, hurry!
+        if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot && pot.isSticking()) {
+            for (int i = 0; i < 2; i++) {
+                double x = pos.getX() + 0.3 + random.nextDouble() * 0.4;
+                double z = pos.getZ() + 0.3 + random.nextDouble() * 0.4;
+                level.addParticle(ParticleTypes.SMOKE, x, surfaceY + 0.1, z, 0.0, 0.05, 0.0);
             }
-            level.addParticle(ParticleTypes.CLOUD, pos.getX() + 0.5, surfaceY + 0.4, pos.getZ() + 0.5,
-                    (random.nextDouble() - 0.5) * 0.02, 0.06, (random.nextDouble() - 0.5) * 0.02);
+            if (random.nextInt(3) == 0) {
+                level.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX() + 0.5, surfaceY + 0.2, pos.getZ() + 0.5,
+                        0.0, 0.04, 0.0);
+            }
         }
 
         for (int i = 0; i < 2; i++) {

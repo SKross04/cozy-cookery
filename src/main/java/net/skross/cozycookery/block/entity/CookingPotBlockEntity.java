@@ -40,10 +40,11 @@ public class CookingPotBlockEntity extends BlockEntity {
     public static final int SERVINGS_WHEN_BURNT = 2;
     public static final int WATER_COLOR = 0x3F76E4; // the colour of plain water in the pot
 
-    // Stirring: the pot asks for a stir every 8-12 seconds and you have 6 seconds to do it
-    private static final int STIR_INTERVAL_MIN = 160;   // 8 seconds
-    private static final int STIR_INTERVAL_RANDOM = 80; // + up to 4 seconds
-    private static final int STIR_WINDOW = 120;         // 6 seconds
+    // Stirring (close-up with the spoon): keep stirring or it burns
+    private static final int GRACE = 100;            // 5 s to grab the spoon after the ingredients are in
+    private static final int WARN_AFTER = 80;        // 4 s without stirring -> it starts to stick and smoke
+    private static final int BURN_AFTER = 140;       // 7 s without stirring -> Burnt Stew
+    private static final int STIRRED_RECENTLY = 20;  // stirred in the last second -> cooks twice as fast
 
     // The ingredients in the pot: 6 slots with 1 item each
     public final ItemStackHandler ingredients = new ItemStackHandler(INGREDIENT_SLOTS) {
@@ -62,9 +63,9 @@ public class CookingPotBlockEntity extends BlockEntity {
     @Nullable
     private ResourceLocation cookingRecipeId = null; // which recipe is cooking right now
     private int progress = 0;          // ticks cooked so far
-    private int nextStirIn = 0;        // ticks until the pot asks for a stir
-    private boolean needsStir = false; // big bubbles: stir now!
-    private int stirTimeLeft = 0;      // ticks left to stir before it burns
+    private int neglect = 0;           // ticks since the last stir (starts negative = grace time)
+    private long lastStirTick = -1000; // game time of the last stir
+    private boolean sticking = false;  // not stirred for a while: smoke, hurry!
     private int cookingTime = 0;       // total ticks the current recipe needs
     private int targetColor = WATER_COLOR; // colour the water slowly turns into while cooking
 
@@ -155,7 +156,7 @@ public class CookingPotBlockEntity extends BlockEntity {
             cookingRecipeId = recipe.get().id();
             cookingTime = recipe.get().value().cookingTime();
             targetColor = recipe.get().value().color();
-            nextStirIn = randomStirInterval(level);
+            neglect = -GRACE;
             syncToClient();
         }
         // Safety net for pots saved before cooking_time existed
@@ -168,27 +169,20 @@ public class CookingPotBlockEntity extends BlockEntity {
             return;
         }
 
-        progress++;
-
-        if (needsStir) {
-            stirTimeLeft--;
-            if (stirTimeLeft % 20 == 0) {
-                level.playSound(null, pos, ModSounds.COOKING_POT_BLUB.get(), SoundSource.BLOCKS,
-                        1.0f, 0.8f + level.getRandom().nextFloat() * 0.3f);
-            }
-            if (stirTimeLeft <= 0) {
-                burn((ServerLevel) level, pos, state);
-                return;
-            }
-        } else {
-            nextStirIn--;
-            // Ask for a stir, but not in the last 3 seconds
-            if (nextStirIn <= 0 && progress < cookingTime - 60) {
-                needsStir = true;
-                stirTimeLeft = STIR_WINDOW;
-                level.playSound(null, pos, ModSounds.COOKING_POT_BLUB.get(), SoundSource.BLOCKS, 1.2f, 0.8f);
-                syncToClient();
-            }
+        boolean stirredRecently = level.getGameTime() - lastStirTick <= STIRRED_RECENTLY;
+        progress += stirredRecently ? 2 : 1;
+        neglect++;
+        if (neglect >= BURN_AFTER) {
+            burn((ServerLevel) level, pos, state);
+            return;
+        }
+        boolean nowSticking = neglect >= WARN_AFTER;
+        if (nowSticking != sticking) {
+            sticking = nowSticking;
+            syncToClient();
+        }
+        if (sticking && neglect % 20 == 0) {
+            level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.4f, 1.6f);
         }
 
         if (progress >= cookingTime) {
@@ -198,15 +192,22 @@ public class CookingPotBlockEntity extends BlockEntity {
         }
     }
 
-    // Called when the player clicks with a spoon. Returns true if the pot really needed a stir.
+    // Called by the stir message from the close-up (StirPayload). Returns true if something is cooking.
     public boolean stir(Level level) {
-        if (!needsStir) {
+        if (cookingRecipeId == null) {
             return false;
         }
-        needsStir = false;
-        nextStirIn = randomStirInterval(level);
-        syncToClient();
+        lastStirTick = level.getGameTime();
+        neglect = 0;
+        if (sticking) {
+            sticking = false;
+            syncToClient();
+        }
         return true;
+    }
+
+    public boolean isCooking() {
+        return cookingRecipeId != null;
     }
 
     private void finish(Level level, BlockPos pos, BlockState state, CookingRecipe recipe) {
@@ -240,12 +241,8 @@ public class CookingPotBlockEntity extends BlockEntity {
         progress = 0;
         cookingTime = 0;
         targetColor = WATER_COLOR;
-        needsStir = false;
-        stirTimeLeft = 0;
-    }
-
-    private static int randomStirInterval(Level level) {
-        return STIR_INTERVAL_MIN + level.getRandom().nextInt(STIR_INTERVAL_RANDOM + 1);
+        neglect = 0;
+        sticking = false;
     }
 
     // ---------- Serving ----------
@@ -282,8 +279,9 @@ public class CookingPotBlockEntity extends BlockEntity {
         return result;
     }
 
-    public boolean needsStir() {
-        return needsStir;
+    // Not stirred for a while: smoke and hissing (CookingPotBlock.animateTick, close-up hint)
+    public boolean isSticking() {
+        return sticking;
     }
 
     // ---------- Colour (used by the colour handler in CozyCookeryClient) ----------
@@ -325,9 +323,8 @@ public class CookingPotBlockEntity extends BlockEntity {
             tag.putString("recipe", cookingRecipeId.toString());
         }
         tag.putInt("progress", progress);
-        tag.putInt("next_stir_in", nextStirIn);
-        tag.putBoolean("needs_stir", needsStir);
-        tag.putInt("stir_time_left", stirTimeLeft);
+        tag.putInt("neglect", neglect);
+        tag.putBoolean("sticking", sticking);
         tag.putInt("cooking_time", cookingTime);
         tag.putInt("target_color", targetColor);
         tag.putInt("soup_color", soupColor);
@@ -344,9 +341,8 @@ public class CookingPotBlockEntity extends BlockEntity {
         ingredients.deserializeNBT(registries, tag.getCompound("ingredients"));
         cookingRecipeId = tag.contains("recipe") ? ResourceLocation.tryParse(tag.getString("recipe")) : null;
         progress = tag.getInt("progress");
-        nextStirIn = tag.getInt("next_stir_in");
-        needsStir = tag.getBoolean("needs_stir");
-        stirTimeLeft = tag.getInt("stir_time_left");
+        neglect = tag.getInt("neglect");
+        sticking = tag.getBoolean("sticking");
         cookingTime = tag.getInt("cooking_time");
         targetColor = tag.contains("target_color") ? tag.getInt("target_color") : WATER_COLOR;
         soupColor = tag.contains("soup_color") ? tag.getInt("soup_color") : WATER_COLOR;

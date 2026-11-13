@@ -59,15 +59,33 @@ public class CookingPotMenu extends AbstractContainerMenu {
                 public boolean mayPickup(Player player) {
                     return CookingPotMenu.this.pot.canTakeIngredients();
                 }
+
+                // With the spoon you only stir: the slots are hidden and can't be clicked
+                @Override
+                public boolean isActive() {
+                    return CookingPotMenu.this.mode == CloseUpMode.ADD;
+                }
             });
         }
 
         // Your inventory: a panel on the left, 4 columns x 9 rows (first column = hotbar)
         for (int row = 0; row < 9; row++) {
-            this.addSlot(new Slot(inventory, row, 10, 10 + row * 18));              // hotbar
+            this.addSlot(new PanelSlot(inventory, row, 10, 10 + row * 18));              // hotbar
             for (int col = 0; col < 3; col++) {
-                this.addSlot(new Slot(inventory, 9 + row * 3 + col, 30 + col * 18, 10 + row * 18));
+                this.addSlot(new PanelSlot(inventory, 9 + row * 3 + col, 30 + col * 18, 10 + row * 18));
             }
+        }
+    }
+
+    // An inventory slot that disappears in tool mode
+    private class PanelSlot extends Slot {
+        PanelSlot(Inventory inventory, int index, int x, int y) {
+            super(inventory, index, x, y);
+        }
+
+        @Override
+        public boolean isActive() {
+            return CookingPotMenu.this.mode == CloseUpMode.ADD;
         }
     }
 
