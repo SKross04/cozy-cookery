@@ -1,5 +1,6 @@
 package net.skross.cozycookery.client;
 
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -16,6 +17,9 @@ import org.jetbrains.annotations.Nullable;
 public final class CloseUpCamera {
     @Nullable
     private static Marker camera = null;
+    // the view (first person / F5 views) from before the close-up, restored afterwards
+    @Nullable
+    private static CameraType previousView = null;
 
     private CloseUpCamera() {
     }
@@ -54,6 +58,11 @@ public final class CloseUpCamera {
         marker.yRotO = yaw;
         marker.xRotO = pitch;
         camera = marker;
+        // F5 views would put the camera behind/in front of the marker: always look through it in first person
+        if (previousView == null) {
+            previousView = mc.options.getCameraType();
+        }
+        mc.options.setCameraType(CameraType.FIRST_PERSON);
         mc.setCameraEntity(marker);
     }
 
@@ -66,6 +75,10 @@ public final class CloseUpCamera {
         if (camera != null && mc.player != null) {
             mc.setCameraEntity(mc.player);
         }
+        if (previousView != null) {
+            mc.options.setCameraType(previousView);
+        }
         camera = null;
+        previousView = null;
     }
 }
