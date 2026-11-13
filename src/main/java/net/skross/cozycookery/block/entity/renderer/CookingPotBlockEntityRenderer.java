@@ -8,7 +8,9 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
@@ -17,8 +19,7 @@ import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
 import net.skross.cozycookery.item.ModItems;
 
 public class CookingPotBlockEntityRenderer implements BlockEntityRenderer<CookingPotBlockEntity> {
-    private static final float SURFACE = 7f / 16f; // the water surface in the pot model
-    public static final float SPOON_RADIUS = 2.6f / 16f; // how far from the middle the spoon stands
+    public static final float SURFACE = 7f / 16f; // the water surface in the pot model
 
     public CookingPotBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -61,17 +62,40 @@ public class CookingPotBlockEntityRenderer implements BlockEntityRenderer<Cookin
         }
     }
 
-    // The wooden spoon standing in the pot: bowl in the soup, handle leaning out over the rim
+    // ---------- The wooden spoon standing in the pot ----------
+    public static final float SPOON_SCALE = 0.45f;
+    private static final float SPOON_TILT = 25f;   // degrees the handle leans towards you
+    private static final float BOWL_OFFSET = 0.46f; // icon units from the icon's middle to the spoon's bowl
+    private static final float TIP_OFFSET = 0.60f;  // icon units from the icon's middle to the handle's tip
+
+    // Horizontal direction from the pot to the camera, so the handle always leans towards you
+    private static Vec3 towardsCamera(BlockPos pos) {
+        Vec3 cam = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        Vec3 h = new Vec3(cam.x - (pos.getX() + 0.5), 0, cam.z - (pos.getZ() + 0.5));
+        return h.lengthSqr() < 1.0E-6 ? new Vec3(0, 0, 1) : h.normalize();
+    }
+
+    /** World position of the tip of the spoon handle: that's where you grab it. */
+    public static Vec3 spoonTip(CookingPotBlockEntity pot) {
+        BlockPos pos = pot.getBlockPos();
+        Vec3 h = towardsCamera(pos);
+        double t = Math.toRadians(SPOON_TILT);
+        double length = (BOWL_OFFSET + TIP_OFFSET) * SPOON_SCALE;
+        return new Vec3(pos.getX() + 0.5 + pot.clientSpoonX + h.x * Math.sin(t) * length,
+                pos.getY() + SURFACE + Math.cos(t) * length,
+                pos.getZ() + 0.5 + pot.clientSpoonZ + h.z * Math.sin(t) * length);
+    }
+
     private void renderSpoon(CookingPotBlockEntity pot, PoseStack poseStack, MultiBufferSource bufferSource,
                              int packedLight, ItemRenderer itemRenderer) {
-        float a = pot.clientSpoonAngle;
-        float radius = SPOON_RADIUS;
+        Vec3 h = towardsCamera(pot.getBlockPos());
         poseStack.pushPose();
-        poseStack.translate(0.5f + Mth.cos(a) * radius, SURFACE + 0.16f, 0.5f + Mth.sin(a) * radius);
-        poseStack.mulPose(Axis.YP.rotation(-a));              // item's X axis = from the middle outwards
-        poseStack.mulPose(Axis.ZP.rotationDegrees(-15f));     // lean the handle outwards
-        poseStack.mulPose(Axis.ZP.rotationDegrees(-135f));    // icon: bowl top-right -> bowl down, handle up
-        poseStack.scale(0.55f, 0.55f, 0.55f);
+        poseStack.translate(0.5f + pot.clientSpoonX, SURFACE, 0.5f + pot.clientSpoonZ); // the bowl, in the soup
+        poseStack.mulPose(Axis.YP.rotation((float) Math.atan2(h.x, h.z))); // face the camera
+        poseStack.mulPose(Axis.XP.rotationDegrees(SPOON_TILT));            // lean the handle towards you
+        poseStack.scale(SPOON_SCALE, SPOON_SCALE, SPOON_SCALE);
+        poseStack.translate(0, BOWL_OFFSET, 0);                           // bowl at the bottom
+        poseStack.mulPose(Axis.ZP.rotationDegrees(135f));                  // icon diagonal -> handle straight up
         itemRenderer.renderStatic(new ItemStack(ModItems.WOODEN_SPOON.get()), ItemDisplayContext.FIXED, packedLight,
                 OverlayTexture.NO_OVERLAY, poseStack, bufferSource, pot.getLevel(), 99);
         poseStack.popPose();

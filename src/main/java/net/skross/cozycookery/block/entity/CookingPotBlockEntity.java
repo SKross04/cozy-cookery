@@ -77,7 +77,8 @@ public class CookingPotBlockEntity extends BlockEntity {
 
     // ---------- Client only (close-up visuals, not saved) ----------
     public boolean clientSpoonIn = false;  // the spoon stands in the pot while you're in the spoon close-up
-    public float clientSpoonAngle = 0.8f;  // where the spoon is, around the middle (radians)
+    public float clientSpoonX = 0.12f;     // where the spoon's bowl is in the soup, from the middle (blocks)
+    public float clientSpoonZ = 0.06f;
     public float clientSwirl = 0;          // degrees the ingredients were pushed around by stirring
 
     public CookingPotBlockEntity(BlockPos pos, BlockState blockState) {

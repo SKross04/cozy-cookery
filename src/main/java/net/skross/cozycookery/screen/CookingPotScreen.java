@@ -31,13 +31,12 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> {
     private static final int POT_SLOT = 0x40FFFFFF;
 
     // Stirring
-    private static final float QUARTER = Mth.HALF_PI;
-    private static final double GRAB_DISTANCE = 0.13; // blocks: how close to the spoon you must click
-    private static final double MAX_REACH = 0.6;      // blocks from the middle: further out doesn't count
-    private static final float FAST = 0.9f;           // radians per frame: faster than this splashes
+    private static final double GRAB_PIXELS = 9;      // how close to the handle tip you must click (GUI pixels)
+    private static final double POT_RADIUS = 0.27;    // blocks: the spoon's bowl stays inside the pot
+    private static final double QUARTER_PATH = 0.25;  // blocks the spoon must travel for one quarter stir
+    private static final double FAST_STEP = 0.12;     // blocks per frame: faster than this splashes
     private boolean stirring = false; // holding the spoon
-    private float lastAngle = 0;
-    private float sinceQuarter = 0;   // radians stirred since the last message to the server
+    private double sinceQuarter = 0;  // distance stirred since the last message to the server
     private int quarters = 0;         // quarters since the last full circle
 
     public CookingPotScreen(CookingPotMenu menu, Inventory playerInventory, Component title) {
@@ -74,31 +73,27 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> {
     }
 
     // ---------- Stirring ----------
-    private Vec3 mouseInPot(double mouseX, double mouseY) {
-        return CloseUpCamera.mouseOnSurface(mouseX, mouseY, this.width, this.height);
+    private Vec3 potCentre() {
+        BlockPos pos = menu.pos;
+        return new Vec3(pos.getX() + 0.5, pos.getY() + CookingPotBlockEntityRenderer.SURFACE, pos.getZ() + 0.5);
     }
 
-    private Vec3 spoonTip() {
-        Vec3 c = CloseUpCamera.target();
-        float a = menu.pot.clientSpoonAngle;
-        double r = CookingPotBlockEntityRenderer.SPOON_RADIUS;
-        return c.add(Math.cos(a) * r, 0, Math.sin(a) * r);
+    private double[] tipOnScreen() {
+        return CloseUpCamera.toScreen(CookingPotBlockEntityRenderer.spoonTip(menu.pot), this.width, this.height);
     }
 
-    private boolean overSpoon(double mouseX, double mouseY) {
-        return toolMode() && mouseInPot(mouseX, mouseY).distanceTo(spoonTip()) < GRAB_DISTANCE;
-    }
-
-    private static float angleAround(Vec3 point) {
-        Vec3 c = CloseUpCamera.target();
-        return (float) Mth.atan2(point.z - c.z, point.x - c.x);
+    private boolean overSpoonTip(double mouseX, double mouseY) {
+        if (!toolMode()) {
+            return false;
+        }
+        double[] tip = tipOnScreen();
+        return Math.hypot(mouseX - tip[0], mouseY - tip[1]) <= GRAB_PIXELS;
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT && this.menu.getCarried().isEmpty() && overSpoon(mouseX, mouseY)) {
+        if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT && this.menu.getCarried().isEmpty() && overSpoonTip(mouseX, mouseY)) {
             stirring = true;
-            lastAngle = angleAround(mouseInPot(mouseX, mouseY));
             setCursorHidden(true);
             return true;
         }
@@ -115,27 +110,36 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> {
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
-    // While you hold the spoon: it follows the mouse around the middle, the ingredients swirl along,
-    // and every quarter turn is reported to the server
+    // While you hold the spoon its bowl follows the mouse anywhere in the pot. The ingredients swirl along with
+    // the spoon's movement around the middle, and every bit of stirring is reported to the server.
     private void updateStir(int mouseX, int mouseY) {
         if (!stirring) {
             return;
         }
-        Vec3 point = mouseInPot(mouseX, mouseY);
-        if (point.distanceTo(CloseUpCamera.target()) > MAX_REACH) {
-            return;
+        Vec3 c = potCentre();
+        Vec3 m = CloseUpCamera.mouseOnPlane(mouseX, mouseY, this.width, this.height, c.y);
+        double dx = m.x - c.x;
+        double dz = m.z - c.z;
+        double r = Math.hypot(dx, dz);
+        if (r > POT_RADIUS) {
+            dx *= POT_RADIUS / r;
+            dz *= POT_RADIUS / r;
         }
-        float angle = angleAround(point);
-        float delta = Mth.wrapDegrees((angle - lastAngle) * Mth.RAD_TO_DEG) * Mth.DEG_TO_RAD;
-        lastAngle = angle;
-        menu.pot.clientSpoonAngle = angle;
-        menu.pot.clientSwirl += delta * Mth.RAD_TO_DEG * 0.8f;
-        sinceQuarter += Math.abs(delta);
-        if (Math.abs(delta) > FAST) {
+        double oldX = menu.pot.clientSpoonX;
+        double oldZ = menu.pot.clientSpoonZ;
+        double moved = Math.hypot(dx - oldX, dz - oldZ);
+        if (Math.hypot(oldX, oldZ) > 0.04 && Math.hypot(dx, dz) > 0.04) {
+            float delta = Mth.wrapDegrees((float) (Math.toDegrees(Math.atan2(dz, dx) - Math.atan2(oldZ, oldX))));
+            menu.pot.clientSwirl += delta * 0.8f;
+        }
+        menu.pot.clientSpoonX = (float) dx;
+        menu.pot.clientSpoonZ = (float) dz;
+        if (moved > FAST_STEP) {
             splash();
         }
-        while (sinceQuarter >= QUARTER) {
-            sinceQuarter -= QUARTER;
+        sinceQuarter += moved;
+        while (sinceQuarter >= QUARTER_PATH) {
+            sinceQuarter -= QUARTER_PATH;
             quarters++;
             boolean fullTurn = quarters >= 4;
             if (fullTurn) {
@@ -169,9 +173,9 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> {
         if (!stirring) {
             this.renderTooltip(graphics, mouseX, mouseY);
         }
-        if (!stirring && overSpoon(mouseX, mouseY)) {
-            // a little ring around the spoon handle: "you can grab this"
-            double[] p = CloseUpCamera.toScreen(spoonTip().add(0, 0.16, 0), this.width, this.height);
+        if (!stirring && overSpoonTip(mouseX, mouseY)) {
+            // a little frame around the handle tip: "you can grab this"
+            double[] p = tipOnScreen();
             int x = (int) p[0];
             int y = (int) p[1];
             graphics.fill(x - 5, y - 5, x + 5, y - 4, 0xC0FFFFFF);

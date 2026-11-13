@@ -75,17 +75,21 @@ public final class CloseUpCamera {
         start(new Vec3(pos.getX() + 0.5, pos.getY() + surfaceHeight, pos.getZ() + 0.5), 0.55, 0.95);
     }
 
-    // ---------- Screen <-> world (simple pinhole camera, matches the game view closely enough) ----------
-    private static Vec3 forward() {
-        return target.subtract(eye).normalize();
+    // ---------- Screen <-> world, using the game's real camera ----------
+    private static Vec3 camPos() {
+        return Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
     }
 
-    private static Vec3 right() {
-        return forward().cross(new Vec3(0, 1, 0)).normalize();
+    private static Vec3 forward() {
+        return new Vec3(Minecraft.getInstance().gameRenderer.getMainCamera().getLookVector());
     }
 
     private static Vec3 up() {
-        return right().cross(forward());
+        return new Vec3(Minecraft.getInstance().gameRenderer.getMainCamera().getUpVector());
+    }
+
+    private static Vec3 right() {
+        return forward().cross(up()).normalize();
     }
 
     // pixels (GUI scale) per unit at distance 1
@@ -94,23 +98,24 @@ public final class CloseUpCamera {
         return (screenHeight / 2.0) / Math.tan(Math.toRadians(fov) / 2.0);
     }
 
-    /** Where the mouse points on the horizontal plane through the target (e.g. the soup surface). */
-    public static Vec3 mouseOnSurface(double mouseX, double mouseY, int screenWidth, int screenHeight) {
+    /** Where the mouse points on the horizontal plane at the given height (e.g. the soup surface). */
+    public static Vec3 mouseOnPlane(double mouseX, double mouseY, int screenWidth, int screenHeight, double planeY) {
         double f = focal(screenHeight);
         double sx = (mouseX - screenWidth / 2.0) / f;
         double sy = (mouseY - screenHeight / 2.0) / f;
         Vec3 dir = forward().add(right().scale(sx)).subtract(up().scale(sy));
+        Vec3 eye = camPos();
         if (Math.abs(dir.y) < 1.0E-4) {
-            return target;
+            return new Vec3(eye.x, planeY, eye.z);
         }
-        double t = (target.y - eye.y) / dir.y;
+        double t = (planeY - eye.y) / dir.y;
         return eye.add(dir.scale(t));
     }
 
     /** Screen position (GUI scale) of a point in the world. */
     public static double[] toScreen(Vec3 point, int screenWidth, int screenHeight) {
-        Vec3 v = point.subtract(eye);
-        double z = v.dot(forward());
+        Vec3 v = point.subtract(camPos());
+        double z = Math.max(0.01, v.dot(forward()));
         double f = focal(screenHeight);
         return new double[]{screenWidth / 2.0 + v.dot(right()) / z * f, screenHeight / 2.0 - v.dot(up()) / z * f};
     }
