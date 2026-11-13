@@ -22,7 +22,9 @@ public class CookingPotMenu extends AbstractContainerMenu {
     public static final int HEIGHT = 180;
     public static final int POT_CENTER_X = 165;
     public static final int POT_CENTER_Y = 90;
-    public static final int POT_RING_RADIUS = 48;
+    // "In the pot" panel on the right: 2 rows of 4
+    public static final int POT_PANEL_X = 248;
+    public static final int POT_PANEL_Y = 68;
 
     private static final int POT_SLOTS = CookingPotBlockEntity.INGREDIENT_SLOTS;
 
@@ -44,11 +46,10 @@ public class CookingPotMenu extends AbstractContainerMenu {
         this.pos = pot.getBlockPos();
         this.mode = mode;
 
-        // The pot's ingredients: a ring of 8 slots around the middle of the screen
+        // The pot's ingredients: a small "In the pot" panel on the right, so the pot itself stays free
         for (int i = 0; i < POT_SLOTS; i++) {
-            double angle = -Math.PI / 2 + i * (2 * Math.PI / POT_SLOTS);
-            int x = POT_CENTER_X - 8 + (int) Math.round(Math.cos(angle) * POT_RING_RADIUS);
-            int y = POT_CENTER_Y - 8 + (int) Math.round(Math.sin(angle) * POT_RING_RADIUS * 0.75);
+            int x = POT_PANEL_X + 6 + (i % 4) * 18;
+            int y = POT_PANEL_Y + 16 + (i / 4) * 18;
             this.addSlot(new SlotItemHandler(pot.ingredients, i, x, y) {
                 @Override
                 public boolean mayPlace(ItemStack stack) {
@@ -59,33 +60,15 @@ public class CookingPotMenu extends AbstractContainerMenu {
                 public boolean mayPickup(Player player) {
                     return CookingPotMenu.this.pot.canTakeIngredients();
                 }
-
-                // With the spoon you only stir: the slots are hidden and can't be clicked
-                @Override
-                public boolean isActive() {
-                    return CookingPotMenu.this.mode == CloseUpMode.ADD;
-                }
             });
         }
 
         // Your inventory: a panel on the left, 4 columns x 9 rows (first column = hotbar)
         for (int row = 0; row < 9; row++) {
-            this.addSlot(new PanelSlot(inventory, row, 10, 10 + row * 18));              // hotbar
+            this.addSlot(new Slot(inventory, row, 10, 10 + row * 18));              // hotbar
             for (int col = 0; col < 3; col++) {
-                this.addSlot(new PanelSlot(inventory, 9 + row * 3 + col, 30 + col * 18, 10 + row * 18));
+                this.addSlot(new Slot(inventory, 9 + row * 3 + col, 30 + col * 18, 10 + row * 18));
             }
-        }
-    }
-
-    // An inventory slot that disappears in tool mode
-    private class PanelSlot extends Slot {
-        PanelSlot(Inventory inventory, int index, int x, int y) {
-            super(inventory, index, x, y);
-        }
-
-        @Override
-        public boolean isActive() {
-            return CookingPotMenu.this.mode == CloseUpMode.ADD;
         }
     }
 

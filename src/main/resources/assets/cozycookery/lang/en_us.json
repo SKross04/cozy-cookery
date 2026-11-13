@@ -162,7 +162,9 @@
   "block.cozycookery.plated_rabbit_stew": "Plate of Rabbit Stew",
   "tooltip.cozycookery.soup_contents": "%s× %s",
   "closeup.cozycookery.cooking_pot.add": "Drag ingredients into the pot  •  Esc to step back",
-  "closeup.cozycookery.cooking_pot.tool": "Hold left click and stir in circles  •  Esc to step back",
+  "closeup.cozycookery.cooking_pot.tool": "Grab the spoon and stir in circles  •  Esc to step back",
   "closeup.cozycookery.cooking_pot.sticking": "It's sticking! Keep stirring!",
-  "closeup.cozycookery.cooking_pot.nothing": "Nothing is cooking yet: add ingredients with a bare hand"
+  "closeup.cozycookery.cooking_pot.nothing": "Nothing is cooking yet: drag in some ingredients",
+  "closeup.cozycookery.cooking_pot.stirring": "Keep stirring...",
+  "closeup.cozycookery.cooking_pot.in_the_pot": "In the pot"
 }

@@ -14,9 +14,11 @@ import net.minecraft.world.item.ItemStack;
 import net.skross.cozycookery.block.custom.CookingPotBlock;
 import net.skross.cozycookery.block.custom.PotLiquid;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
+import net.skross.cozycookery.item.ModItems;
 
 public class CookingPotBlockEntityRenderer implements BlockEntityRenderer<CookingPotBlockEntity> {
     private static final float SURFACE = 7f / 16f; // the water surface in the pot model
+    public static final float SPOON_RADIUS = 2.6f / 16f; // how far from the middle the spoon stands
 
     public CookingPotBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -24,10 +26,16 @@ public class CookingPotBlockEntityRenderer implements BlockEntityRenderer<Cookin
     @Override
     public void render(CookingPotBlockEntity pot, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-        if (pot.getBlockState().getValue(CookingPotBlock.LIQUID) == PotLiquid.EMPTY || pot.getLevel() == null) {
+        if (pot.getLevel() == null) {
             return;
         }
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+        if (pot.clientSpoonIn) {
+            renderSpoon(pot, poseStack, bufferSource, packedLight, itemRenderer);
+        }
+        if (pot.getBlockState().getValue(CookingPotBlock.LIQUID) == PotLiquid.EMPTY) {
+            return;
+        }
         float time = pot.getLevel().getGameTime() + partialTick;
 
         for (int i = 0; i < CookingPotBlockEntity.INGREDIENT_SLOTS; i++) {
@@ -36,7 +44,7 @@ public class CookingPotBlockEntityRenderer implements BlockEntityRenderer<Cookin
                 continue;
             }
             // Ingredients float in a slow circle around the middle of the pot and bob up and down
-            float angle = i * 45f + time * 0.6f;
+            float angle = i * 45f + time * 0.6f + pot.clientSwirl; // stirring pushes them around
             float radius = 2.4f / 16f;
             float x = 0.5f + Mth.cos(angle * Mth.DEG_TO_RAD) * radius;
             float z = 0.5f + Mth.sin(angle * Mth.DEG_TO_RAD) * radius;
@@ -51,5 +59,21 @@ public class CookingPotBlockEntityRenderer implements BlockEntityRenderer<Cookin
                     poseStack, bufferSource, pot.getLevel(), i);
             poseStack.popPose();
         }
+    }
+
+    // The wooden spoon standing in the pot: bowl in the soup, handle leaning out over the rim
+    private void renderSpoon(CookingPotBlockEntity pot, PoseStack poseStack, MultiBufferSource bufferSource,
+                             int packedLight, ItemRenderer itemRenderer) {
+        float a = pot.clientSpoonAngle;
+        float radius = SPOON_RADIUS;
+        poseStack.pushPose();
+        poseStack.translate(0.5f + Mth.cos(a) * radius, SURFACE + 0.16f, 0.5f + Mth.sin(a) * radius);
+        poseStack.mulPose(Axis.YP.rotation(-a));              // item's X axis = from the middle outwards
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-15f));     // lean the handle outwards
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-135f));    // icon: bowl top-right -> bowl down, handle up
+        poseStack.scale(0.55f, 0.55f, 0.55f);
+        itemRenderer.renderStatic(new ItemStack(ModItems.WOODEN_SPOON.get()), ItemDisplayContext.FIXED, packedLight,
+                OverlayTexture.NO_OVERLAY, poseStack, bufferSource, pot.getLevel(), 99);
+        poseStack.popPose();
     }
 }

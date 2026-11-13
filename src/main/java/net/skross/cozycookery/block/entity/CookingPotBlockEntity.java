@@ -75,6 +75,11 @@ public class CookingPotBlockEntity extends BlockEntity {
     private int soupColor = WATER_COLOR;          // colour of the finished soup
     private boolean servedInBowl = true;          // false: take it out with an empty hand (cooked noodles)
 
+    // ---------- Client only (close-up visuals, not saved) ----------
+    public boolean clientSpoonIn = false;  // the spoon stands in the pot while you're in the spoon close-up
+    public float clientSpoonAngle = 0.8f;  // where the spoon is, around the middle (radians)
+    public float clientSwirl = 0;          // degrees the ingredients were pushed around by stirring
+
     public CookingPotBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.COOKING_POT_BE.get(), pos, blockState);
     }
