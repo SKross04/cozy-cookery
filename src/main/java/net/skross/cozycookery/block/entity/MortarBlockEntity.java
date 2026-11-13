@@ -31,6 +31,11 @@ public class MortarBlockEntity extends BlockEntity {
         }
     };
 
+    // Grinding in the close-up: full circles ground so far (server, not saved)
+    public int grindTurns = 0;
+    // Client only: how far the item in the bowl was turned by grinding
+    public float clientGrindSpin = 0;
+
     public MortarBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.MORTAR_BE.get(), pos, blockState);
     }

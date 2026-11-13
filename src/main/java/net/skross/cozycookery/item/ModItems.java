@@ -2,6 +2,7 @@ package net.skross.cozycookery.item;
 
 import net.skross.cozycookery.item.custom.CookbookItem;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.SwordItem;
@@ -56,7 +57,9 @@ public class ModItems {
 
     // ---------- Plates: 3 clay balls -> raw plate -> furnace -> plate ----------
     public static final DeferredItem<Item> RAW_PLATE = ITEMS.registerSimpleItem("raw_plate");
-    public static final DeferredItem<Item> PLATE = ITEMS.registerSimpleItem("plate");
+    // The plate: place it on a counter and arrange a meal on it (or craft it with the parts of a meal)
+    public static final DeferredItem<Item> PLATE = ITEMS.register("plate",
+            () -> new BlockItem(ModBlocks.PLATE.get(), new Item.Properties()));
 
     // ---------- Baking ingredients ----------
     public static final DeferredItem<Item> FLOUR = ITEMS.registerSimpleItem("flour");

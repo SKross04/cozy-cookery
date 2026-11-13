@@ -41,10 +41,10 @@ Every station works with right-clicks:
 | **Cooking pot** | Place it on a heat source and fill it with a water bucket. Right-click it with an empty hand to lean in close: drag up to 8 ingredients into the pot. Then right-click with the wooden spoon, grab the spoon standing in the pot and stir in circles with the mouse (you can still add ingredients while holding the spoon); keep stirring, because if you stop for too long it sticks and burns. When the soup is done, scoop it out with bowls or with a mixing bowl. |
 | **Frying pan** | Place it on a heat source and right-click with a bare hand to drag food in. Right-click with the spatula, grab its handle and flick the mouse up to flip the food. If you leave it too long, it chars into scraps. |
 | **Tool rack** | Hang knives, spoons and spatulas on the wall. When you lean in over a station with a bare hand, it takes the right tool from a rack within 4 blocks. |
-| **Mortar and pestle** | Put in wheat and right-click to grind it into flour. |
-| **Mixing bowl** | Add ingredients such as flour, eggs, sugar or a water bottle, then mix them with the spoon to make dough or batter. |
-| **Brick oven** | Light it like the stove, then put in dough or batter to bake. |
-| **Plates** | Fire a raw plate in a furnace to make a plate. Craft a plate together with a dish to get a placeable meal, then right-click the meal to eat it one bite at a time. |
+| **Mortar and pestle** | Right-click to lean in and drag grain into it. Hold the left mouse button over the mortar and grind in circles; a few turns turn wheat into flour. |
+| **Mixing bowl** | Right-click with a bare hand to drag in flour, eggs, sugar or a water bottle. Right-click with the wooden spoon, grab its handle and mix in circles until it becomes dough or batter. |
+| **Brick oven** | Feed it fuel and light it like the stove. Right-click to look inside and drag dough or batter onto the tray. Take it out before it burns. |
+| **Plates** | Fire a raw plate in a furnace. Place the plate on a counter, right-click it and arrange the parts of a meal on it; when they match a meal the plate becomes that dish. Crafting the plate with the parts works too. Right-click the meal to eat it one bite at a time. |
 
 Most vanilla food crafting and smelting recipes (bread, cake, cookies, cooked meats and others) are turned off. Those foods are made with the stations above instead. Campfire cooking still works.
 

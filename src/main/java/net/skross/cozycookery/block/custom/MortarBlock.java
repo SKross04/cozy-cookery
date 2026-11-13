@@ -1,6 +1,9 @@
 package net.skross.cozycookery.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.skross.cozycookery.menu.MortarMenu;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -72,7 +75,7 @@ public class MortarBlock extends BaseEntityBlock {
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
-    private static Optional<GrindingRecipe> findRecipe(Level level, ItemStack stack) {
+    public static Optional<GrindingRecipe> findRecipe(Level level, ItemStack stack) {
         return level.getRecipeManager()
                 .getRecipeFor(ModRecipes.GRINDING_TYPE.get(), new SingleRecipeInput(stack), level)
                 .map(RecipeHolder::value);
@@ -81,57 +84,39 @@ public class MortarBlock extends BaseEntityBlock {
     // ---------- Interaction (no GUI!) ----------
     // With something that can be ground, on an empty mortar -> put it in.
     // Anything else -> handled by useWithoutItem (grind or take out), so you can keep clicking with a stack in your hand.
+    // Anything in your hand -> useWithoutItem opens the close-up
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (stack.isEmpty() || !(level.getBlockEntity(pos) instanceof MortarBlockEntity mortar)) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        }
-        if (mortar.isEmpty() && findRecipe(level, stack).isPresent()) {
-            if (!level.isClientSide()) {
-                mortar.inventory.setStackInSlot(0, stack.copyWithCount(1));
-                stack.consume(1, player);
-                level.playSound(null, pos, SoundEvents.STONE_HIT, SoundSource.BLOCKS, 0.6f, 1.4f);
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
-        }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    // Click the mortar:
-    //   something grindable in it -> grind it with the pestle
-    //   already ground (or sneaking with an empty hand) -> take it out
+    // Lean in over the mortar: drag something in, hold the mouse and grind in circles with the pestle
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hitResult) {
-        if (!(level.getBlockEntity(pos) instanceof MortarBlockEntity mortar) || mortar.isEmpty()) {
+        if (!(level.getBlockEntity(pos) instanceof MortarBlockEntity mortar)) {
             return InteractionResult.PASS;
         }
         if (!level.isClientSide()) {
-            Optional<GrindingRecipe> recipe = findRecipe(level, mortar.getItem());
-            if (recipe.isPresent() && !player.isShiftKeyDown()) {
-                grind(recipe.get(), mortar, (ServerLevel) level, pos);
-            } else {
-                ItemStack taken = mortar.inventory.extractItem(0, 1, false);
-                if (player.getMainHandItem().isEmpty()) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, taken);
-                } else {
-                    player.getInventory().placeItemBackInInventory(taken);
-                }
-                level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4f, 1.2f);
-            }
+            player.openMenu(new SimpleMenuProvider(
+                            (containerId, inventory, p) -> new MortarMenu(containerId, inventory, mortar),
+                            Component.translatable("block.cozycookery.mortar")),
+                    buf -> buf.writeBlockPos(pos));
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
-    private static void grind(GrindingRecipe recipe, MortarBlockEntity mortar, ServerLevel level, BlockPos pos) {
+    // The ground result stays in the mortar; several results go to your inventory
+    public static void grind(GrindingRecipe recipe, MortarBlockEntity mortar, ServerLevel level, BlockPos pos,
+                             Player player) {
         ItemStack input = mortar.getItem().copy();
         ItemStack result = recipe.result().copy();
         if (result.getCount() == 1) {
-            mortar.inventory.setStackInSlot(0, result);           // stays in the mortar
+            mortar.inventory.setStackInSlot(0, result);
         } else {
-            mortar.inventory.setStackInSlot(0, ItemStack.EMPTY);   // several results pop out
-            Block.popResource(level, pos, result);
+            mortar.inventory.setStackInSlot(0, ItemStack.EMPTY);
+            player.getInventory().placeItemBackInInventory(result);
         }
         level.playSound(null, pos, ModSounds.MORTAR_GRIND.get(), SoundSource.BLOCKS,
                 1.0f, 0.9f + level.getRandom().nextFloat() * 0.2f);

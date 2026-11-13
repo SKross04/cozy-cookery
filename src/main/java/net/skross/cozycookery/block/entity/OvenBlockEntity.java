@@ -151,7 +151,7 @@ public class OvenBlockEntity extends BlockEntity {
         return true;
     }
 
-    private void resetSlot(int i) {
+    public void resetSlot(int i) {
         progress[i] = 0;
         bakeTime[i] = 0;
         done[i] = false;

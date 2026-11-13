@@ -15,5 +15,7 @@ public class ModNetworking {
         registrar.playToServer(StirPayload.TYPE, StirPayload.STREAM_CODEC, StirPayload::handle);
         registrar.playToServer(FlipPayload.TYPE, FlipPayload.STREAM_CODEC, FlipPayload::handle);
         registrar.playToServer(ChopPayload.TYPE, ChopPayload.STREAM_CODEC, ChopPayload::handle);
+        registrar.playToServer(MixPayload.TYPE, MixPayload.STREAM_CODEC, MixPayload::handle);
+        registrar.playToServer(GrindPayload.TYPE, GrindPayload.STREAM_CODEC, GrindPayload::handle);
     }
 }

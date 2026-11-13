@@ -43,6 +43,9 @@ public class MixingBowlBlockEntity extends BlockEntity {
 
         @Override
         protected void onContentsChanged(int slot) {
+            if (mixed && MixingBowlBlockEntity.this.isEmpty()) {
+                mixed = false; // the dough was taken out (e.g. dragged out in the close-up)
+            }
             setChanged();
             if (level != null && !level.isClientSide()) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
@@ -57,6 +60,15 @@ public class MixingBowlBlockEntity extends BlockEntity {
     private Item soupServing = null;
     private int soupServings = 0;
     private int soupColor = 0xFFFFFF;
+
+    // Mixing in the close-up: quarter circles stirred so far (server, not saved)
+    public int mixQuarters = 0;
+
+    // ---------- Client only (close-up visuals, not saved) ----------
+    public boolean clientSpoonIn = false;
+    public float clientSpoonX = 0.08f;
+    public float clientSpoonZ = 0.04f;
+    public float clientSwirl = 0;
 
     public MixingBowlBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.MIXING_BOWL_BE.get(), pos, blockState);

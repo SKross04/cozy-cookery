@@ -22,6 +22,18 @@ public class ModMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<ChoppingBoardMenu>> CHOPPING_BOARD_MENU =
             MENUS.register("chopping_board", () -> IMenuTypeExtension.create(ChoppingBoardMenu::new));
 
+    public static final DeferredHolder<MenuType<?>, MenuType<MixingBowlMenu>> MIXING_BOWL_MENU =
+            MENUS.register("mixing_bowl", () -> IMenuTypeExtension.create(MixingBowlMenu::new));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<MortarMenu>> MORTAR_MENU =
+            MENUS.register("mortar", () -> IMenuTypeExtension.create(MortarMenu::new));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<OvenMenu>> OVEN_MENU =
+            MENUS.register("oven", () -> IMenuTypeExtension.create(OvenMenu::new));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<PlateMenu>> PLATE_MENU =
+            MENUS.register("plate", () -> IMenuTypeExtension.create(PlateMenu::new));
+
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
     }

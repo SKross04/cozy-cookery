@@ -1,6 +1,9 @@
 package net.skross.cozycookery.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.skross.cozycookery.menu.OvenMenu;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -130,17 +133,6 @@ public class OvenBlock extends BaseEntityBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        // Dough, batter, raw pie... -> on the baking tray (max 4)
-        if (OvenBlockEntity.findRecipe(level, stack).isPresent()) {
-            if (!level.isClientSide()) {
-                if (oven.addToTray(stack)) {
-                    stack.consume(1, player);
-                    level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 0.6f, 1.2f);
-                }
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
-        }
-
         // Flint and steel / fire charge -> light it
         if (!lit && (stack.is(Items.FLINT_AND_STEEL) || stack.is(Items.FIRE_CHARGE))) {
             if (!level.isClientSide() && oven.ignite(level, pos, state)) {
@@ -179,6 +171,7 @@ public class OvenBlock extends BaseEntityBlock {
 
     // Empty hand -> take something off the tray (finished first).
     // Tray empty and the oven is cold -> take the last fuel item back.
+    // Bare hand (or dough): crouch in front of the oven and look inside (tray + firebox)
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hitResult) {
@@ -186,19 +179,10 @@ public class OvenBlock extends BaseEntityBlock {
             return InteractionResult.PASS;
         }
         if (!level.isClientSide()) {
-            ItemStack taken = oven.takeFromTray();
-            if (taken.isEmpty() && !state.getValue(LIT)) {
-                taken = oven.removeLastFuel();
-            }
-            if (taken.isEmpty()) {
-                return InteractionResult.PASS;
-            }
-            if (player.getMainHandItem().isEmpty()) {
-                player.setItemInHand(InteractionHand.MAIN_HAND, taken);
-            } else {
-                player.getInventory().placeItemBackInInventory(taken);
-            }
-            level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4f, 1.0f);
+            player.openMenu(new SimpleMenuProvider(
+                            (containerId, inventory, p) -> new OvenMenu(containerId, inventory, oven),
+                            Component.translatable("closeup.cozycookery.oven.panel")),
+                    buf -> buf.writeBlockPos(pos));
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }

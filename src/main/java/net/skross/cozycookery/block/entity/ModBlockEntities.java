@@ -32,6 +32,9 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<ToolRackBlockEntity>> TOOL_RACK_BE =
             BLOCK_ENTITIES.register("tool_rack_be", () -> BlockEntityType.Builder.of(
                     ToolRackBlockEntity::new, ModBlocks.TOOL_RACK.get()).build(null));
+    public static final Supplier<BlockEntityType<PlateBlockEntity>> PLATE_BE =
+            BLOCK_ENTITIES.register("plate_be", () -> BlockEntityType.Builder.of(
+                    PlateBlockEntity::new, ModBlocks.PLATE.get()).build(null));
     public static final Supplier<BlockEntityType<CookingPotBlockEntity>> COOKING_POT_BE =
             BLOCK_ENTITIES.register("cooking_pot_be", () -> BlockEntityType.Builder.of(
                     CookingPotBlockEntity::new, ModBlocks.COOKING_POT.get()).build(null));

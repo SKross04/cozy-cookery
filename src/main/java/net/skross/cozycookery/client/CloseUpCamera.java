@@ -30,8 +30,16 @@ public final class CloseUpCamera {
         return camera != null;
     }
 
+    /** Look at a station from its front (e.g. into the oven), instead of from the player's side. */
+    public static void startFront(BlockPos pos, net.minecraft.core.Direction front, double targetHeight,
+                                  double distance, double height) {
+        Vec3 target = new Vec3(pos.getX() + 0.5, pos.getY() + targetHeight, pos.getZ() + 0.5);
+        Vec3 out = new Vec3(front.getStepX(), 0, front.getStepZ());
+        place(target, target.add(out.scale(distance)).add(0, height, 0));
+    }
+
     /**
-     * @param target the point to look at (e.g. the middle of the soup)
+     * @param lookAt the point to look at (e.g. the middle of the soup)
      * @param distance how far back from the target the camera sits (towards the player)
      * @param height how far above the target the camera sits
      */
@@ -49,6 +57,14 @@ public final class CloseUpCamera {
         toPlayer = toPlayer.normalize();
         Vec3 eye = target.add(toPlayer.scale(distance)).add(0, height, 0);
 
+        place(target, eye);
+    }
+
+    private static void place(Vec3 target, Vec3 eye) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null || mc.player == null) {
+            return;
+        }
         Vec3 look = target.subtract(eye);
         float yaw = (float) (Mth.atan2(look.z, look.x) * Mth.RAD_TO_DEG) - 90.0f;
         float pitch = (float) -(Mth.atan2(look.y, look.horizontalDistance()) * Mth.RAD_TO_DEG);

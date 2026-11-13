@@ -15,6 +15,10 @@ import net.skross.cozycookery.menu.ModMenuTypes;
 import net.skross.cozycookery.screen.ChoppingBoardScreen;
 import net.skross.cozycookery.screen.CookingPotScreen;
 import net.skross.cozycookery.screen.FryingPanScreen;
+import net.skross.cozycookery.screen.MixingBowlScreen;
+import net.skross.cozycookery.screen.MortarScreen;
+import net.skross.cozycookery.screen.OvenScreen;
+import net.skross.cozycookery.screen.PlateScreen;
 import net.skross.cozycookery.block.ModBlocks;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
 import net.skross.cozycookery.block.entity.MixingBowlBlockEntity;
@@ -25,6 +29,7 @@ import net.skross.cozycookery.block.entity.renderer.FryingPanBlockEntityRenderer
 import net.skross.cozycookery.block.entity.renderer.MixingBowlBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.MortarBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.OvenBlockEntityRenderer;
+import net.skross.cozycookery.block.entity.renderer.PlateBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.StoveBlockEntityRenderer;
 import net.skross.cozycookery.block.entity.renderer.ToolRackBlockEntityRenderer;
 import net.skross.cozycookery.component.ModDataComponents;
@@ -44,6 +49,10 @@ public class CozyCookeryClient {
         event.register(ModMenuTypes.COOKING_POT_MENU.get(), CookingPotScreen::new);
         event.register(ModMenuTypes.FRYING_PAN_MENU.get(), FryingPanScreen::new);
         event.register(ModMenuTypes.CHOPPING_BOARD_MENU.get(), ChoppingBoardScreen::new);
+        event.register(ModMenuTypes.MIXING_BOWL_MENU.get(), MixingBowlScreen::new);
+        event.register(ModMenuTypes.MORTAR_MENU.get(), MortarScreen::new);
+        event.register(ModMenuTypes.OVEN_MENU.get(), OvenScreen::new);
+        event.register(ModMenuTypes.PLATE_MENU.get(), PlateScreen::new);
     }
 
     @SubscribeEvent
@@ -65,6 +74,7 @@ public class CozyCookeryClient {
         event.registerBlockEntityRenderer(ModBlockEntities.MIXING_BOWL_BE.get(), MixingBowlBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.OVEN_BE.get(), OvenBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.TOOL_RACK_BE.get(), ToolRackBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.PLATE_BE.get(), PlateBlockEntityRenderer::new);
     }
 
     // Colours the water/soup surface in the cooking pot ("tintindex": 0 in the pot models)

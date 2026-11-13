@@ -1,6 +1,7 @@
 package net.skross.cozycookery.block;
 
 import net.skross.cozycookery.block.custom.CookbookBlock;
+import net.skross.cozycookery.block.custom.PlateBlock;
 import net.skross.cozycookery.block.custom.ToolRackBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -103,6 +104,15 @@ public class ModBlocks {
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
                     .noOcclusion()));
+
+    // An empty plate on the counter (its item is the Plate in ModItems): arrange a meal on it
+    public static final DeferredBlock<Block> PLATE = BLOCKS.register("plate",
+            () -> new PlateBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.QUARTZ)
+                    .strength(0.3f)
+                    .sound(SoundType.DECORATED_POT)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
 
     // The cookbook lying open on a counter (its item is the Cookbook in ModItems)
     public static final DeferredBlock<Block> COOKBOOK = BLOCKS.register("cookbook",

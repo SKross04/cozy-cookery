@@ -66,7 +66,7 @@ public abstract class StationScreen<M extends StationMenu> extends AbstractConta
     @Override
     protected void init() {
         super.init();
-        CloseUpCamera.start(menu.pos, surfaceHeight());
+        startCamera();
         onCloseUpStart();
     }
 
@@ -76,6 +76,11 @@ public abstract class StationScreen<M extends StationMenu> extends AbstractConta
         onCloseUpEnd();
         setCursorHidden(false);
         CloseUpCamera.stop();
+    }
+
+    // Default: from your side, looking down at the working surface
+    protected void startCamera() {
+        CloseUpCamera.start(menu.pos, surfaceHeight());
     }
 
     protected static void setCursorHidden(boolean hidden) {

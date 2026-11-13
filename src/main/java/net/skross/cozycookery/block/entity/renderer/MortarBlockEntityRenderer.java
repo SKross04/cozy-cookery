@@ -24,6 +24,7 @@ public class MortarBlockEntityRenderer implements BlockEntityRenderer<MortarBloc
         }
         poseStack.pushPose();
         poseStack.translate(0.5f, 1f / 16f + 0.02f, 0.5f);   // on the bottom of the bowl
+        poseStack.mulPose(Axis.YP.rotationDegrees(-mortar.clientGrindSpin)); // turned by grinding
         poseStack.mulPose(Axis.XP.rotationDegrees(90f));     // lie flat
         poseStack.mulPose(Axis.ZP.rotationDegrees(-45f));    // diagonal items fit better in the bowl
         poseStack.scale(0.35f, 0.35f, 0.35f);

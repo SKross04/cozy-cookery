@@ -12,9 +12,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.skross.cozycookery.block.entity.MixingBowlBlockEntity;
+import net.skross.cozycookery.client.ToolInStation;
+import net.skross.cozycookery.item.ModItems;
 
 public class MixingBowlBlockEntityRenderer implements BlockEntityRenderer<MixingBowlBlockEntity> {
-    private static final float BOWL_FLOOR = 1f / 16f;
+    public static final float BOWL_FLOOR = 1f / 16f;
+    public static final float SPOON_SCALE = 0.42f;
 
     public MixingBowlBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -23,6 +26,11 @@ public class MixingBowlBlockEntityRenderer implements BlockEntityRenderer<Mixing
     public void render(MixingBowlBlockEntity bowl, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+        if (bowl.clientSpoonIn && bowl.getLevel() != null) {
+            ToolInStation.render(poseStack, bufferSource, packedLight, bowl.getLevel(),
+                    new ItemStack(ModItems.WOODEN_SPOON.get()), bowl.getBlockPos(),
+                    0.5 + bowl.clientSpoonX, BOWL_FLOOR + 0.03, 0.5 + bowl.clientSpoonZ, 0f, SPOON_SCALE);
+        }
 
         // Finished dough: one big item in the middle
         if (bowl.isMixed()) {
@@ -43,7 +51,7 @@ public class MixingBowlBlockEntityRenderer implements BlockEntityRenderer<Mixing
         for (int i = 0; i < MixingBowlBlockEntity.SLOTS; i++) {
             ItemStack stack = bowl.items.getStackInSlot(i);
             if (stack.isEmpty()) continue;
-            float angle = i * 45f;
+            float angle = i * 45f + bowl.clientSwirl; // stirring pushes them around
             float x = 0.5f + Mth.cos(angle * Mth.DEG_TO_RAD) * (2.4f / 16f);
             float z = 0.5f + Mth.sin(angle * Mth.DEG_TO_RAD) * (2.4f / 16f);
             poseStack.pushPose();

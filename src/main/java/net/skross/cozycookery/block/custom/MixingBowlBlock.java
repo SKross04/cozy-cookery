@@ -1,6 +1,11 @@
 package net.skross.cozycookery.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.skross.cozycookery.util.ToolAccess;
+import net.skross.cozycookery.menu.MixingBowlMenu;
+import net.skross.cozycookery.menu.CloseUpMode;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -112,61 +117,40 @@ public class MixingBowlBlock extends BaseEntityBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        // Spoon -> stir. If the ingredients match a recipe, they become dough.
+        // Spoon -> lean in with the spoon: grab it and mix in circles (see MixingBowlScreen)
         if (stack.getItem() instanceof SpoonItem) {
-            if (bowl.isEmpty() || bowl.isMixed()) {
-                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
-            }
             if (!level.isClientSide()) {
-                level.playSound(null, pos, ModSounds.COOKING_POT_STIR.get(), SoundSource.BLOCKS,
-                        1.0f, 1.1f + level.getRandom().nextFloat() * 0.2f);
-                Optional<MixingRecipe> recipe = bowl.findRecipe(level);
-                if (recipe.isPresent()) {
-                    ItemStack particleItem = bowl.items.getStackInSlot(0).copy();
-                    bowl.mix(recipe.get());
-                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-                    ((ServerLevel) level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, particleItem),
-                            pos.getX() + 0.5, pos.getY() + 0.4, pos.getZ() + 0.5, 8, 0.15, 0.05, 0.15, 0.03);
-                }
+                openCloseUp(player, bowl, ToolAccess.HAND);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
-
-        // Tools and empty buckets are no ingredients (milk buckets, water bottles and empty bowls for salads are!)
-        if (bowl.isMixed() || stack.isDamageableItem() || stack.is(Items.BUCKET)) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        }
-
-        // Anything else -> into the bowl (max 8). Containers come back: milk bucket -> bucket, water bottle -> glass bottle.
-        if (!level.isClientSide()) {
-            if (bowl.addIngredient(stack)) {
-                ItemStack container = stack.is(Items.POTION) ? new ItemStack(Items.GLASS_BOTTLE) : stack.getCraftingRemainingItem();
-                stack.consume(1, player);
-                if (!container.isEmpty()) {
-                    player.getInventory().placeItemBackInInventory(container);
-                }
-                level.playSound(null, pos, SoundEvents.WOOD_HIT, SoundSource.BLOCKS, 0.5f, 1.4f);
-            }
-        }
-        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        // Anything else -> useWithoutItem opens the close-up (drag ingredients in there)
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    // Empty hand -> take the dough out (or the last ingredient you put in)
+    // Bare hand: lean in. A spoon on a tool rack nearby is used automatically. (Soup in the bowl: no close-up.)
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof MixingBowlBlockEntity bowl && !bowl.isEmpty() && !bowl.hasSoup()) {
-            if (!level.isClientSide()) {
-                ItemStack taken = bowl.takeItem();
-                if (player.getMainHandItem().isEmpty()) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, taken);
-                } else {
-                    player.getInventory().placeItemBackInInventory(taken);
-                }
-                level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4f, 1.2f);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide());
+        if (!(level.getBlockEntity(pos) instanceof MixingBowlBlockEntity bowl) || bowl.hasSoup()) {
+            return InteractionResult.PASS;
         }
-        return InteractionResult.PASS;
+        if (!level.isClientSide()) {
+            openCloseUp(player, bowl, ToolAccess.find(player, pos, s -> s.getItem() instanceof SpoonItem));
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    public static void openCloseUp(Player player, MixingBowlBlockEntity bowl, @Nullable ToolAccess tool) {
+        CloseUpMode mode = tool == null ? CloseUpMode.ADD : CloseUpMode.TOOL;
+        ToolAccess access = tool == null ? ToolAccess.HAND : tool;
+        player.openMenu(new SimpleMenuProvider(
+                        (containerId, inventory, p) -> new MixingBowlMenu(containerId, inventory, bowl, mode, access),
+                        Component.translatable("block.cozycookery.mixing_bowl")),
+                buf -> {
+                    buf.writeBlockPos(bowl.getBlockPos());
+                    buf.writeEnum(mode);
+                    access.write(buf);
+                });
     }
 }
