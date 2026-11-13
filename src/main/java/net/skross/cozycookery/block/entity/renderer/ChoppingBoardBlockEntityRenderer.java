@@ -1,6 +1,8 @@
 package net.skross.cozycookery.block.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -13,7 +15,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
 import net.skross.cozycookery.block.entity.ChoppingBoardBlockEntity;
-import net.skross.cozycookery.client.ToolInStation;
 
 public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<ChoppingBoardBlockEntity> {
     public static final float BOARD_TOP = 2f / 16f; // the board is 2 pixels high
@@ -66,7 +67,6 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
     }
 
     // ---------- The knife during the close-up: it hovers over the board and comes down when you chop ----------
-    public static final float KNIFE_TILT = 70f;  // degrees from upright: the blade is almost flat, edge down
     public static final float KNIFE_SCALE = 0.5f;
     public static final float KNIFE_HOVER = 0.18f;
 
@@ -78,9 +78,19 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
         return KNIFE_HOVER * Math.abs(1f - 2f * t); // down, then back up
     }
 
+    // Held straight: blade level with the board, edge down, the flat side facing you
     private void renderKnife(ChoppingBoardBlockEntity board, PoseStack poseStack, MultiBufferSource buffers, int light) {
-        ToolInStation.render(poseStack, buffers, light, board.getLevel(), board.clientKnife, board.getBlockPos(),
-                0.5 + board.clientKnifeX, BOARD_TOP + 0.01 + knifeLift(board), 0.5 + board.clientKnifeZ,
-                KNIFE_TILT, KNIFE_SCALE);
+        Vec3 cam = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        BlockPos pos = board.getBlockPos();
+        double hx = cam.x - (pos.getX() + 0.5);
+        double hz = cam.z - (pos.getZ() + 0.5);
+        poseStack.pushPose();
+        poseStack.translate(0.5 + board.clientKnifeX, BOARD_TOP + 0.05 + knifeLift(board), 0.5 + board.clientKnifeZ);
+        poseStack.mulPose(Axis.YP.rotation((float) Math.atan2(hx, hz))); // flat side towards the camera
+        poseStack.scale(KNIFE_SCALE, KNIFE_SCALE, KNIFE_SCALE);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-135f));                // icon diagonal -> level, tip to the right
+        Minecraft.getInstance().getItemRenderer().renderStatic(board.clientKnife, ItemDisplayContext.FIXED, light,
+                OverlayTexture.NO_OVERLAY, poseStack, buffers, board.getLevel(), 97);
+        poseStack.popPose();
     }
 }
