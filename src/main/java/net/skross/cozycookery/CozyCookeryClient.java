@@ -10,6 +10,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.skross.cozycookery.menu.ModMenuTypes;
+import net.skross.cozycookery.screen.CookingPotScreen;
 import net.skross.cozycookery.block.ModBlocks;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
 import net.skross.cozycookery.block.entity.MixingBowlBlockEntity;
@@ -30,6 +33,12 @@ import net.skross.cozycookery.component.SoupContents;
 @EventBusSubscriber(modid = CozyCookery.MOD_ID, value = Dist.CLIENT)
 public class CozyCookeryClient {
     public CozyCookeryClient(ModContainer container) {
+    }
+
+    // Which screen opens for which menu
+    @SubscribeEvent
+    static void onRegisterScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenuTypes.COOKING_POT_MENU.get(), CookingPotScreen::new);
     }
 
     @SubscribeEvent

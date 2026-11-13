@@ -4,11 +4,13 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -42,6 +44,8 @@ import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
 import net.skross.cozycookery.block.entity.ModBlockEntities;
 import net.skross.cozycookery.component.ModDataComponents;
 import net.skross.cozycookery.item.custom.SpoonItem;
+import net.skross.cozycookery.menu.CloseUpMode;
+import net.skross.cozycookery.menu.CookingPotMenu;
 import net.skross.cozycookery.sound.ModSounds;
 import net.skross.cozycookery.util.ModTags;
 import org.jetbrains.annotations.Nullable;
@@ -136,7 +140,7 @@ public class CookingPotBlock extends BaseEntityBlock {
         return !below.hasProperty(BlockStateProperties.LIT) || below.getValue(BlockStateProperties.LIT);
     }
 
-    // ---------- Interaction (no GUI!) ----------
+    // ---------- Interaction: buckets, bowls and the spoon work directly; the rest opens the close-up ----------
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
@@ -215,34 +219,26 @@ public class CookingPotBlock extends BaseEntityBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        // Any other item into a pot with water -> add it as an ingredient (max 6)
-        if (liquid == PotLiquid.WATER && isIngredient(stack)) {
-            if (!level.isClientSide()) {
-                if (pot.addIngredient(stack)) {
-                    stack.consume(1, player);
-                    level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS,
-                            0.3f, 1.3f + level.getRandom().nextFloat() * 0.3f);
-                }
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
-        }
-
+        // Anything else (ingredients too) -> falls through to useWithoutItem, which opens the close-up
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     // Tools and containers are never ingredients (they get their own uses: spoon, bowl, knife...)
-    private static boolean isIngredient(ItemStack stack) {
+    public static boolean isIngredient(ItemStack stack) {
         return !(stack.getItem() instanceof TieredItem)
                 && !(stack.getItem() instanceof SpoonItem)
                 && !stack.is(Items.BOWL)
                 && !stack.isDamageableItem();
     }
 
-    // Empty hand -> take a finished dish that needs no bowl (cooked noodles), or else the last ingredient back out
+    // Empty hand (or an ingredient) -> take out cooked noodles, or else open the close-up to add ingredients
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot && pot.hasServings() && !pot.isServedInBowl()) {
+        if (!(level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot)) {
+            return InteractionResult.PASS;
+        }
+        if (pot.hasServings() && !pot.isServedInBowl()) {
             if (!level.isClientSide()) {
                 ItemStack serving = pot.takeServing(level, pos, state);
                 if (player.getMainHandItem().isEmpty()) {
@@ -254,19 +250,20 @@ public class CookingPotBlock extends BaseEntityBlock {
             }
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
-        if (level.getBlockEntity(pos) instanceof CookingPotBlockEntity pot && pot.hasIngredients()) {
-            if (!level.isClientSide()) {
-                ItemStack taken = pot.removeLastIngredient();
-                if (player.getMainHandItem().isEmpty()) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, taken);
-                } else {
-                    player.getInventory().placeItemBackInInventory(taken);
-                }
-                level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4f, 1.2f);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide());
+        if (!level.isClientSide()) {
+            openCloseUp(player, pot, CloseUpMode.ADD);
         }
-        return InteractionResult.PASS;
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    public static void openCloseUp(Player player, CookingPotBlockEntity pot, CloseUpMode mode) {
+        player.openMenu(new SimpleMenuProvider(
+                        (containerId, inventory, p) -> new CookingPotMenu(containerId, inventory, pot, mode),
+                        Component.translatable("block.cozycookery.cooking_pot")),
+                buf -> {
+                    buf.writeBlockPos(pot.getBlockPos());
+                    buf.writeEnum(mode);
+                });
     }
 
     // ---------- Client effects: bubbles, steam and bubbling sounds ----------

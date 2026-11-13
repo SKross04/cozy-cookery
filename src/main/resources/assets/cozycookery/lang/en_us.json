@@ -160,5 +160,7 @@
   "block.cozycookery.plated_mushroom_stew": "Plate of Mushroom Stew",
   "block.cozycookery.plated_beetroot_soup": "Plate of Beetroot Soup",
   "block.cozycookery.plated_rabbit_stew": "Plate of Rabbit Stew",
-  "tooltip.cozycookery.soup_contents": "%s\u00d7 %s"
+  "tooltip.cozycookery.soup_contents": "%s× %s",
+  "closeup.cozycookery.cooking_pot.add": "Drag ingredients into the pot  •  Esc to step back",
+  "closeup.cozycookery.cooking_pot.tool": "Stir with the spoon  •  Esc to step back"
 }

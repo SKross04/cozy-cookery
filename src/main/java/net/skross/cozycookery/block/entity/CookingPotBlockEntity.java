@@ -98,6 +98,16 @@ public class CookingPotBlockEntity extends BlockEntity {
         return ItemStack.EMPTY;
     }
 
+    // Close-up rules: ingredients go in when there is water and no finished dish,
+    // and can come back out as long as cooking hasn't started
+    public boolean canAddIngredients() {
+        return getBlockState().getValue(CookingPotBlock.LIQUID) == PotLiquid.WATER && servings == 0;
+    }
+
+    public boolean canTakeIngredients() {
+        return servings == 0 && progress == 0;
+    }
+
     public boolean hasIngredients() {
         for (int i = 0; i < INGREDIENT_SLOTS; i++) {
             if (!ingredients.getStackInSlot(i).isEmpty()) {

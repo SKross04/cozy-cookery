@@ -5,7 +5,10 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.skross.cozycookery.client.CloseUpCamera;
 import net.skross.cozycookery.CozyCookery;
 import net.skross.cozycookery.component.ModDataComponents;
 import net.skross.cozycookery.component.SoupContents;
@@ -21,6 +24,21 @@ public class ModClientGameEvents {
         if (contents != null) {
             event.getToolTip().add(Component.translatable("tooltip.cozycookery.soup_contents",
                     contents.servings(), contents.serving().getDescription()).withStyle(ChatFormatting.GRAY));
+        }
+    }
+
+    // Close-up mode: no floating hand and no hotbar/hearts, only the station and your inventory panel
+    @SubscribeEvent
+    public static void onRenderHand(RenderHandEvent event) {
+        if (CloseUpCamera.isActive()) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRenderGuiLayer(RenderGuiLayerEvent.Pre event) {
+        if (CloseUpCamera.isActive()) {
+            event.setCanceled(true);
         }
     }
 }

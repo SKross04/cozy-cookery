@@ -37,7 +37,7 @@ Every station works with right-clicks:
 |---|---|
 | **Chopping board** | Place food on the board, then right-click it with a knife. Each chop plays a sound. You can place any item on a board for decoration. |
 | **Stove** | Add coal, charcoal or sticks (sticks burn out faster), then light it with flint and steel. A lit stove or a campfire heats whatever is placed on top. |
-| **Cooking pot** | Place it on a heat source and fill it with a water bucket. Add up to 8 ingredients, then stir with the wooden spoon. When the soup is done, scoop it out with bowls or with a mixing bowl. If you forget it, the soup burns. |
+| **Cooking pot** | Place it on a heat source and fill it with a water bucket. Right-click it with an empty hand to lean in close: drag up to 8 ingredients into the pot, then stir with the wooden spoon. When the soup is done, scoop it out with bowls or with a mixing bowl. If you forget it, the soup burns. |
 | **Frying pan** | Place it on a heat source and add food. Flip the food with the spatula. If you leave it too long, it chars into scraps. |
 | **Mortar and pestle** | Put in wheat and right-click to grind it into flour. |
 | **Mixing bowl** | Add ingredients such as flour, eggs, sugar or a water bottle, then mix them with the spoon to make dough or batter. |

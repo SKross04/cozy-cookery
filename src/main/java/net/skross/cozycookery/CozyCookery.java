@@ -9,6 +9,7 @@ import net.skross.cozycookery.block.entity.ModBlockEntities;
 import net.skross.cozycookery.component.ModDataComponents;
 import net.skross.cozycookery.item.ModCreativeModeTabs;
 import net.skross.cozycookery.item.ModItems;
+import net.skross.cozycookery.menu.ModMenuTypes;
 import net.skross.cozycookery.recipe.ModRecipes;
 import net.skross.cozycookery.sound.ModSounds;
 import org.slf4j.Logger;
@@ -27,5 +28,6 @@ public class CozyCookery {
         ModSounds.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModDataComponents.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
     }
 }
