@@ -67,7 +67,8 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
     }
 
     // ---------- The knife during the close-up: it hovers over the board and comes down when you chop ----------
-    public static final float KNIFE_SCALE = 0.5f;
+    public static final float KNIFE_SCALE = 0.34f;
+    public static final float KNIFE_LEAN_BACK = 35f; // degrees the flat side tilts up towards the camera
     public static final float KNIFE_HOVER = 0.18f;
 
     public static float knifeLift(ChoppingBoardBlockEntity board) {
@@ -85,8 +86,9 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
         double hx = cam.x - (pos.getX() + 0.5);
         double hz = cam.z - (pos.getZ() + 0.5);
         poseStack.pushPose();
-        poseStack.translate(0.5 + board.clientKnifeX, BOARD_TOP + 0.05 + knifeLift(board), 0.5 + board.clientKnifeZ);
+        poseStack.translate(0.5 + board.clientKnifeX, BOARD_TOP + 0.04 + knifeLift(board), 0.5 + board.clientKnifeZ);
         poseStack.mulPose(Axis.YP.rotation((float) Math.atan2(hx, hz))); // flat side towards the camera
+        poseStack.mulPose(Axis.XP.rotationDegrees(-KNIFE_LEAN_BACK));      // ...and tilted up so you see the blade
         poseStack.scale(KNIFE_SCALE, KNIFE_SCALE, KNIFE_SCALE);
         poseStack.mulPose(Axis.ZP.rotationDegrees(-135f));                // icon diagonal -> level, tip to the right
         Minecraft.getInstance().getItemRenderer().renderStatic(board.clientKnife, ItemDisplayContext.FIXED, light,
