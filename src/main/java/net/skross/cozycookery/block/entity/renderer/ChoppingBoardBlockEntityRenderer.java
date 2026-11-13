@@ -68,7 +68,7 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
 
     // ---------- The knife during the close-up: it hovers over the board and comes down when you chop ----------
     public static final float KNIFE_SCALE = 0.34f;
-    public static final double KNIFE_ANGLE = 1.0; // how far the tip turns to your left (1 = 45 degrees)
+    public static final float KNIFE_ROLL = 20f; // degrees rolled around its length so you see the flat of the blade
     public static final float KNIFE_HOVER = 0.18f;
 
     public static float knifeLift(ChoppingBoardBlockEntity board) {
@@ -87,14 +87,10 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
         double hz = cam.z - (pos.getZ() + 0.5);
         poseStack.pushPose();
         poseStack.translate(0.5 + board.clientKnifeX, BOARD_TOP + 0.04 + knifeLift(board), 0.5 + board.clientKnifeZ);
-        // Held like in your right hand: tip away from you and a bit to the left, handle towards you and a bit
-        // to the right, edge straight down, so you see the flat of the blade
-        double len = Math.max(1.0E-6, Math.sqrt(hx * hx + hz * hz));
-        double fx = -hx / len;                 // "away from you"
-        double fz = -hz / len;
-        double tipX = fx + fz * KNIFE_ANGLE;   // + a bit to your left
-        double tipZ = fz - fx * KNIFE_ANGLE;
-        poseStack.mulPose(Axis.YP.rotation((float) Math.atan2(-tipZ, tipX))); // icon +X (the tip) -> that way
+        // Pointing straight away from you: handle towards you, tip away from you
+        poseStack.mulPose(Axis.YP.rotation((float) Math.atan2(hz, -hx)));   // icon +X (the tip) -> away from you
+        // Turned over around its length so the sharp edge faces the board, rolled a little so the flat shows
+        poseStack.mulPose(Axis.XP.rotationDegrees(180f + KNIFE_ROLL));
         poseStack.scale(KNIFE_SCALE, KNIFE_SCALE, KNIFE_SCALE);
         poseStack.mulPose(Axis.ZP.rotationDegrees(-135f));                // icon diagonal -> level (handle at -X, tip at +X)
         Minecraft.getInstance().getItemRenderer().renderStatic(board.clientKnife, ItemDisplayContext.FIXED, light,
