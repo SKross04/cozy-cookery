@@ -51,6 +51,12 @@ public class FryingPanBlockEntity extends BlockEntity {
     private final int[] flipTimeLeft = new int[SLOTS];
     private final boolean[] flipped = new boolean[SLOTS];
 
+    // ---------- Client only (close-up visuals, not saved) ----------
+    public boolean clientSpatulaIn = false; // the spatula lies in the pan during the spatula close-up
+    public float clientSpatulaX = 0.08f;    // where the spatula head is, from the middle of the pan (blocks)
+    public float clientSpatulaZ = 0.08f;
+    public long clientFlipStart = -100;     // game time of the last flick (food jumps up and turns over)
+
     public FryingPanBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.FRYING_PAN_BE.get(), pos, blockState);
     }
@@ -186,7 +192,7 @@ public class FryingPanBlockEntity extends BlockEntity {
         }
     }
 
-    private void resetSlot(int i) {
+    public void resetSlot(int i) {
         progress[i] = 0;
         needsFlip[i] = false;
         flipTimeLeft[i] = 0;

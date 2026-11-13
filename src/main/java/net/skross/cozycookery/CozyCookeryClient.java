@@ -12,7 +12,9 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.skross.cozycookery.menu.ModMenuTypes;
+import net.skross.cozycookery.screen.ChoppingBoardScreen;
 import net.skross.cozycookery.screen.CookingPotScreen;
+import net.skross.cozycookery.screen.FryingPanScreen;
 import net.skross.cozycookery.block.ModBlocks;
 import net.skross.cozycookery.block.entity.CookingPotBlockEntity;
 import net.skross.cozycookery.block.entity.MixingBowlBlockEntity;
@@ -40,6 +42,8 @@ public class CozyCookeryClient {
     @SubscribeEvent
     static void onRegisterScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenuTypes.COOKING_POT_MENU.get(), CookingPotScreen::new);
+        event.register(ModMenuTypes.FRYING_PAN_MENU.get(), FryingPanScreen::new);
+        event.register(ModMenuTypes.CHOPPING_BOARD_MENU.get(), ChoppingBoardScreen::new);
     }
 
     @SubscribeEvent

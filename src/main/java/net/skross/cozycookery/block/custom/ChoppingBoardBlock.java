@@ -1,6 +1,12 @@
 package net.skross.cozycookery.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.skross.cozycookery.item.custom.KnifeItem;
+import net.skross.cozycookery.util.ToolAccess;
+import net.skross.cozycookery.menu.ChoppingBoardMenu;
+import net.skross.cozycookery.menu.CloseUpMode;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -121,7 +127,13 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
         if (stack.isEmpty() || !(level.getBlockEntity(pos) instanceof ChoppingBoardBlockEntity board)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-
+        // Knife -> lean in with the knife (click to chop, see ChoppingBoardScreen)
+        if (stack.getItem() instanceof KnifeItem) {
+            if (!level.isClientSide()) {
+                openCloseUp(player, board, ToolAccess.HAND);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        }
         // Board is empty -> put 1 of the held item on it (anything can be placed, for decoration too)
         if (board.isEmpty()) {
             if (!level.isClientSide()) {
@@ -131,74 +143,81 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
-
-        // Board is full -> is there a chopping recipe for this item + the tool in your hand?
-        Optional<ChoppingRecipe> recipe = findRecipe(level, board.getItem(), stack);
-        if (recipe.isPresent()) {
-            if (!level.isClientSide()) {
-                chop(recipe.get(), board, (ServerLevel) level, pos, player, hand, stack);
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
-        }
-
-        // No recipe -> let useWithoutItem decide (takes the item off)
+        // Something on the board and something else in your hand -> useWithoutItem opens the close-up
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
+    // Bare hand: lean in. A knife on a tool rack nearby is used automatically.
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
+                                               Player player, BlockHitResult hitResult) {
+        if (!(level.getBlockEntity(pos) instanceof ChoppingBoardBlockEntity board)) {
+            return InteractionResult.PASS;
+        }
+        if (!level.isClientSide()) {
+            openCloseUp(player, board, ToolAccess.find(player, pos, s -> s.getItem() instanceof KnifeItem));
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    public static void openCloseUp(Player player, ChoppingBoardBlockEntity board, @Nullable ToolAccess tool) {
+        CloseUpMode mode = tool == null ? CloseUpMode.ADD : CloseUpMode.TOOL;
+        ToolAccess access = tool == null ? ToolAccess.HAND : tool;
+        player.openMenu(new SimpleMenuProvider(
+                        (containerId, inventory, p) -> new ChoppingBoardMenu(containerId, inventory, board, mode, access),
+                        Component.translatable("block.cozycookery.oak_chopping_board")),
+                buf -> {
+                    buf.writeBlockPos(board.getBlockPos());
+                    buf.writeEnum(mode);
+                    access.write(buf);
+                });
+    }
+
     // ---------- Chopping ----------
-    private static Optional<ChoppingRecipe> findRecipe(Level level, ItemStack onBoard, ItemStack heldItem) {
+    private static Optional<ChoppingRecipe> findRecipe(Level level, ItemStack onBoard, ItemStack tool) {
         return level.getRecipeManager()
                 .getRecipesFor(ModRecipes.CHOPPING_TYPE.get(), new ChoppingRecipeInput(onBoard), level)
                 .stream()
                 .map(RecipeHolder::value)
-                .filter(recipe -> recipe.matchesTool(heldItem))
+                .filter(recipe -> recipe.matchesTool(tool))
                 .findFirst();
     }
 
-    private static void chop(ChoppingRecipe recipe, ChoppingBoardBlockEntity board, ServerLevel level,
-                             BlockPos pos, Player player, InteractionHand hand, ItemStack tool) {
+    /**
+     * One cut. Results that stay a single item remain on the board; several results (chicken -> drumsticks + wings)
+     * go to your inventory when you're in the close-up, or pop out of the board otherwise.
+     * Returns true if something was cut.
+     */
+    public static boolean tryChop(ServerLevel level, BlockPos pos, ChoppingBoardBlockEntity board, Player player,
+                                  ToolAccess tool, boolean toInventory) {
+        ItemStack knife = tool.get(player);
+        if (board.isEmpty() || knife.isEmpty()) {
+            return false;
+        }
+        Optional<ChoppingRecipe> recipe = findRecipe(level, board.getItem(), knife);
+        // the knife hits the board anyway (a dull "tock" when there's nothing to cut)
+        if (recipe.isEmpty()) {
+            level.playSound(null, pos, SoundEvents.WOOD_HIT, SoundSource.BLOCKS, 0.6f, 1.2f);
+            return false;
+        }
         ItemStack input = board.getItem().copy();
-
-        if (recipe.hasSingleResult()) {
-            // 1 result -> it stays on the board, so you can keep chopping
-            board.inventory.setStackInSlot(0, recipe.results().get(0).copy());
+        if (recipe.get().hasSingleResult()) {
+            board.inventory.setStackInSlot(0, recipe.get().results().get(0).copy());
         } else {
-            // Several results (chicken -> 2 drumsticks + 2 wings) -> they pop out of the board
             board.inventory.setStackInSlot(0, ItemStack.EMPTY);
-            for (ItemStack result : recipe.results()) {
-                Block.popResource(level, pos, result.copy());
+            for (ItemStack result : recipe.get().results()) {
+                if (toInventory) {
+                    player.getInventory().placeItemBackInInventory(result.copy());
+                } else {
+                    Block.popResource(level, pos, result.copy());
+                }
             }
         }
-
-        // Chop sound with a slightly random pitch
         level.playSound(null, pos, ModSounds.CHOPPING_BOARD_CHOP.get(), SoundSource.BLOCKS,
                 1.0f, 0.9f + level.getRandom().nextFloat() * 0.2f);
-
-        // Little pieces of the chopped item fly off the board
         level.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, input),
-                pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5,
-                8, 0.15, 0.05, 0.15, 0.05);
-
-        // Every chop costs 1 durability of the knife
-        tool.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-    }
-
-    // Right-click with an EMPTY hand (or when useItemOn passed)
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
-                                               Player player, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof ChoppingBoardBlockEntity board && !board.isEmpty()) {
-            if (!level.isClientSide()) {
-                ItemStack taken = board.inventory.extractItem(0, 1, false);
-                if (player.getMainHandItem().isEmpty()) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, taken);
-                } else {
-                    player.getInventory().placeItemBackInInventory(taken); // drops it if your inventory is full
-                }
-                level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 1.0f, 1.0f);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide());
-        }
-        return InteractionResult.PASS;
+                pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5, 8, 0.15, 0.05, 0.15, 0.05);
+        tool.damage(player); // every chop costs 1 durability
+        return true;
     }
 }

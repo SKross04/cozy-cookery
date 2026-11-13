@@ -36,10 +36,11 @@ Every station works with right-clicks:
 
 | Station | How it works |
 |---|---|
-| **Chopping board** | Place food on the board, then right-click it with a knife. Each chop plays a sound. You can place any item on a board for decoration. |
+| **Chopping board** | Place food on the board, then right-click it with a knife to lean in: every click brings the knife down for one cut. With a bare hand you can put things on the board or take them off. You can place any item on a board for decoration. |
 | **Stove** | Add coal, charcoal or sticks (sticks burn out faster), then light it with flint and steel. A lit stove or a campfire heats whatever is placed on top. |
 | **Cooking pot** | Place it on a heat source and fill it with a water bucket. Right-click it with an empty hand to lean in close: drag up to 8 ingredients into the pot. Then right-click with the wooden spoon, grab the spoon standing in the pot and stir in circles with the mouse (you can still add ingredients while holding the spoon); keep stirring, because if you stop for too long it sticks and burns. When the soup is done, scoop it out with bowls or with a mixing bowl. |
-| **Frying pan** | Place it on a heat source and add food. Flip the food with the spatula. If you leave it too long, it chars into scraps. |
+| **Frying pan** | Place it on a heat source and right-click with a bare hand to drag food in. Right-click with the spatula, grab its handle and flick the mouse up to flip the food. If you leave it too long, it chars into scraps. |
+| **Tool rack** | Hang knives, spoons and spatulas on the wall. When you lean in over a station with a bare hand, it takes the right tool from a rack within 4 blocks. |
 | **Mortar and pestle** | Put in wheat and right-click to grind it into flour. |
 | **Mixing bowl** | Add ingredients such as flour, eggs, sugar or a water bottle, then mix them with the spoon to make dough or batter. |
 | **Brick oven** | Light it like the stove, then put in dough or batter to bake. |

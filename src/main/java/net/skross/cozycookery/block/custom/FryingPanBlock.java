@@ -1,6 +1,11 @@
 package net.skross.cozycookery.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.skross.cozycookery.util.ToolAccess;
+import net.skross.cozycookery.menu.FryingPanMenu;
+import net.skross.cozycookery.menu.CloseUpMode;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -120,52 +125,41 @@ public class FryingPanBlock extends BaseEntityBlock {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        // Spatula -> flip everything that is waiting to be flipped
+        // Spatula -> lean in with the spatula (flick to flip, see FryingPanScreen)
         if (stack.getItem() instanceof SpatulaItem) {
-            if (pan.isEmpty()) {
-                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
-            }
             if (!level.isClientSide()) {
-                level.playSound(null, pos, ModSounds.FRYING_PAN_FLIP.get(), SoundSource.BLOCKS,
-                        1.0f, 0.9f + level.getRandom().nextFloat() * 0.2f);
-                if (pan.flip()) {
-                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-                }
+                openCloseUp(player, pan, ToolAccess.HAND);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
-
-        // Something that can be fried -> into the pan (max 4)
-        if (FryingPanBlockEntity.isFryable(level, stack)) {
-            if (!level.isClientSide()) {
-                if (pan.addItem(stack)) {
-                    stack.consume(1, player);
-                    level.playSound(null, pos, ModSounds.FRYING_PAN_SIZZLE.get(), SoundSource.BLOCKS, 0.6f, 1.0f);
-                }
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
-        }
-
+        // Anything else -> useWithoutItem opens the close-up
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    // Empty hand -> take a finished piece out (or the last one you put in)
+    // Bare hand (or food): lean in. A spatula on a tool rack nearby is used automatically.
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof FryingPanBlockEntity pan && !pan.isEmpty()) {
-            if (!level.isClientSide()) {
-                ItemStack taken = pan.takeItem(level);
-                if (player.getMainHandItem().isEmpty()) {
-                    player.setItemInHand(InteractionHand.MAIN_HAND, taken);
-                } else {
-                    player.getInventory().placeItemBackInInventory(taken);
-                }
-                level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4f, 1.2f);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide());
+        if (!(level.getBlockEntity(pos) instanceof FryingPanBlockEntity pan)) {
+            return InteractionResult.PASS;
         }
-        return InteractionResult.PASS;
+        if (!level.isClientSide()) {
+            openCloseUp(player, pan, ToolAccess.find(player, pos, s -> s.getItem() instanceof SpatulaItem));
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    public static void openCloseUp(Player player, FryingPanBlockEntity pan, @Nullable ToolAccess tool) {
+        CloseUpMode mode = tool == null ? CloseUpMode.ADD : CloseUpMode.TOOL;
+        ToolAccess access = tool == null ? ToolAccess.HAND : tool;
+        player.openMenu(new SimpleMenuProvider(
+                        (containerId, inventory, p) -> new FryingPanMenu(containerId, inventory, pan, mode, access),
+                        Component.translatable("block.cozycookery.frying_pan")),
+                buf -> {
+                    buf.writeBlockPos(pan.getBlockPos());
+                    buf.writeEnum(mode);
+                    access.write(buf);
+                });
     }
 
     // ---------- Client effects: sizzling smoke, more when something needs flipping ----------

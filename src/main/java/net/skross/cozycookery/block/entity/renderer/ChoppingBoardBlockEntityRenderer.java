@@ -13,9 +13,10 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.skross.cozycookery.block.custom.ChoppingBoardBlock;
 import net.skross.cozycookery.block.entity.ChoppingBoardBlockEntity;
+import net.skross.cozycookery.client.ToolInStation;
 
 public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<ChoppingBoardBlockEntity> {
-    private static final float BOARD_TOP = 2f / 16f; // the board is 2 pixels high
+    public static final float BOARD_TOP = 2f / 16f; // the board is 2 pixels high
     // The cutting surface is 1 pixel left of the block centre (the handle sticks out on the right)
     private static final float SURFACE_OFFSET = -1f / 16f;
 
@@ -25,6 +26,9 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
     @Override
     public void render(ChoppingBoardBlockEntity blockEntity, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        if (!blockEntity.clientKnife.isEmpty() && blockEntity.getLevel() != null) {
+            renderKnife(blockEntity, poseStack, bufferSource, packedLight);
+        }
         ItemStack stack = blockEntity.getItem();
         if (stack.isEmpty()) {
             return;
@@ -59,5 +63,24 @@ public class ChoppingBoardBlockEntityRenderer implements BlockEntityRenderer<Cho
         itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY,
                 poseStack, bufferSource, blockEntity.getLevel(), (int) blockEntity.getBlockPos().asLong());
         poseStack.popPose();
+    }
+
+    // ---------- The knife during the close-up: it hovers over the board and comes down when you chop ----------
+    public static final float KNIFE_TILT = 70f;  // degrees from upright: the blade is almost flat, edge down
+    public static final float KNIFE_SCALE = 0.5f;
+    public static final float KNIFE_HOVER = 0.18f;
+
+    public static float knifeLift(ChoppingBoardBlockEntity board) {
+        float t = (System.currentTimeMillis() - board.clientChopStart) / 180f; // 0..1 during a chop
+        if (t >= 1f) {
+            return KNIFE_HOVER;
+        }
+        return KNIFE_HOVER * Math.abs(1f - 2f * t); // down, then back up
+    }
+
+    private void renderKnife(ChoppingBoardBlockEntity board, PoseStack poseStack, MultiBufferSource buffers, int light) {
+        ToolInStation.render(poseStack, buffers, light, board.getLevel(), board.clientKnife, board.getBlockPos(),
+                0.5 + board.clientKnifeX, BOARD_TOP + 0.01 + knifeLift(board), 0.5 + board.clientKnifeZ,
+                KNIFE_TILT, KNIFE_SCALE);
     }
 }

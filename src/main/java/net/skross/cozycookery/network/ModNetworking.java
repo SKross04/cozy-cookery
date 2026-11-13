@@ -13,5 +13,7 @@ public class ModNetworking {
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
         registrar.playToServer(StirPayload.TYPE, StirPayload.STREAM_CODEC, StirPayload::handle);
+        registrar.playToServer(FlipPayload.TYPE, FlipPayload.STREAM_CODEC, FlipPayload::handle);
+        registrar.playToServer(ChopPayload.TYPE, ChopPayload.STREAM_CODEC, ChopPayload::handle);
     }
 }

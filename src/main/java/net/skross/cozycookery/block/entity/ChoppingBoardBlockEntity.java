@@ -33,6 +33,12 @@ public class ChoppingBoardBlockEntity extends BlockEntity {
         }
     };
 
+    // ---------- Client only (close-up visuals, not saved) ----------
+    public ItemStack clientKnife = ItemStack.EMPTY; // the knife hovering over the board during the knife close-up
+    public float clientKnifeX = 0f;                 // where the blade is, from the middle of the board (blocks)
+    public float clientKnifeZ = 0f;
+    public long clientChopStart = 0;                // System time (ms) of the last chop: the knife comes down
+
     public ChoppingBoardBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.CHOPPING_BOARD_BE.get(), pos, blockState);
     }

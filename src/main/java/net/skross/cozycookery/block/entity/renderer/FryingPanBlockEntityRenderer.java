@@ -10,11 +10,16 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.util.Mth;
+import net.skross.cozycookery.client.ToolInStation;
+import net.skross.cozycookery.item.ModItems;
 import net.skross.cozycookery.block.custom.FryingPanBlock;
 import net.skross.cozycookery.block.entity.FryingPanBlockEntity;
 
 public class FryingPanBlockEntityRenderer implements BlockEntityRenderer<FryingPanBlockEntity> {
-    private static final float PAN_FLOOR = 1f / 16f;
+    public static final float PAN_FLOOR = 1f / 16f;
+    public static final float SPATULA_TILT = 55f;   // degrees from upright, leaning towards you
+    public static final float SPATULA_SCALE = 0.42f;
     // 2 x 2 spots inside the pan (pan floor: x 4-12, z 4-12)
     private static final float[][] SPOTS = {{6f, 6f}, {10f, 6f}, {6f, 10f}, {10f, 10f}};
 
@@ -25,6 +30,14 @@ public class FryingPanBlockEntityRenderer implements BlockEntityRenderer<FryingP
     public void render(FryingPanBlockEntity pan, float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+        if (pan.clientSpatulaIn && pan.getLevel() != null) {
+            ToolInStation.render(poseStack, bufferSource, packedLight, pan.getLevel(),
+                    new ItemStack(ModItems.WOODEN_SPATULA.get()), pan.getBlockPos(),
+                    0.5 + pan.clientSpatulaX, PAN_FLOOR + 0.02, 0.5 + pan.clientSpatulaZ, SPATULA_TILT, SPATULA_SCALE);
+        }
+        // a flick with the spatula: the food jumps up and turns over (half a second)
+        float flip = pan.getLevel() == null ? 1f
+                : Math.min(1f, (pan.getLevel().getGameTime() - pan.clientFlipStart + partialTick) / 10f);
         float rotation = (pan.getBlockState().getValue(FryingPanBlock.FACING).toYRot() + 180f) % 360f;
 
         for (int i = 0; i < FryingPanBlockEntity.SLOTS; i++) {
@@ -37,6 +50,10 @@ public class FryingPanBlockEntityRenderer implements BlockEntityRenderer<FryingP
             poseStack.mulPose(Axis.YP.rotationDegrees(-rotation));      // same rotation as the block model
             poseStack.translate(-0.5f, 0f, -0.5f);
             poseStack.translate(SPOTS[i][0] / 16f, PAN_FLOOR + 0.015f + i * 0.003f, SPOTS[i][1] / 16f);
+            if (flip < 1f) {
+                poseStack.translate(0, Mth.sin(flip * Mth.PI) * 0.25f, 0);
+                poseStack.mulPose(Axis.XP.rotationDegrees(flip * 180f));
+            }
             poseStack.mulPose(Axis.XP.rotationDegrees(90f));             // lie flat
             poseStack.mulPose(Axis.ZP.rotationDegrees(i * 90f + 20f));   // each piece turned a bit differently
             if (pan.isFlipped(i)) {
