@@ -1,5 +1,6 @@
 package net.skross.cozycookery.item;
 
+import net.skross.cozycookery.item.custom.CookbookItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -33,6 +34,10 @@ public class ModItems {
     // Wooden spoon: 128 uses. Items with durability automatically stack to 1.
     public static final DeferredItem<Item> WOODEN_SPOON = ITEMS.register("wooden_spoon",
             () -> new SpoonItem(new Item.Properties().durability(128)));
+
+    // The cookbook: right-click to read, sneak + right-click to lay it open on a counter
+    public static final DeferredItem<Item> COOKBOOK = ITEMS.register("cookbook",
+            () -> new CookbookItem(ModBlocks.COOKBOOK.get(), new Item.Properties().stacksTo(1)));
 
     // Wooden spatula: flips food in the frying pan. 128 uses.
     public static final DeferredItem<Item> WOODEN_SPATULA = ITEMS.register("wooden_spatula",

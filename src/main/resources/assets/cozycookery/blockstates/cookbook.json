@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "cozycookery:block/cookbook"
+    },
+    "facing=east": {
+      "model": "cozycookery:block/cookbook",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "cozycookery:block/cookbook",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "cozycookery:block/cookbook",
+      "y": 270
+    }
+  }
+}

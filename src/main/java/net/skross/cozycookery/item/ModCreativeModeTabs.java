@@ -28,6 +28,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.NETHERITE_KNIFE);
                         output.accept(ModItems.WOODEN_SPOON);
                         output.accept(ModItems.WOODEN_SPATULA);
+                        output.accept(ModItems.COOKBOOK);
 
                         // Workstations
                         ModBlocks.CHOPPING_BOARDS.values().forEach(output::accept);

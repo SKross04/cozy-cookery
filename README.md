@@ -11,6 +11,7 @@ Cozy Cookery has no cooking menus. You place real tools in the world and work wi
 - NeoForge **21.1.265** or newer
 
 ## Content
+- **Cozy Cookbook:** craft a book with a bowl. It explains every station and lists every recipe with pictures. Sneak + right-click to lay it open on a counter.
 - **Tools:**
   - Knives: flint, iron, gold, diamond, netherite.
   - Wooden spoon. Bonk another player on the head with it to hear a sound.

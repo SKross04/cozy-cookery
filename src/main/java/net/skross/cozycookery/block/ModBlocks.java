@@ -1,5 +1,6 @@
 package net.skross.cozycookery.block;
 
+import net.skross.cozycookery.block.custom.CookbookBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -94,6 +95,15 @@ public class ModBlocks {
                     .noOcclusion()));
 
     // ---------- Trellis + tomatoes (2 blocks tall) ----------
+    // The cookbook lying open on a counter (its item is the Cookbook in ModItems)
+    public static final DeferredBlock<Block> COOKBOOK = BLOCKS.register("cookbook",
+            () -> new CookbookBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_RED)
+                    .strength(0.5f)
+                    .sound(SoundType.WOOD)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+
     public static final DeferredBlock<Block> TRELLIS = registerBlock("trellis",
             () -> new TrellisBlock(trellisProperties()));
     // No BlockItem: you get it by using tomato seeds on a trellis
